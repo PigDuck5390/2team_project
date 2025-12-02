@@ -1,8 +1,8 @@
-function Login() {
+function Event(){
     return(
         <>
         </>
     )
 }
 
-export default Login
+export default Event;

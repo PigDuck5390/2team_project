@@ -1,8 +1,8 @@
-function Login() {
+function Benefit(){
     return(
         <>
         </>
     )
 }
 
-export default Login
+export default Benefit;

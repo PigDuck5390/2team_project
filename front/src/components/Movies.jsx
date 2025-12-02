@@ -1,8 +1,8 @@
-function Login() {
+function Movies(){
     return(
         <>
         </>
     )
 }
 
-export default Login
+export default Movies;
