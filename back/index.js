@@ -9,6 +9,7 @@ app.use(cors())
 
 app.get('/', async(req, res) => {
   const data = await pool.query('SELECT * FROM user')
+  res.send(data)
 })
 
 app.listen(3000, () => {
