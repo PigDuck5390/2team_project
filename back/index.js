@@ -7,8 +7,18 @@ const pool = require('./db')
 app.use(express.json())
 app.use(cors())
 
-app.get('/', async(req, res) => {
+app.get('/user', async(req, res) => {
   const data = await pool.query('SELECT * FROM user')
+  res.send(data)
+})
+
+app.get('/seat', async(req, res) => {
+  const data = await pool.query('SELECT * FROM seat')
+  res.send(data)
+})
+
+app.get('/movie_info', async(req, res) => {
+  const data = await pool.query('SELECT * FROM movie_info')
   res.send(data)
 })
 
