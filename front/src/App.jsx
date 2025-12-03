@@ -7,6 +7,8 @@ import Benefit from './components/Benefit.jsx'
 import Event from './components/Event.jsx'
 import Reservation from './components/Reservation.jsx'
 import Admin from './components/Admin.jsx'
+import Booking from './components/Booking.jsx';
+import Seat from './components/Seat.jsx'
 
 
 import './App.css'
@@ -24,6 +26,8 @@ function App() {
         <Route path='/event' element={<Event />} />
         <Route path='/reservation' element={<Reservation />} />
         <Route path='/admin' element={<Admin />} />
+        <Route path="/booking/:movieId" element={<Booking />} />
+        <Route path="/booking/:movieId/seat/:screeningId" element={<Seat />}/>
 
       </Routes>
     </BrowserRouter>

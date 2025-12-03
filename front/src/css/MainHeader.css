@@ -19,10 +19,14 @@ body {
       transparent 3px
     );
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.header-wrapper {
   position: sticky;
   top: 0;
   z-index: 100;
 }
+
 
 /* 상단 얇은 라인: 로그인/회원가입 */
 .header-top {
@@ -80,7 +84,7 @@ body {
   flex: 1;
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 180px;
   font-size: 15px;
 }
 
@@ -99,6 +103,7 @@ body {
   letter-spacing: 0.12em;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
   padding-bottom: 4px;
+  margin-top: 25px;
 }
 
 /* 밑줄 효과 */
@@ -117,13 +122,7 @@ body {
   width: 100%;
 }
 
-.nav-item.active {
-  color: #ffe8a4;
-}
 
-.nav-item.active::after {
-  width: 100%;
-}
 
 /* 중앙 로고 */
 .header-logo {
@@ -141,4 +140,79 @@ body {
   box-shadow:
     0 0 8px rgba(0, 0, 0, 0.9),
     0 0 0 1px rgba(0, 0, 0, 0.6);
+}
+
+/* =========================
+   헤더 상단 광고 배너
+   ========================= */
+.header-ad {
+  width: 100%;
+  background: linear-gradient(90deg, #3b1548 0%, #641f65 40%, #8a214e 100%);
+  /* 메가박스처럼 위에만 있는 느낌: 고정 높이 배너 */
+}
+
+.header-ad-inner {
+  max-width: 1150px;      /* 헤더/책 폭과 맞춰주기 */
+  height: 60px;          /* 배너 높이 */
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.header-ad-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 24px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.18);
+  color: #fdf5ff;
+}
+
+.header-ad-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 22px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  border-radius: 999px;
+  background: #ff4b7b;
+  color: #fff;
+}
+
+.header-ad-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.header-ad-text strong {
+  font-size: 14px;
+}
+
+.header-ad-text span {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* (원하면 나중에 살릴 닫기 버튼) */
+.header-ad-close {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 4px;
+  border: none;
+  background: transparent;
+  color: #f5e9ff;
+  font-size: 18px;
+  cursor: pointer;
 }

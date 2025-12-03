@@ -1,0 +1,201 @@
+/* src/css/Booking.css */
+
+/* 책 컨셉에서 약간 여백/배치만 커스텀 */
+.booking-book {
+  height: 720px;
+}
+
+.booking-left {
+  justify-content: flex-start;
+}
+
+.booking-title {
+  font-size: 28px;
+  margin-bottom: 12px;
+  color: #2c1d0e;
+}
+
+.booking-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #4a3622;
+}
+
+.booking-meta {
+  margin-top: 18px;
+  font-size: 14px;
+  color: #6b4a2b;
+}
+
+.schedule-title {
+  font-size: 22px;
+  margin-bottom: 18px;
+  letter-spacing: 0.1em;
+  color: #2c1d0e;
+}
+
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 이미 위에서 한 번 제안한 스타일과 동일하게 맞춤 */
+.schedule-btn {
+  width: 90%;
+  padding: 12px 18px;
+  font-size: 16px;
+  margin: 4px 0;
+  background: #fff4d6;
+  border-radius: 10px;
+  border: 2px solid #8b5a2b;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  cursor: pointer;
+  text-align: left;
+  transition: 0.2s;
+}
+
+.schedule-btn:hover {
+  background: #ffe2a2;
+  transform: scale(1.03);
+}
+
+/* ===== 좌석 선택 ===== */
+.seat-left {
+  row-gap: 20px;
+}
+
+.seat-title {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.seat-meta {
+  font-size: 14px;
+  color: #6b4a2b;
+}
+
+.seat-selected-box {
+  margin-top: 24px;
+  padding: 14px 16px;
+  background: #fff7dd;
+  border-radius: 8px;
+  border: 1px solid #c8a36b;
+  font-size: 14px;
+}
+
+.seat-reserve-btn {
+  margin-top: 28px;
+  padding: 10px 22px;
+  border-radius: 20px;
+  border: 1px solid #8b5a2b;
+  background: #f3c06a;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  transition: 0.2s;
+}
+
+.seat-reserve-btn:hover {
+  background: #e5a94b;
+  transform: translateY(-1px);
+}
+
+/* 상단 스크린 라벨 */
+.screen-label {
+  width: 70%;
+  margin: 0 auto 20px;
+  text-align: center;
+  padding: 8px 0;
+  background: #444;
+  color: #fff;
+  border-radius: 16px;
+  font-size: 14px;
+}
+
+/* 좌석 그리드 */
+.seat-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.seat-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.row-label {
+  width: 24px;
+  text-align: right;
+  font-weight: 700;
+  color: #4a3622;
+}
+
+.seat {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  border: 1.5px solid #5c3a19;
+  background: #fff4d6;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.seat:hover {
+  background: #ffe2a2;
+}
+
+/* 빈 좌석(해당 위치에 좌석 없음) */
+.seat-empty {
+  background: transparent;
+  border: none;
+}
+
+/* 선택된 */
+.seat.selected {
+  background: #ffcc73;
+  border-color: #8b5a2b;
+}
+
+/* 이미 예약된 */
+.seat.reserved {
+  background: #b9b9b9;
+  border-color: #7d7d7d;
+  color: #eee;
+  cursor: not-allowed;
+}
+
+/* 좌석 범례 */
+.seat-legend {
+  margin-top: 24px;
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: #4a3622;
+}
+
+.legend-box {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 4px;
+  border-radius: 3px;
+  border: 1px solid #5c3a19;
+}
+
+.legend-available {
+  background: #fff4d6;
+}
+
+.legend-selected {
+  background: #ffcc73;
+}
+
+.legend-reserved {
+  background: #b9b9b9;
+}
