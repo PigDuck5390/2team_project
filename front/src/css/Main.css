@@ -1,0 +1,161 @@
+/* ===== 메인 영역 기본 ===== */
+.main-area {
+  padding: 80px 0 160px;
+  background: linear-gradient(
+    to bottom,
+    #8a6131 0%,
+    #a97f3f 15%,
+    #a97f3f 100%
+  );
+}
+
+/* ===== 책 전체 래퍼 ===== */
+.book-wrapper {
+  width: 1300px;
+  margin-left: 195px;
+}
+
+/* ===== 열린 책 본체 ===== */
+.open-book {
+  position: relative;
+  width: 100%;             /* book-wrapper 기준 */
+  height: 800px;           /* 고정 높이 */
+  padding: 72px 110px;      /* 페이지 여백 */
+  background: radial-gradient(
+      circle at 50% 0,
+      #ffeec8 0,
+      #f5dfb4 55%,
+      #f1d79f 100%
+    );
+  border-radius: 26px 26px 40px 40px;
+  box-shadow:
+    0 32px 55px rgba(0, 0, 0, 0.45),
+    0 0 0 2px rgba(0, 0, 0, 0.18);
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* 좌/우 페이지 2열 */
+  column-gap: 72px;
+  overflow: hidden;
+}
+
+/* 양 옆 빨간 커버 */
+.open-book::before,
+.open-book::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  width: 20px;
+  background: linear-gradient(180deg, #b30000, #6b0000);
+  z-index: -1;
+}
+
+.open-book::before {
+  left: -16px;
+  border-radius: 20px 0 0 32px;
+}
+
+.open-book::after {
+  right: -16px;
+  border-radius: 0 20px 32px 0;
+}
+
+/* 가운데 제본 줄 (갈색 줄) */
+.book-spine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 12px;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(circle at 50% 0, rgba(0, 0, 0, 0.25) 0, transparent 55%),
+    radial-gradient(circle at 50% 100%, rgba(0, 0, 0, 0.7) 0, transparent 60%),
+    linear-gradient(180deg, #8b5a2b, #5c3a19);
+  box-shadow:
+    0 0 10px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(0, 0, 0, 0.28);
+    inset: 0 0 8px rgba(0, 0, 0, 0.4);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ===== 각 페이지 영역 ===== */
+.page {
+  position: relative;
+  padding: 8px 24px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+}
+
+/* 종이 질감 + 위/아래 여백 동일 */
+.page::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  left: 0;
+  right: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03), transparent 45%, rgba(0, 0, 0, 0.05)),
+    repeating-linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.03) 0,
+      rgba(0, 0, 0, 0.03) 1px,
+      transparent 1px,
+      transparent 14px
+    );
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.page > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== 영화 카드 한 줄 ===== */
+.movie-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+/* 포스터 */
+.movie-row img {
+  width: 260px;
+  height: auto;
+  border-radius: 6px;
+  box-shadow:
+    0 10px 18px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.movie-row img:hover {
+  transform: scale(1.03);
+  box-shadow:
+    0 16px 30px rgba(0, 0, 0, 0.6),
+    0 0 0 2px rgba(255, 230, 180, 0.65);
+  cursor: pointer;
+}
+/* 설명 영역 */
+.movie-row .desc {
+  padding-top: 12px;
+  color: #3d3021;
+}
+
+.movie-row .desc h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 0 0 12px;
+  color: #2c1d0e;
+}
+
+.movie-row .desc p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.75;
+  color: #4a3622;
+}

@@ -6,6 +6,7 @@ import Movies from './components/Movies.jsx'
 import Benefit from './components/Benefit.jsx'
 import Event from './components/Event.jsx'
 import Reservation from './components/Reservation.jsx'
+import Admin from './components/Admin.jsx'
 
 
 import './App.css'
@@ -22,6 +23,7 @@ function App() {
         <Route path='/benefit' element={<Benefit />} />
         <Route path='/event' element={<Event />} />
         <Route path='/reservation' element={<Reservation />} />
+        <Route path='/admin' element={<Admin />} />
 
       </Routes>
     </BrowserRouter>
