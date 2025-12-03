@@ -1,0 +1,72 @@
+/* 전체 배경 (서류가 놓여 있는 느낌) */
+body {
+    background-color: #8C611C; /* 따뜻한 갈색 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* 종이 */
+form, .join-paper {
+    width: 460px;
+    padding: 50px 60px;
+    background: #f8f6f2;  /* 약간의 종이 톤 */
+    border-radius: 4px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+/* 만년필 아이콘 */
+.pen-icon {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 40px;
+    opacity: 0.9;
+    transform: rotate(-10deg);
+}
+
+/* 라벨 (이름:, 아이디:, 비밀번호:) */
+label {
+    font-size: 18px;
+    color: #333;
+    display: block;
+    margin-top: 25px;
+}
+
+/* 입력 라인 (진짜 input 대신 종이에 적는 느낌) */
+.input-box {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.4);
+    padding: 8px 5px;
+    font-size: 18px;
+    background: transparent;
+    outline: none;
+}
+
+/* 입력 시 자연스러운 연필 느낌 */
+.input-box:focus {
+    border-bottom: 1.5px solid #000;
+}
+
+/* 회원가입 버튼 (텍스트 + 밑줄만 있는 스타일) */
+.join-btn {
+    margin-top: 50px;
+    font-size: 20px;
+    background: none;
+    border: none;
+    color: #000;
+    cursor: pointer;
+    padding: 0;
+    font-weight: 600;
+    border-bottom: 2px solid #d29d9d;
+    display: inline-block;
+}
+
+.join-btn:hover {
+    color: #b00000;
+    border-bottom-color: #b00000;
+}

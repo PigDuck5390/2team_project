@@ -11,8 +11,8 @@ function MainHeader(){
             <button onClick={() => navigate('/event')}>이벤트</button>
             <button onClick={() => navigate('/benefit')}>혜택</button>
 
-            <a href="">로그인</a>
-            <a href="">회원가입</a>
+            <a href="/login">로그인</a>
+            <a href="/join">회원가입</a>
         
         </>
     )
