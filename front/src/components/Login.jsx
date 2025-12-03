@@ -10,7 +10,7 @@ function Login() {
 
     function handleLogin() {
         const storedUser = localStorage.getItem('user');
-
+        
         if (!storedUser) {
             alert("저장된 회원 정보가 없습니다. 회원가입 화면으로 이동합니다.");
             navigate('/join');
