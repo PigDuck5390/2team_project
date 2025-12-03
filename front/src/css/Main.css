@@ -34,21 +34,12 @@
     0 0 0 10px #e8d7b5,                 /* 2장째 종이 */
     0 0 0 15px #d9c6a1,                 /* 3장째 종이 */
     0 0 0 20px #ccb58d;             
- box-shadow:
-    0 32px 55px rgba(0, 0, 0, 0.45),  /* 아래 그림자 */
-    0 0 0 5px #f5e7c8,                 /* 1장째 종이 */
-    0 0 0 10px #e8d7b5,                 /* 2장째 종이 */
-    0 0 0 15px #d9c6a1,                 /* 3장째 종이 */
-    0 0 0 20px #ccb58d;             
   display: grid;
   grid-template-columns: 1fr 1fr;  /* 좌/우 페이지 2열 */
   column-gap: 72px;
   overflow: visible;
-  overflow: visible;
 }
 
-/* ░ 종이 겹 테두리 */
-.open-book::before {
 /* ░ 종이 겹 테두리 */
 .open-book::before {
   content: "";
@@ -62,18 +53,8 @@
     0 0 0 15px #ccb58d,
     0 0 20px rgba(0, 0, 0, 0.18);
   z-index: -2;
-  inset: -10px; /* 기존보다 살짝 크게 */
-  border-radius: 30px;
-  background: #f5e7c8;
-  box-shadow:
-    0 0 0 5px #e8d7b5,
-    0 0 0 10px #d9c6a1,
-    0 0 0 15px #ccb58d,
-    0 0 20px rgba(0, 0, 0, 0.18);
-  z-index: -2;
 }
 
-/* ▒ 더 아래 레이어: 바깥 종이 */
 /* ▒ 더 아래 레이어: 바깥 종이 */
 .open-book::after {
   content: "";
@@ -85,24 +66,12 @@
     0 0 0 3px #b39974,
     0 30px 55px rgba(0,0,0,0.45);
   z-index: -3;
-  content: "";
-  position: absolute;
-  inset: -22px;
-  border-radius: 34px;
-  background: #cbb18a;
-  box-shadow:
-    0 0 0 3px #b39974,
-    0 30px 55px rgba(0,0,0,0.45);
-  z-index: -3;
 }
-
 
 
 /* 가운데 제본 줄 (갈색 줄) */
 .book-spine {
   position: absolute;
-  top: -16px;
-  bottom: -16px;
   top: -16px;
   bottom: -16px;
   left: 50%;
@@ -186,7 +155,6 @@
 }
 
 .movie-row .desc h1 {
-.movie-row .desc h1 {
   margin: 0 0 8px;
   font-size: 24px;
   font-weight: 700;
@@ -195,7 +163,6 @@
   color: #2c1d0e;
 }
 
-.movie-row .desc span {
 .movie-row .desc span {
   margin: 0;
   font-size: 15px;
@@ -242,3 +209,4 @@
     0 4px 10px rgba(0,0,0,0.4),
     inset 0 0 4px rgba(0,0,0,0.4);
 }
+
