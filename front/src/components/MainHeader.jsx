@@ -1,7 +1,11 @@
+import { useNavigate } from "react-router-dom"
 
 import '../css/MainHeader.css'
 
 function MainHeader() {
+
+    const navigate = useNavigate();
+
   return (
     <div className="header-wrapper">
       {/* 🔼 광고 배너 */}
@@ -27,8 +31,8 @@ function MainHeader() {
               <span>고객센터</span>
             </div>
             <div className="header-top-right">
-              <button>로그인</button>
-              <button>회원가입</button>
+              <button onClick={()=>navigate("/login")}>로그인</button>
+              <button onClick={()=>navigate("/join")}>회원가입</button>
             </div>
           </div>
         </div>
