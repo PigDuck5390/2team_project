@@ -11,13 +11,11 @@ function Main(){
   const navigate = useNavigate();
 
   const Reserve = (movieId) =>{
-    navigate('/booking', {
-      state: {movieId},
-    });
+    navigate(`/booking/${movieId}`);
   };
   return (
     <>
-      
+      <MainHeader/>
 
       <main className="main-area">
         <div className="book-wrapper">

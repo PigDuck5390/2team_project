@@ -8,8 +8,8 @@ import Event from './components/Event.jsx'
 import Booking from './components/Booking.jsx'
 import Admin from './components/Admin.jsx'
 import MyPage from './components/MyPage.jsx'
-import Booking from './components/Booking.jsx';
 import Seat from './components/Seat.jsx'
+import Reservation from './components/Reservation.jsx'
 
 
 
@@ -31,6 +31,7 @@ function App() {
         <Route path='/booking' element={<Booking />} />
         <Route path='/admin' element={<Admin />} />
         <Route path='/mypage' element={<MyPage />} />
+        <Route path='/reservation' element={<Reservation />} />
         <Route path="/booking/:movieId" element={<Booking />} />
         <Route path="/booking/:movieId/seat/:screeningId" element={<Seat />}/>
 
