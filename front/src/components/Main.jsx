@@ -1,6 +1,6 @@
 import { useState } from 'react'
-
-
+import { useNavigate } from 'react-router-dom'
+import MainHeader from './MainHeader.jsx'
 import firstMovie from '../img/주토피아.jpg'
 import secondMovie from '../img/주술회전.jpg'
 import thirdMovie from '../img/윗집사람들.jpg'
@@ -8,8 +8,13 @@ import fourthMovie from '../img/정보원.jpg'
 import '../css/Main.css'
 
 function Main(){
+  const navigate = useNavigate();
 
-  
+  const Reserve = (movieId) =>{
+    navigate('/booking', {
+      state: {movieId},
+    });
+  };
   return (
     <>
       
@@ -37,7 +42,7 @@ function Main(){
                       11월, 초특급 추적 어드벤처가 펼쳐진다!
                       </span>
                 </div>
-                <button className="quick-reserv">바로 예매하기</button>
+                <button className="quick-reserv" onClick={()=>Reserve(1)}>바로 예매하기</button>
               </div>
 
               <div className="movie-row">
