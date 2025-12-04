@@ -1,16 +1,15 @@
-/* 페이지 전체를 Join 전용으로 한정 */
-.join-page {
+/* Login 페이지 전체 배경 */
+.login-page {
     background-color: #8C611C;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding: 0;
-    width: 100%;
+    margin: 0;
 }
 
 /* 종이 */
-.join-container {
+.login-container {
     height: 700px;
     width: 460px;
     padding: 50px 60px;
@@ -21,7 +20,7 @@
 }
 
 /* 만년필 아이콘 */
-.join-pen-icon {
+.login-pen-icon {
     position: absolute;
     top: 60px;
     right: 60px;
@@ -31,7 +30,7 @@
 }
 
 /* 라벨 */
-.join-label {
+.login-label {
     font-size: 18px;
     color: #333;
     display: block;
@@ -39,7 +38,7 @@
 }
 
 /* 입력 라인 */
-.join-input {
+.login-input {
     width: 100%;
     border: none;
     border-bottom: 1px solid rgba(0,0,0,0.4);
@@ -49,35 +48,38 @@
     outline: none;
 }
 
-.join-input:focus {
+.login-input:focus {
     border-bottom: 1.5px solid #000;
 }
 
-/* 버튼 */
-.join-submit-btn {
-    float: right;
-    margin-top: 40px;
+/* 로그인 버튼 */
+.login-submit-btn {
+    margin-top: 45px;
     font-size: 20px;
     background: none;
     border: none;
-    color: #2a1c02;
+    color: #000;
     cursor: pointer;
     padding: 0;
     font-weight: 600;
-    border-bottom: 2px solid #c17b7b;
-}
-
-.join-submit-btn:hover {
-    color: #a40000;
-    border-bottom-color: #a40000;
-}
-
-/* 로그인 이동 링크 */
-.join-link {
-    margin-top: 40px;
+    border-bottom: 2px solid #d29d9d;
     display: inline-block;
+}
+
+.login-submit-btn:hover {
+    color: #b00000;
+    border-bottom-color: #b00000;
+}
+
+/* 회원가입 링크 */
+.login-join-link {
+    display: block;
+    margin-top: 20px;
+    text-align: right;
     font-size: 16px;
-    color: #4a3420;
-    text-decoration: underline;
-    cursor: pointer;
+    color: #333;
+}
+
+.login-join-link:hover {
+    color: #b00000;
 }

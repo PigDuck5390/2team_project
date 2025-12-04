@@ -5,9 +5,8 @@ import Login from './components/Login.jsx'
 import Movies from './components/Movies.jsx'
 import Benefit from './components/Benefit.jsx'
 import Event from './components/Event.jsx'
-import Reservation from './components/Reservation.jsx'
+import Booking from './components/Booking.jsx'
 import Admin from './components/Admin.jsx'
-import Booking from './components/Booking.jsx';
 import Seat from './components/Seat.jsx'
 
 
@@ -24,9 +23,8 @@ function App() {
         <Route path='/movies' element={<Movies />} />
         <Route path='/benefit' element={<Benefit />} />
         <Route path='/event' element={<Event />} />
-        <Route path='/reservation' element={<Reservation />} />
+        <Route path='/booking' element={<Booking />} />
         <Route path='/admin' element={<Admin />} />
-        <Route path="/booking/:movieId" element={<Booking />} />
         <Route path="/booking/:movieId/seat/:screeningId" element={<Seat />}/>
 
       </Routes>

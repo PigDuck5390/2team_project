@@ -1,69 +1,66 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import pen from "../img/pen.jpg";
+import "../css/Login.css";
 
 function Login() {
     const navigate = useNavigate();
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [loggedInId, setLoggedInId] = useState('');
+    const [userData, setUserData] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:3000/userinfo')
+            .then(response => response.json())
+            .then(data => setUserData(data))
+    }, [userData]);
 
     function handleLogin() {
-        const storedUser = localStorage.getItem('user');
+        const login = userData.find(item =>
+            item.id === id && item.pw === pw
+        );
 
-        if (!storedUser) {
-            alert("저장된 회원 정보가 없습니다. 회원가입 화면으로 이동합니다.");
-            navigate('/join');
-            return;
-        }
-
-        const user = JSON.parse(storedUser);
-
-        if (user.userId === id && user.userPw === pw) {
-            alert(`환영합니다. ${id}님`);
-            setIsLoggedIn(true);
-            setLoggedInId(id);
-
+        if (login) {
+            alert("로그인에 성공했습니다");
+            navigate('/', {state : login.name});
         } else {
-            alert("회원이 아닙니다. 회원가입화면으로 이동합니다.");
-            navigate('/join');
+            alert("계정 정보가 없습니다");
         }
-
-    }
-
-
-
-    if (isLoggedIn) {
-        return (
-            <div style={{ border: '2px solid green', padding: '20px' }}>
-                <h1>로그인 성공</h1>
-                <p style={{ fontSize: '24px', fontWeight: 'bold' }}>환영합니다.{loggedInId}님</p>
-            </div>
-        )
     }
 
     return (
-        <>
-            <h2>로그인</h2>
-            <input
-                placeholder="ID입력"
-                onChange={(e) => setId(e.target.value)} />
+        <div className="login-page">
 
+            <div className="login-container">
+                <h2>로그인</h2>
+                <img src={pen} className="login-pen-icon" />
 
-            <input
-                style={{ marginLeft: '5px' }}
-                type="password"
-                placeholder="PW 입력"
-                onChange={(e) => setPw(e.target.value)} />
+                <label className="login-label">아이디 :</label>
+                <input
+                    className="login-input"
+                    value={id}
+                    onChange={(e) => setId(e.target.value)}
+                />
 
-            <button onClick={handleLogin}>Login</button>
-            <div style={{ marginTop: '10px' }}>
-                <Link to='/Join'>회원가입</Link>
+                <label className="login-label">비밀번호 :</label>
+                <input
+                    className="login-input"
+                    type="password"
+                    value={pw}
+                    onChange={(e) => setPw(e.target.value)}
+                />
+
+                <button className="login-submit-btn" onClick={handleLogin}>
+                    로그인
+                </button>
+
+                <Link to="/join" className="login-join-link">
+                    회원가입
+                </Link>
             </div>
-        </>
-    )
 
+        </div>
+    );
 }
-
 
 export default Login;
