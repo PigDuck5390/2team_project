@@ -19,7 +19,8 @@ function Login() {
 
         if(login){
             alert("로그인에 성공했습니다")
-            navigate('/')
+            navigate('/', {state : login.name})
+
             }else{
                 alert("계정 정보가 없습니다")
             }

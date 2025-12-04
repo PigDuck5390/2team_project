@@ -1,4 +1,4 @@
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link, useLocation } from 'react-router-dom'
 import '../css/MainHeader.css'
 import {useState, useEffect} from 'react'
 
@@ -6,17 +6,20 @@ function MainHeader(){
 
     const navigate = useNavigate()
     const [loggedInId, setLoggedInId] = useState(null);
-
+    const location = useLocation()
+    const { state : locateName } = location
+    
     useEffect(()=> {
-      const id = localStorage.getItem('loggedInId');
-      if (id) {
-        setLoggedInId(id);
+      if (locateName) {
+        setLoggedInId(locateName)
       }
-    }, [])
-      const handleLogout = () => {
-        localStorage.removeItem('loggedInId');
+    }, [locateName])
+
+      function handleLogout(){
         setLoggedInId(null);
-        window.location.reload();
+        alert("로그아웃 되었습니다")
+        navigate('/', { state : null })
+        
       }
 
       const headerRightContent = loggedInId ? (
