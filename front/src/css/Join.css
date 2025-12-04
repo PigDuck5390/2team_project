@@ -20,6 +20,13 @@
     position: relative;
 }
 
+.join-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
 /* 만년필 아이콘 */
 .join-pen-icon {
     position: absolute;

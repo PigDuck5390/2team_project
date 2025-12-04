@@ -49,7 +49,7 @@ function Join() {
     return (
         <div className="join-page">
             <div className="join-container">
-
+                <h1 className='join-title'>회원가입</h1>
                 <img src={pen} className="join-pen-icon" alt="pen" />
 
                 <label className="join-label">이름 :</label>

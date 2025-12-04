@@ -10,6 +10,7 @@ import Admin from './components/Admin.jsx'
 import Seat from './components/Seat.jsx'
 
 
+
 import './App.css'
 
 function App() {

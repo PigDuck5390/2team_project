@@ -22,7 +22,7 @@ function Login() {
 
         if (login) {
             alert("로그인에 성공했습니다");
-            navigate('/', {state : login.name});
+            navigate('/', { state: login.name });
         } else {
             alert("계정 정보가 없습니다");
         }
@@ -32,7 +32,7 @@ function Login() {
         <div className="login-page">
 
             <div className="login-container">
-                <h2>로그인</h2>
+                <h1 className='login-title'>로그인</h1>
                 <img src={pen} className="login-pen-icon" />
 
                 <label className="login-label">아이디 :</label>
@@ -50,13 +50,13 @@ function Login() {
                     onChange={(e) => setPw(e.target.value)}
                 />
 
-                <button className="login-submit-btn" onClick={handleLogin}>
-                    로그인
-                </button>
-
                 <Link to="/join" className="login-join-link">
                     회원가입
                 </Link>
+
+                <button className="login-submit-btn" onClick={handleLogin}>
+                    로그인
+                </button>
             </div>
 
         </div>

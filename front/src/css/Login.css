@@ -19,6 +19,13 @@
     position: relative;
 }
 
+.login-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
 /* 만년필 아이콘 */
 .login-pen-icon {
     position: absolute;
@@ -54,16 +61,16 @@
 
 /* 로그인 버튼 */
 .login-submit-btn {
-    margin-top: 45px;
+    float: right;
+    margin-top: 40px;
     font-size: 20px;
     background: none;
     border: none;
-    color: #000;
+    color: #2a1c02;
     cursor: pointer;
     padding: 0;
     font-weight: 600;
-    border-bottom: 2px solid #d29d9d;
-    display: inline-block;
+    border-bottom: 2px solid #c17b7b;
 }
 
 .login-submit-btn:hover {
@@ -73,11 +80,12 @@
 
 /* 회원가입 링크 */
 .login-join-link {
-    display: block;
-    margin-top: 20px;
-    text-align: right;
+    margin-top: 40px;
+    display: inline-block;
     font-size: 16px;
-    color: #333;
+    color: #4a3420;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .login-join-link:hover {
