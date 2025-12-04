@@ -1,40 +1,40 @@
 import { useNavigate, Link, useLocation } from 'react-router-dom'
 import '../css/MainHeader.css'
-import { useState, useEffect } from 'react'
+import {useState, useEffect} from 'react'
 
-function MainHeader() {
+function MainHeader(){
 
-  const navigate = useNavigate()
-  const [loggedInId, setLoggedInId] = useState(null);
-  const location = useLocation()
-  const { state: locateName } = location
+    const navigate = useNavigate()
+    const [loggedInId, setLoggedInId] = useState(null);
+    const location = useLocation()
+    const { state : locateName } = location
+    
+    useEffect(()=> {
+      if (locateName) {
+        setLoggedInId(locateName)
+      }
+    }, [locateName])
 
-  useEffect(() => {
-    if (locateName) {
-      setLoggedInId(locateName)
-    }
-  }, [locateName])
+      function handleLogout(){
+        setLoggedInId(null);
+        alert("로그아웃 되었습니다")
+        navigate('/', { state : null })
+        
+      }
 
-  function handleLogout() {
-    setLoggedInId(null);
-    alert("로그아웃 되었습니다")
-    navigate('/', { state: null })
+      const headerRightContent = loggedInId ? (
+        <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+          환영합니다. {loggedInId}님
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      ) : (
+        <>
+        <Link to = "/login"><button>로그인</button></Link>
+        <Link to = "/join"><button>회원가입</button></Link>
+        </>
+      )
 
-  }
-
-  const headerRightContent = loggedInId ? (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-      환영합니다. {loggedInId}님
-      <button onClick={handleLogout}>Logout</button>
-    </div>
-  ) : (
-    <>
-      <Link to="/login"><button>로그인</button></Link>
-      <Link to="/join"><button>회원가입</button></Link>
-    </>
-  )
-
-  return (
+return (
     <header className="main-header">
       {/* 로그인/회원가입 라인 */}
       <div className="header-top">
