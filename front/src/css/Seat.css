@@ -1,6 +1,7 @@
 .seat-container {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 6개씩 한 줄 */
+  grid-template-columns: repeat(6, 1fr);
+  /* 6개씩 한 줄 */
   gap: 10px;
   width: fit-content;
   margin: 30px auto;
@@ -21,4 +22,10 @@
 .seat.selected {
   background: #FF5722;
   color: #fff;
+}
+
+.screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

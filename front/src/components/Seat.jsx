@@ -41,6 +41,7 @@ function Seat(){
     return(
       <>
         <MainHeader />
+        <h1 className='screen'>SCREEN</h1>
         <div className="seat-container">
           {seats.map(seat => ( //좌석 반복문
             <div
