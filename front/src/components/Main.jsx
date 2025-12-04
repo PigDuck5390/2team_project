@@ -17,8 +17,7 @@ function Main(){
   };
   return (
     <>
-      
-
+    <MainHeader />
       <main className="main-area">
         <div className="book-wrapper">
           <div className="open-book">
