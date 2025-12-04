@@ -1,15 +1,16 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Main from './components/Main.jsx'
+import Main from './Main/Main.jsx'
 import Join from './components/Join.jsx'
 import Login from './components/Login.jsx'
 import Movies from './components/Movies.jsx'
 import Benefit from './components/Benefit.jsx'
 import Event from './components/Event.jsx'
 import Booking from './components/Booking.jsx'
-import Admin from './components/Admin.jsx'
+import Admin from './Admin/Admin.jsx'
 import MyPage from './components/MyPage.jsx'
 import Reservation from './components/Reservation.jsx'
-import In_Reserv from './components/In_Reserv.jsx'
+import Seat from './components/Seat.jsx'
+
 
 
 
@@ -28,11 +29,12 @@ function App() {
         <Route path='/movies' element={<Movies />} />
         <Route path='/benefit' element={<Benefit />} />
         <Route path='/event' element={<Event />} />
-        <Route path='/booking' element={<Booking />} />
+        <Route path='/booking/:movieId' element={<Booking />} />
         <Route path='/admin' element={<Admin />} />
         <Route path='/mypage' element={<MyPage />} />
         <Route path='/reservation' element={<Reservation />} />
-        <Route path='/in_reserv' element={<In_Reserv />} />
+        <Route path='/seat/:movieId' element={<Seat />} />
+        
 
 
       </Routes>

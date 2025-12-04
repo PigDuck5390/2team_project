@@ -1,4 +1,4 @@
-import MainHeader from './MainHeader.jsx'
+import MainHeader from '../Main/MainHeader.jsx'
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 

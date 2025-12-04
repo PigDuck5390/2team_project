@@ -17,6 +17,11 @@ app.get('/seatlist', async (req, res) => {
   res.send(data)
 })
 
+app.get('/movie_info', async (req, res) => {
+  const data = await pool.query('SELECT * FROM movie_info')
+  res.send(data)
+})
+
 app.post('/join', async (req, res) => {
   await pool.query('INSERT INTO user (name, id, pw) VALUES (?,?,?)',
     [req.body.userName, req.body.userId, req.body.userPw]

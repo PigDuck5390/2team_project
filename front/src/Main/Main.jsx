@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import MainHeader from './MainHeader.jsx'
+import { useNavigate, useLocation } from 'react-router-dom'
+import MainHeader from '../Main/MainHeader.jsx'
 import firstMovie from '../img/주토피아.jpg'
 import secondMovie from '../img/주술회전.jpg'
 import thirdMovie from '../img/윗집사람들.jpg'
@@ -9,9 +9,11 @@ import '../css/Main.css'
 
 function Main(){
   const navigate = useNavigate();
-
+  const location = useLocation()
+  const { state : locateName } = location
+  
   const Reserve = (movieId) =>{
-    navigate(`/booking/${movieId}`);
+    navigate(`/booking/${movieId}`,{ state : locateName });
   };
   return (
     <>
