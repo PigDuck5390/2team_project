@@ -5,7 +5,7 @@ import '../css/Seat.css'
 
 function Seat(){
     const location =- useLocation()
-    const { state : locateName } = location
+    const { state : locateName } = location //헤더 로그인 유지
     
     const seats = 
     ["A1", "A2", "A3", "A4", "A5", "A6",
@@ -18,43 +18,42 @@ function Seat(){
 
     const [seatData, setSeatData] = useState([])
 
-    useEffect(() => {
-        fetch('http://localhost:3000/seatlist')
-            .then(response => response.json())
-            .then(data => setSeatData(data))
+    useEffect(() => { //예매정보 조회
+      fetch('http://localhost:3000/seatlist')
+        .then(response => response.json())
+        .then(data => setSeatData(data))
     }, [seatData]);
-
 
     const [selectedSeats, setSelectedSeats] = useState([]);
 
-    const toggleSeat = (seat) => {
-        if(selectedSeats.includes(seat)) {
-            setSelectedSeats(selectedSeats.filter(s => s !== seat));
-            } else {
-                    setSelectedSeats([...selectedSeats, seat]);
-            }
+    const toggleSeat = (seat) => { //자리선택 뻥션
+      if(selectedSeats.includes(seat)) {
+        setSelectedSeats(selectedSeats.filter(s => s !== seat));
+      }else{
+        setSelectedSeats([...selectedSeats, seat]);
+      }
     };
 
-    function submit(){
+    function submit(){ //예매 뻥션
         console.log(seatData)
     }
 
     return(
-        <>
+      <>
         <MainHeader />
         <div className="seat-container">
-      {seats.map(seat => (
-        <div
-          key={seat}
-          className={`seat ${selectedSeats.includes(seat) ? "selected" : ""}`}
-          onClick={() => toggleSeat(seat)}
-        >
-          {seat}
+          {seats.map(seat => ( //좌석 반복문
+            <div
+              key={seat}
+              className={`seat ${selectedSeats.includes(seat) ? "selected" : ""}`}
+              onClick={() => toggleSeat(seat)}
+            >
+              {seat}
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
         <button onClick={submit}>예매</button>
-        </>
+      </>
     )
 }
 

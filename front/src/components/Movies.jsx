@@ -4,7 +4,8 @@ import { useLocation } from 'react-router-dom'
 
 function Movies(){
     const location = useLocation()
-    const { state : locateName } = location
+    const { state : locateName } = location //헤더 로그인 보존
+    
     return(
         <>
         <MainHeader />

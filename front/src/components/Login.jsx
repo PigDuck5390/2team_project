@@ -9,17 +9,16 @@ function Login() {
     const [pw, setPw] = useState("");
     const [userData, setUserData] = useState([]);
 
-    useEffect(() => {
+    useEffect(() => { //회원정보 조회
         fetch('http://localhost:3000/userinfo')
             .then(response => response.json())
             .then(data => setUserData(data))
     }, [userData]);
 
-    function handleLogin() {
+    function handleLogin() { //로그인 시도
         const login = userData.find(item =>
             item.id === id && item.pw === pw
         );
-
         if (login) {
             alert("로그인에 성공했습니다");
             navigate('/', { state: login.name });
@@ -27,10 +26,9 @@ function Login() {
             alert("계정 정보가 없습니다");
         }
     }
-
+    
     return (
         <div className="login-page">
-
             <div className="login-container">
                 <h1 className='login-title'>로그인</h1>
                 <img src={pen} className="login-pen-icon" />
@@ -58,7 +56,6 @@ function Login() {
                     로그인
                 </button>
             </div>
-
         </div>
     );
 }

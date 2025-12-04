@@ -12,17 +12,17 @@ function Join() {
     const [checkPw, setCheckPw] = useState("");
     const [userData, setUserData] = useState([]);
 
-    useEffect(() => {
+    useEffect(() => { //회원정보 조회
         fetch("http://localhost:3000/userinfo")
             .then(response => response.json())
             .then(data => setUserData(data));
     }, []);
 
-    function handleJoin() {
+    function handleJoin() { //회원가입 시도
         if (id !== "" && pw !== "" && name !== "") {
             if (!userData.some(item => item.id === id)) {
                 if (pw === checkPw) {
-                    fetch("http://localhost:3000/join", {
+                fetch("http://localhost:3000/join", { //회원가입
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
@@ -34,14 +34,13 @@ function Join() {
 
                     alert("회원가입이 완료되었습니다. 로그인 화면으로 이동합니다.");
                     navigate("/login");
-
-                } else {
+                }else{
                     alert("비밀번호 확인이 다릅니다.");
                 }
-            } else {
+            }else{
                 alert("중복된 아이디입니다.");
             }
-        } else {
+        }else{
             alert("입력하지 않은 정보가 있습니다.");
         }
     }
@@ -84,13 +83,13 @@ function Join() {
                     onChange={(e) => setCheckPw(e.target.value)}
                 />
 
-                <Link to="/login" className="join-link">로그인 화면으로 이동</Link>
-
+                <Link to="/login"className="join-link">
+                로그인 화면으로 이동
+                </Link>
 
                 <button className="join-submit-btn" onClick={handleJoin}>
                     회원가입
                 </button>
-
             </div>
         </div>
     );
