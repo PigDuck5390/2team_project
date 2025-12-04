@@ -1,201 +1,267 @@
-/* src/css/Booking.css */
-
-/* 책 컨셉에서 약간 여백/배치만 커스텀 */
-.booking-book {
-  height: 720px;
-}
-
-.booking-left {
-  justify-content: flex-start;
-}
-
-.booking-title {
-  font-size: 28px;
-  margin-bottom: 12px;
-  color: #2c1d0e;
-}
-
-.booking-desc {
-  font-size: 15px;
-  line-height: 1.7;
-  color: #4a3622;
-}
-
-.booking-meta {
-  margin-top: 18px;
-  font-size: 14px;
-  color: #6b4a2b;
-}
-
+/* 오른쪽 페이지 제목 */
 .schedule-title {
-  font-size: 22px;
-  margin-bottom: 18px;
-  letter-spacing: 0.1em;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 25px;
   color: #2c1d0e;
 }
 
-.schedule-list {
+/* 시간표 전체 박스 */
+.schedule-box {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 34px;
 }
 
-/* 이미 위에서 한 번 제안한 스타일과 동일하게 맞춤 */
-.schedule-btn {
-  width: 90%;
-  padding: 12px 18px;
-  font-size: 16px;
-  margin: 4px 0;
-  background: #fff4d6;
-  border-radius: 10px;
-  border: 2px solid #8b5a2b;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
-  cursor: pointer;
-  text-align: left;
-  transition: 0.2s;
-}
-
-.schedule-btn:hover {
-  background: #ffe2a2;
-  transform: scale(1.03);
-}
-
-/* ===== 좌석 선택 ===== */
-.seat-left {
-  row-gap: 20px;
-}
-
-.seat-title {
-  font-size: 26px;
-  margin-bottom: 8px;
-}
-
-.seat-meta {
-  font-size: 14px;
-  color: #6b4a2b;
-}
-
-.seat-selected-box {
-  margin-top: 24px;
-  padding: 14px 16px;
-  background: #fff7dd;
-  border-radius: 8px;
-  border: 1px solid #c8a36b;
-  font-size: 14px;
-}
-
-.seat-reserve-btn {
-  margin-top: 28px;
-  padding: 10px 22px;
-  border-radius: 20px;
-  border: 1px solid #8b5a2b;
-  background: #f3c06a;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-  transition: 0.2s;
-}
-
-.seat-reserve-btn:hover {
-  background: #e5a94b;
-  transform: translateY(-1px);
-}
-
-/* 상단 스크린 라벨 */
-.screen-label {
-  width: 70%;
-  margin: 0 auto 20px;
-  text-align: center;
-  padding: 8px 0;
-  background: #444;
-  color: #fff;
-  border-radius: 16px;
-  font-size: 14px;
-}
-
-/* 좌석 그리드 */
-.seat-grid {
+/* 각 관(1관/2관/3관) 줄 */
+.screen-row {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 20px;
+  align-items: flex-start;
 }
 
-.seat-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.row-label {
-  width: 24px;
-  text-align: right;
+/* '1관' */
+.screen-name {
+  width: 80px;
+  font-size: 20px;
   font-weight: 700;
   color: #4a3622;
 }
 
-.seat {
-  width: 36px;
-  height: 36px;
-  border-radius: 6px;
-  border: 1.5px solid #5c3a19;
-  background: #fff4d6;
-  font-size: 13px;
-  cursor: pointer;
-  transition: 0.15s;
-}
-
-.seat:hover {
-  background: #ffe2a2;
-}
-
-/* 빈 좌석(해당 위치에 좌석 없음) */
-.seat-empty {
-  background: transparent;
-  border: none;
-}
-
-/* 선택된 */
-.seat.selected {
-  background: #ffcc73;
-  border-color: #8b5a2b;
-}
-
-/* 이미 예약된 */
-.seat.reserved {
-  background: #b9b9b9;
-  border-color: #7d7d7d;
-  color: #eee;
-  cursor: not-allowed;
-}
-
-/* 좌석 범례 */
-.seat-legend {
-  margin-top: 24px;
+/* 시간 버튼 리스트 */
+.time-list {
   display: flex;
-  gap: 16px;
-  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* 시간 버튼 */
+.time-btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  background: #fff;
+  border: 2px solid #c7b08a;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  color: #3d2b1a;
+}
+
+.time-btn:hover {
+  transform: scale(1.05);
+  background: #f7f1e3;
+  border-color: #9a7c52;
+}
+
+/* ===== 메인 영역 기본 ===== */
+.main-area {
+  padding: 80px 0 160px;
+  background: linear-gradient(
+    to bottom,
+    #8a6131 0%,
+    #a97f3f 15%,
+    #a97f3f 100%
+  );
+}
+
+/* ===== 책 전체 래퍼 ===== */
+.book-wrapper {
+  width: 1300px;
+  margin-left: 195px;
+}
+
+/* ===== 열린 책 본체 ===== */
+.open-book {
+  position: relative;
+  width: 100%;             /* book-wrapper 기준 */
+  height: 800px;           /* 고정 높이 */
+  padding: 72px 110px;      /* 페이지 여백 */
+  background: radial-gradient(
+      circle at 50% 0,
+      #ffeec8 0,
+      #f5dfb4 55%,
+      #f1d79f 100%
+    );
+  border-radius: 26px 26px 40px 40px;
+ box-shadow:
+    0 32px 55px rgba(0, 0, 0, 0.45),  /* 아래 그림자 */
+    0 0 0 5px #f5e7c8,                 /* 1장째 종이 */
+    0 0 0 10px #e8d7b5,                 /* 2장째 종이 */
+    0 0 0 15px #d9c6a1,                 /* 3장째 종이 */
+    0 0 0 20px #ccb58d;             
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* 좌/우 페이지 2열 */
+  column-gap: 72px;
+  overflow: visible;
+}
+
+/* ░ 종이 겹 테두리 */
+.open-book::before {
+  content: "";
+  position: absolute;
+  inset: -10px; /* 기존보다 살짝 크게 */
+  border-radius: 30px;
+  background: #f5e7c8;
+  box-shadow:
+    0 0 0 5px #e8d7b5,
+    0 0 0 10px #d9c6a1,
+    0 0 0 15px #ccb58d,
+    0 0 20px rgba(0, 0, 0, 0.18);
+  z-index: -2;
+}
+
+/* ▒ 더 아래 레이어: 바깥 종이 */
+.open-book::after {
+  content: "";
+  position: absolute;
+  inset: -22px;
+  border-radius: 34px;
+  background: #cbb18a;
+  box-shadow:
+    0 0 0 3px #b39974,
+    0 30px 55px rgba(0,0,0,0.45);
+  z-index: -3;
+}
+
+
+/* 가운데 제본 줄 (갈색 줄) */
+.book-spine {
+  position: absolute;
+  top: -16px;
+  bottom: -16px;
+  left: 50%;
+  width: 12px;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(circle at 50% 0, rgba(0, 0, 0, 0.25) 0, transparent 55%),
+    radial-gradient(circle at 50% 100%, rgba(0, 0, 0, 0.7) 0, transparent 60%),
+    linear-gradient(180deg, #8b5a2b, #5c3a19);
+  box-shadow:
+    0 0 10px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(0, 0, 0, 0.28);
+    inset: 0 0 8px rgba(0, 0, 0, 0.4);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ===== 각 페이지 영역 ===== */
+.page {
+  position: relative;
+  padding: 8px 24px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+}
+
+/* 종이 질감 + 위/아래 여백 동일 */
+.page::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  left: 0;
+  right: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03), transparent 45%, rgba(0, 0, 0, 0.05)),
+    repeating-linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.03) 0,
+      rgba(0, 0, 0, 0.03) 1px,
+      transparent 1px,
+      transparent 14px
+    );
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.page > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== 영화 카드 한 줄 ===== */
+.movie-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+/* 포스터 */
+.movie-row img {
+  width: 260px;
+  height: auto;
+  border-radius: 6px;
+  box-shadow:
+    0 10px 18px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.movie-row img:hover {
+  transform: scale(1.03);
+  box-shadow:
+    0 16px 30px rgba(0, 0, 0, 0.6),
+    0 0 0 2px rgba(255, 230, 180, 0.65);
+  cursor: pointer;
+}
+/* 설명 영역 */
+.movie-row .desc {
+  padding-top: 12px;
+  color: #3d3021;
+}
+
+.movie-row .desc h1 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 0 0 12px;
+  color: #2c1d0e;
+}
+
+.movie-row .desc span {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.75;
   color: #4a3622;
 }
 
-.legend-box {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  margin-right: 4px;
-  border-radius: 3px;
-  border: 1px solid #5c3a19;
+.quick-reserv {
+  position: absolute;
+  bottom: 0px;       /* 페이지 아래쪽 자연 배치 */
+  right: 0px;        /* 오른쪽 정렬 */
+  
+  background: linear-gradient(to bottom, #8a6131, #5a3a1f);
+  color: #f8eedd;
+
+  padding: 10px 24px;
+  border: 1px solid rgba(0,0,0,0.3);
+  border-radius: 6px;
+
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+
+  cursor: pointer;
+  transition: 0.18s ease;
+
+  box-shadow:
+    0 3px 8px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
-.legend-available {
-  background: #fff4d6;
+.quick-reserv:hover {
+  background: linear-gradient(to bottom, #9c6e38, #6a4828);
+  transform: translateY(-2px);
+  box-shadow:
+    0 5px 14px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.28);
 }
 
-.legend-selected {
-  background: #ffcc73;
+.quick-reserv:active {
+  transform: translateY(0);
+  background: linear-gradient(to bottom, #6a4828, #4a311c);
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.4),
+    inset 0 0 4px rgba(0,0,0,0.4);
 }
 
-.legend-reserved {
-  background: #b9b9b9;
-}
