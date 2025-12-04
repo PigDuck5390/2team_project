@@ -22,10 +22,32 @@ function MainHeader(){
         
       }
 
+      function mypage(){
+        navigate('/mypage', { state : locateName })
+      }
+      
+      function moveMain(){
+        navigate("/", { state : locateName })
+      }
+      function moveMovies(){
+        navigate("/movies", { state : locateName })
+      }
+      function moveReserv(){
+        navigate("/reservation", { state : locateName })
+      }
+      function moveBenefit(){
+        navigate("/benefit", { state : locateName })
+      }
+      function moveEvent(){
+        navigate("/event", { state : locateName })
+      }
+
+
       const headerRightContent = loggedInId ? (
         <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
           환영합니다. {loggedInId}님
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout}>로그아웃</button>
+          <button onClick={mypage}>마이페이지</button>
         </div>
       ) : (
         <>
@@ -56,17 +78,17 @@ return (
       <div className="header-main">
         <div className="header-main-inner">
           <nav className="nav-left">
-            <a href="#" className="nav-item active">영화</a>
-            <a href="#" className="nav-item">예매</a>
+            <a onClick={moveMovies} className="nav-item active">영화</a>
+            <a onClick={moveReserv} className="nav-item">예매</a>
           </nav>
 
-          <div className="header-logo">
+          <div className="header-logo" onClick={moveMain}>
             MOVIELOG
           </div>
 
           <nav className="nav-right">
-            <a href="#" className="nav-item">이벤트</a>
-            <a href="#" className="nav-item">혜택</a>
+            <a onClick={moveEvent} className="nav-item">이벤트</a>
+            <a onClick={moveBenefit} className="nav-item">혜택</a>
           </nav>
         </div>
       </div>

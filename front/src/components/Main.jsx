@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import MainHeader from './MainHeader.jsx'
+
 import firstMovie from '../img/주토피아.jpg'
 import secondMovie from '../img/주술회전.jpg'
 import thirdMovie from '../img/윗집사람들.jpg'
@@ -12,7 +12,7 @@ function Main(){
   
   return (
     <>
-      <MainHeader />
+      
 
       <main className="main-area">
         <div className="book-wrapper">

@@ -2,17 +2,15 @@ import MainHeader from './MainHeader.jsx'
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
-
-function Reservation() {
-    const location =- useLocation()
+function MyPage(){
+    const location = useLocation()
     const { state : locateName } = location
 
     return(
         <>
         <MainHeader />
-        <h1>예매</h1>
         </>
     )
 }
 
-export default Reservation;
+export default MyPage
