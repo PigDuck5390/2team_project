@@ -7,6 +7,7 @@ const pool = require('./db')
 
 app.use(express.json())
 app.use(cors())
+app.use('/upload', express.static('upload'));
 
 // app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -58,6 +59,12 @@ app.get('/seatlist', async (req, res) => { //예매정보 호출
 app.get('/movieinfo', async (req, res) => { //영화정보 호출
   const data = await pool.query('SELECT * FROM movie_info')
   res.send(data)
+})
+
+app.get('/movies', async (req, res) => { //영화목록 호출
+  const data = await pool.query(
+    'SELECT movie_id, title, description, poster, runtime FROM movie_info ORDER BY movie_id')
+    res.send(data)
 })
 
 app.post('/join', async (req, res) => { //회원가입
