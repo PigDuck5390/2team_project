@@ -1,0 +1,203 @@
+/* 페이지 전체 영역 */
+.reservation-page {
+  min-height: 100vh;
+  padding: 80px 0 160px;
+  background: linear-gradient(
+    to bottom,
+    #8a6131 0%,
+    #a97f3f 15%,
+    #a97f3f 100%
+  );
+}
+
+/* 가운데 정렬 컨테이너 */
+.reservation-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+/* 한 편당 카드 */
+.reservation-card {
+  background: radial-gradient(circle at 50% 0, #ffeec8 0, #f5dfb4 55%, #f1d79f 100%);
+  border-radius: 20px;
+  padding: 32px 32px 28px;
+  box-shadow:
+    0 22px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 4px #f5e7c8,
+    0 0 0 8px #e8d7b5;
+  display: grid;
+  grid-template-columns: 1fr;  /* 모바일/좁은 화면: 세로 배치 */
+  row-gap: 24px;
+  width : 1080px;
+  margin-left: 30px;
+  
+}
+
+/* 포스터 영역 */
+.reservation-poster-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+/* 포스터 5:7, 유조현 설정 사이즈 */
+.reservation-poster {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 5 / 7;
+  max-height: 453px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow:
+    0 18px 28px rgba(0, 0, 0, 0.65),
+    0 0 0 2px rgba(0, 0, 0, 0.5);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.reservation-poster:hover {
+  transform: scale(1.02);
+  box-shadow:
+    0 26px 40px rgba(0, 0, 0, 0.7),
+    0 0 0 2px rgba(255, 230, 180, 0.85);
+  cursor: pointer;
+}
+
+/* 영화 정보 텍스트 영역을 flex 세로 레이아웃으로 (위: 설명 / 아래: 빠른 예매) */
+.reservation-info {
+  padding: 6px 4px 0;
+  color: #3d3021;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 위쪽: 제목 + 설명 + 상영 시간 묶음 */
+.reservation-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.reservation-title {
+  margin: 0 0 12px;
+  font-size: 28px;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: #2c1d0e;
+}
+
+.reservation-desc {
+  margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #4a3622;
+  white-space: pre-line;
+}
+
+/* 상영 시간 : 오른쪽 아래 고정 */
+.reservation-runtime {
+  margin: 0;
+  font-size: 15px;
+  color: #4a3622;
+  margin-top: auto;
+  align-self: flex-end;
+  text-align: right;
+}
+
+.reservation-runtime strong {
+  font-weight: 700;
+  color: #2c1d0e;
+}
+
+/* 아래쪽: 빠른 예매 영역 (오른쪽 영역 절반 정도 차지) */
+.reservation-quick {
+  flex: 0 0 auto;
+  margin-top: 12px;
+  padding-top: 24px;
+  border-top: 1px dashed rgba(90, 58, 31, 0.4);
+  min-height: 220px;          /* 🔸 오른쪽 영역 절반 정도 확보 */
+  display: flex;
+  flex-direction: column;
+}
+
+.reservation-quick-title {
+  margin: 0 0 18px;           /* 🔸 제목과 버튼 사이 간격 넉넉하게 */
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #2c1d0e;
+}
+
+/* 시간 버튼 영역: 3열 그리드 */
+.reservation-times {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;                  /* 버튼 간격 살짝 넓게 */
+}
+
+/* 개별 시간 버튼 */
+.time-slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;               /* 셀 가로폭 꽉 채우기 */
+  min-height: 36px;
+  padding: 8px 0;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  background: linear-gradient(to bottom, #8a6131, #5a3a1f);
+  color: #f8eedd;
+  box-shadow:
+    0 3px 7px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: 0.18s ease;
+  user-select: none;
+}
+
+.time-slot:hover {
+  background: linear-gradient(to bottom, #9c6e38, #6a4828);
+  transform: translateY(-1px);
+  box-shadow:
+    0 5px 11px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.time-slot:active {
+  transform: translateY(0);
+  background: linear-gradient(to bottom, #6a4828, #4a311c);
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.45),
+    inset 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+/* 넓은 화면에서 포스터 / 정보 좌우 배치 + 포스터 오른쪽 구분선 */
+@media (min-width: 1100px) {
+  .reservation-card {
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 36px;
+    align-items: stretch;
+  }
+
+  .reservation-poster-wrap {
+    justify-content: flex-start;
+    padding-right: 24px;
+    border-right: 1px solid rgba(90, 58, 31, 0.35);
+  }
+
+.reservation-info {
+  padding: 6px 4px 0;
+  color: #3d3021;
+  display: flex;
+  flex-direction: column;
+  min-height: 453px;   /* 포스터 높이와 비슷하게 맞춰줌 */
+}
+
+
+}
