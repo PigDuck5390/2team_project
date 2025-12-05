@@ -13,12 +13,12 @@ import '../css/Main.css'
 
 function Main(){
   const navigate = useNavigate();
-  const location = useLocation()
+  const { state : userInfo } = useLocation()
   
   const Reserve = (movieId) =>{
     navigate(`/booking/${movieId}`,{ state : {
-          name : location.state.name,
-          id : location.state.id 
+          name : userInfo.state.name,
+          id : userInfo.state.id 
         } });
   };
   return (

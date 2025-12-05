@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 
 function Benefit(){
     
-    const location = useLocation()
+    const { state : userInfo } = useLocation()
     
     return(
         <>

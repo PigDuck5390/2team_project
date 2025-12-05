@@ -67,6 +67,12 @@ app.get('/movies', async (req, res) => { //영화목록 호출
     res.send(data)
 })
 
+app.post('/reserv', async (req, res) => {
+  await pool.query(
+    'INSERT INTO seat (seat_num, user_id, date, time, movie_name, userName, screen_num) VALUE (?,?,?,?,?,?,?)',
+  [req.body.seat, req.body.userId, req.body.date, req.body.movieTime, req.body.movieName, req.body.userName, req.body.screen])
+})
+
 app.post('/join', async (req, res) => { //회원가입
   await pool.query('INSERT INTO user (name, id, pw) VALUES (?,?,?)',
     [req.body.userName, req.body.userId, req.body.userPw]

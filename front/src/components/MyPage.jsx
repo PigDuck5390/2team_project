@@ -3,13 +3,13 @@ import { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 function MyPage(){
-    const location = useLocation()
+    const { state : userInfo } = useLocation()
     const navigate = useNavigate();
 
     function myReserve(){
         navigate("/myreserve", { state : {
-          name : location.state.name,
-          id : location.state.id 
+          name : userInfo.name,
+          id : userInfo.id 
         } } )}
       
 
@@ -22,7 +22,7 @@ function MyPage(){
                 <h2>나의 무비로그</h2>
             </div>
             <div>
-                <h1>안녕하세요!<br/>{location.state.name}님</h1>
+                <h1>안녕하세요!<br/>{userInfo.name}님</h1>
             </div>
             <div>
                 <h2>나의 예매내역</h2><br/>

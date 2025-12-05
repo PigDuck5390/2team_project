@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
 function Event(){
-    const location = useLocation()
+    const { state : userInfo } = useLocation()
 
     return(
         <>
