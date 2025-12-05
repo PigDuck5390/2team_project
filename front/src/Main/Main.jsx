@@ -1,5 +1,9 @@
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+
+import { Bs0CircleFill } from "react-icons/bs"
+
+
 import MainHeader from '../Main/MainHeader.jsx'
 import firstMovie from '../img/주토피아.jpg'
 import secondMovie from '../img/주술회전.jpg'
@@ -10,10 +14,12 @@ import '../css/Main.css'
 function Main(){
   const navigate = useNavigate();
   const location = useLocation()
-  const { state : locateName } = location
   
   const Reserve = (movieId) =>{
-    navigate(`/booking/${movieId}`,{ state : locateName });
+    navigate(`/booking/${movieId}`,{ state : {
+          name : location.state.name,
+          id : location.state.id 
+        } });
   };
   return (
     <>

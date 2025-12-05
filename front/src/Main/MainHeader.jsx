@@ -7,39 +7,59 @@ function MainHeader(){
     const navigate = useNavigate()
     const [loggedInId, setLoggedInId] = useState(null);
     const location = useLocation()
-    const { state : locateName } = location
     
     useEffect(()=> {
-      if (locateName) {
-        setLoggedInId(locateName)
+      if (location.state.name) {
+        setLoggedInId(location.state.name)
       }
-    }, [locateName])
+    }, [location.state.name])
 
       function handleLogout(){
         setLoggedInId(null);
         alert("로그아웃 되었습니다")
-        navigate('/', { state : null })
+        navigate('/', { state : {
+          name : null,
+          id : null
+        } })
         
       }
 
       function mypage(){
-        navigate('/mypage', { state : locateName })
+        navigate('/mypage', { state : {
+          name : location.state.name,
+          id : location.state.id 
+        } })
       }
       
       function moveMain(){
-        navigate("/", { state : locateName })
+        navigate("/", { state : {
+          name : location.state.name,
+          id : location.state.id 
+        } })
       }
       function moveMovies(){
-        navigate("/movies", { state : locateName })
+        navigate("/movies", { state : {
+          name : location.state.name,
+          id : location.state.id 
+        } })
       }
       function moveReserv(){
-        navigate("/reservation", { state : locateName })
+        navigate("/reservation", { state : {
+          name : location.state.name,
+          id : location.state.id 
+        } })
       }
       function moveBenefit(){
-        navigate("/benefit", { state : locateName })
+        navigate("/benefit", { state : {
+          name : location.state.name,
+          id : location.state.id 
+        } })
       }
       function moveEvent(){
-        navigate("/event", { state : locateName })
+        navigate("/event", { state : {
+          name : location.state.name,
+          id : location.state.id 
+        } })
       }
 
 

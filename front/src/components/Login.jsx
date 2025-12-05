@@ -21,7 +21,11 @@ function Login() {
         );
         if (login) {
             alert("로그인에 성공했습니다");
-            navigate('/', { state: login.name });
+            navigate('/', { state: 
+                { name : login.name,
+                    id : login.id
+                 }
+                });
         } else {
             alert("계정 정보가 없습니다");
         }

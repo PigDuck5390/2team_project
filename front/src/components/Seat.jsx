@@ -5,8 +5,11 @@ import '../css/Seat.css'
 
 function Seat(){
     const location =- useLocation()
-    const { state : locateName } = location //헤더 로그인 유지
+    const reservInfo = useParams()
     
+    console.log(reservInfo.title, reservInfo.time)
+    console.log(location)
+
     const seats = 
     ["A1", "A2", "A3", "A4", "A5", "A6",
         "B1", "B2", "B3", "B4", "B5", "B6",
@@ -35,7 +38,15 @@ function Seat(){
     };
 
     function submit(){ //예매 뻥션
-        console.log(seatData)
+        // fetch("http://localhost:3000/seatlist",{
+        //   method: "PUT",
+        //   headers : {"content-type : application/json"},
+        //   body : JSON.stringify({
+
+            
+        //   })
+        // }
+        // )
     }
 
     return(

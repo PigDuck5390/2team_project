@@ -6,11 +6,10 @@ import imgSample from '../img/주토피아.jpg'
 import '../css/Reservation.css'   // ✅ 이 줄 추가
 
 function Reservation() {
-  const location = useLocation()
+  const location = useLocation() //헤더 로그인 보존 및 유저 정보
   const navigate = useNavigate()
   const [movieData, setMovieData] = useState([])
 
-  const { state: locateName } = location //헤더 로그인 보존
 
   useEffect(() => { //영화정보 조회
     fetch("http://localhost:3000/movieinfo")
@@ -19,7 +18,11 @@ function Reservation() {
   }, [movieData])
 
   function moveSeat(title, time) { //좌석선택 이동
-    navigate(`/seat/${title}/${time}`)
+    navigate(`/seat/${title}/${time}`, 
+      { state : {
+      name : location.state.name,
+      id : location.state.id
+    }} )
   }
 
   return (

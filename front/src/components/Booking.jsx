@@ -8,7 +8,6 @@ function Booking() {
   const navigate = useNavigate();
   const location = useLocation()
   const { movieId } = useParams(); //영화명
-  const { state : locateName } = location //헤더 로그인 보존
 
   const [movieData, setMovieData] = useState([])
   
