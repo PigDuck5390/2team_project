@@ -6,7 +6,7 @@ import "../css/Booking.css";
 
 function Booking() {
   const navigate = useNavigate();
-  const location = useLocation()
+  const { state : userInfo } = useLocation()
   const { movieId } = useParams(); //영화명
 
   const [movieData, setMovieData] = useState([])

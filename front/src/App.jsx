@@ -7,9 +7,12 @@ import Benefit from './components/Benefit.jsx'
 import Event from './components/Event.jsx'
 import Booking from './components/Booking.jsx'
 import Admin from './Admin/Admin.jsx'
-import MyPage from './components/MyPage.jsx'
+import MyPage from './mypage/MyPage.jsx'
 import Reservation from './components/Reservation.jsx'
 import Seat from './components/Seat.jsx'
+import MyInfo from './mypage/MyInfo.jsx'
+import MyPoint from './mypage/MyPoint.jsx'
+import MyReserve from './mypage/MyReserve.jsx'
 
 
 
@@ -35,7 +38,9 @@ function App() {
         <Route path='/mypage' element={<MyPage />} />
         <Route path='/reservation' element={<Reservation />} />
         <Route path='/seat/:title/:time' element={<Seat />} />
-        
+        <Route path='/myinfo' element={<MyInfo />}/>
+        <Route path='/myreserve' element={<MyReserve />}/>
+        <Route path='/mypoint' element={<MyPoint />}/>
 
 
       </Routes>

@@ -201,3 +201,51 @@
 
 
 }
+
+/* 빠른 예매 안의 날짜 선택 인풋 */
+.reservation-date-input {
+  width: 220px;
+  margin-bottom: 18px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(90, 58, 31, 0.5);
+  background: rgba(245, 231, 200, 0.95);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  color: #3d3021;
+  outline: none;
+}
+
+/* 포커스 시 살짝 강조 */
+.reservation-date-input:focus {
+  box-shadow:
+    0 0 0 2px rgba(255, 224, 170, 0.9),
+    0 3px 7px rgba(0, 0, 0, 0.35);
+  border-color: #8a6131;
+}
+
+/* 플레이스홀더/텍스트 정렬 */
+.reservation-date-input::-webkit-datetime-edit {
+  padding: 2px 0;
+}
+
+/* 캘린더 아이콘 살짝 키우기 & 커서 */
+.reservation-date-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.reservation-date-input::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+.reservation-date-wrapper {
+  display: inline-block;
+  cursor: pointer;
+}
+.reservation-date-input {
+  width: 220px;
+  cursor: pointer;
+}

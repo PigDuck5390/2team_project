@@ -6,13 +6,13 @@ function MainHeader(){
 
     const navigate = useNavigate()
     const [loggedInId, setLoggedInId] = useState(null);
-    const location = useLocation()
+    const { state : userInfo } = useLocation()
     
     useEffect(()=> {
-      if (location.state.name) {
-        setLoggedInId(location.state.name)
+      if (userInfo?.name) {
+        setLoggedInId(userInfo.name)
       }
-    }, [location.state.name])
+    }, [userInfo])
 
       function handleLogout(){
         setLoggedInId(null);
@@ -26,39 +26,39 @@ function MainHeader(){
 
       function mypage(){
         navigate('/mypage', { state : {
-          name : location.state.name,
-          id : location.state.id 
+          name : userInfo?.name,
+          id : userInfo?.id 
         } })
       }
       
       function moveMain(){
         navigate("/", { state : {
-          name : location.state.name,
-          id : location.state.id 
+          name : userInfo?.name,
+          id : userInfo?.id 
         } })
       }
       function moveMovies(){
         navigate("/movies", { state : {
-          name : location.state.name,
-          id : location.state.id 
+          name : userInfo?.name,
+          id : userInfo?.id 
         } })
       }
       function moveReserv(){
         navigate("/reservation", { state : {
-          name : location.state.name,
-          id : location.state.id 
+          name : userInfo?.name,
+          id : userInfo?.id 
         } })
       }
       function moveBenefit(){
         navigate("/benefit", { state : {
-          name : location.state.name,
-          id : location.state.id 
+          name : userInfo?.name,
+          id : userInfo?.id 
         } })
       }
       function moveEvent(){
         navigate("/event", { state : {
-          name : location.state.name,
-          id : location.state.id 
+          name : userInfo?.name,
+          id : userInfo?.id 
         } })
       }
 

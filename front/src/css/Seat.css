@@ -1,31 +1,272 @@
-.seat-container {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  /* 6개씩 한 줄 */
-  gap: 10px;
-  width: fit-content;
-  margin: 30px auto;
+/* =========================================
+   좌석 선택 페이지 공통 스타일
+   ========================================= */
+
+/* 전체 페이지 래핑 */
+.seat-page {
+  min-height: 100vh;
+  padding: 40px 0 60px;
+  background: linear-gradient(
+    to bottom,
+    #8a6131 0%,
+    #a97f3f 15%,
+    #a97f3f 100%
+  );
+  color: #3a2413;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
 
+/* =========================================
+   레이아웃: 좌측(관/스크린/좌석) + 우측(정보/예매)
+   ========================================= */
+
+.seat-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 60px;
+  display: flex;
+  justify-content: space-between;
+  gap: 80px;
+  padding: 0 80px 80px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* 중앙 세로 라인 */
+.seat-wrapper::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  bottom: 0;
+  left: 91.8%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    rgba(40, 22, 10, 0) 0%,
+    rgba(40, 22, 10, 0.45) 20%,
+    rgba(40, 22, 10, 0.45) 80%,
+    rgba(40, 22, 10, 0) 100%
+  );
+}
+
+/* 좌측 영역: 스크린 + 좌석 */
+.left-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 300px
+}
+
+/* 우측 영역: 영화 정보 + 예매 버튼 */
+.right-area {
+  flex: 0 0 320px;
+  background: #f6e6c7;
+  border-radius: 24px;
+  padding: 26px 32px 28px;
+  margin-left: 115px;
+  color: #3a2413;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  box-shadow:
+    0 14px 26px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(201, 162, 106, 0.5),
+    0 0 0 6px rgba(182, 125, 61, 0.35);
+  box-sizing: border-box;
+}
+
+/* 우측 정보 텍스트 */
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* 우측 정보 텍스트 */
+.movie-info p {
+  font-size: 15px;
+  margin: 0;
+  line-height: 1.5;
+  display: flex;    /* 라벨 / 값 한 줄에 */
+  gap: 6px;
+}
+
+.movie-info p strong {
+  min-width: 80px;  /* '상영관 :' 같은 라벨 정렬 */
+}
+
+
+/* =========================================
+   제목 / 스크린 바
+   ========================================= */
+
+/* (필요 시 사용) 영화 제목 */
+.title {
+  position: relative;
+  z-index: 2;
+  margin-top: 45px;
+  margin-bottom: 10px;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #2f1b0f;
+  text-align: center;
+}
+
+/* 스크린 텍스트 + 바 */
+.screen {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto 32px;
+  height: 40px;
+  padding: 10px 220px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8a5b2f;
+  font-weight: 700;
+  background: radial-gradient(
+    circle at top,
+    #fdf2dc 0%,
+    #edd1a2 55%,
+    #c8924e 100%
+  );
+  border-radius: 999px;
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.25),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+}
+
+/* =========================================
+   좌석 영역 (책 페이지 느낌)
+   ========================================= */
+
+.seat-container {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  width: fit-content;
+  margin: 20px auto 0;
+  padding: 28px 36px 32px;
+  border-radius: 32px;
+  background: #f6e6c7;
+  box-shadow:
+    0 18px 35px rgba(82, 50, 23, 0.35),
+    0 0 0 2px rgba(201, 162, 106, 0.5),
+    0 0 0 10px rgba(182, 125, 61, 0.4);
+}
+
+.seat-container::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border-radius: 26px;
+  border: 1px solid rgba(153, 117, 71, 0.25);
+  pointer-events: none;
+}
+
+/* =========================================
+   개별 좌석
+   ========================================= */
+
 .seat {
-  width: 45px;
-  height: 45px;
-  background: #c7c7c7;
-  border-radius: 6px;
+  width: 80px;
+  height: 80px;
+  background: #ddc4a4;
+  border-radius: 11px;
+  border: 1px solid #9c7346;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 16px;
+  color: #3a2413;
+  box-shadow:
+    0 3px 0 #8a5c33,
+    0 5px 10px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    background 0.12s ease,
+    color 0.12s ease;
 }
 
+.seat:hover {
+  background: #e7d4b7;
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 0 #7a4c29,
+    0 8px 14px rgba(0, 0, 0, 0.45);
+}
+
+/* 선택된 좌석 */
 .seat.selected {
-  background: #FF5722;
-  color: #fff;
+  background: #c47533;
+  color: #fff9ed;
+  border-color: #8b4a1d;
+  box-shadow:
+    0 3px 0 #6a3915,
+    0 7px 14px rgba(0, 0, 0, 0.55),
+    0 0 0 2px #f9e2bf inset;
 }
 
-.screen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* =========================================
+   예매 버튼
+   ========================================= */
+
+.reserve-btn {
+  position: relative;
+  z-index: 2;
+  margin-top: 8px;
+  padding: 10px 0;
+  background: radial-gradient(
+    circle at top,
+    #fdf2dc 0%,
+    #edd1a2 55%,
+    #c8924e 100%
+  );
+  border: none;
+  border-radius: 999px;
+  color: #8a5b2f;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(54, 30, 14, 0.8);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    filter 0.15s ease;
+  align-self: stretch; /* 우측 카드 안에서 가로 꽉 차게 */
+}
+
+.reserve-btn:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(54, 30, 14, 0.9);
+}
+
+.reserve-btn:active {
+  transform: translateY(0);
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(54, 30, 14, 0.9);
 }
