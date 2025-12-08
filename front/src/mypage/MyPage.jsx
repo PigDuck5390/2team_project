@@ -8,12 +8,11 @@ import { FaCrown } from "react-icons/fa";
 function MyPage() {
     const navigate = useNavigate();
     const location = useLocation();
-    const [loggedInId, setLoggedInId] = useState(null);
-
+    const [loggedInName, setLoggedInName] = useState(null);
     const [profileImg, setProfileImg] = useState(defaultProfile);
 
     useEffect(() => {
-        setLoggedInId(location.state.name);
+        setLoggedInName(location.state.name);
 
         fetch(`http://localhost:3000/userprofile/${location.state.id}`)
             .then(res => res.json())
@@ -26,15 +25,6 @@ function MyPage() {
             });
     }, [location.state?.id]);
 
-    function myReserve() {
-        navigate("/myreserve", {
-            state: {
-                name: userInfo.name,
-                id: userInfo.id
-            }
-        })
-    }
-
     const handleProfileChange = async (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -44,7 +34,7 @@ function MyPage() {
         formData.append("userId", location.state.id);
 
         const res = await fetch("http://localhost:3000/updateProfile", {
-            method: "POST",
+            method: "PUT",
             body: formData
         });
 
@@ -57,30 +47,48 @@ function MyPage() {
         }
     };
 
-    function myinfo() {
+    function goMyInfoEdit() {
         navigate('/myinfo', { state: { name: location.state.name, id: location.state.id } });
     }
 
+    const goPoint = () => {
+        navigate('/mypoint', {
+            state: {
+                name: location.state.name,
+                id: location.state.id
+            }
+        });
+    };
+
+    const goReserve = () => {
+        navigate('/myreserve', {
+            state: {
+                name: location.state.name,
+                id: location.state.id
+            }
+        });
+    };
     return (
         <>
             <MainHeader />
 
             <main className="mypage-wrapper">
 
+                 {/* 🔥 Left Menu */}
                 <aside className="mypage-menu">
                     <h3 className="menu-title">나의 무비로그</h3>
 
                     <ul className="menu-list">
-                        <li onClick={() => myinfo()}>내 정보</li>
-                        <li>멤버십 포인트</li>
-                        <li>예매내역</li>
+                        <li>내 정보</li>
+                        <li onClick={goMyInfoEdit}>개인정보 변경</li>
+                        <li onClick={goPoint}>멤버십 포인트</li>
+                        <li onClick={goReserve}>예매내역</li>
                     </ul>
                 </aside>
 
                 <section className="mypage-content">
-
                     <div className="profile-box">
-
+        
                         <div className="level-top-box">
                             <div className="level-badge">
                                 <FaCrown className="level-icon" />
@@ -106,7 +114,7 @@ function MyPage() {
 
                         <div className="profile-right">
                             <h1 className="welcome-text">
-                                안녕하세요! <br />{loggedInId}님
+                                안녕하세요! <br />{loggedInName}님
                             </h1>
 
                             <div className="point-box">

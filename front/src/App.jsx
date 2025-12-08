@@ -10,7 +10,7 @@ import Admin from './Admin/Admin.jsx'
 import MyPage from './mypage/MyPage.jsx'
 import Reservation from './components/Reservation.jsx'
 import Seat from './components/Seat.jsx'
-import MyInfo from './mypage/MyInfo.jsx'
+import MyInfo from './mypage/MyInfoEdit.jsx'
 import MyPoint from './mypage/MyPoint.jsx'
 import MyReserve from './mypage/MyReserve.jsx'
 
@@ -37,7 +37,7 @@ function App() {
         <Route path='/admin' element={<Admin />} />
         <Route path='/mypage' element={<MyPage />} />
         <Route path='/reservation' element={<Reservation />} />
-        <Route path='/seat/:title/:time' element={<Seat />} />
+        <Route path='/seat/:title/:time/:date/:screen' element={<Seat />} />
         <Route path='/myinfo' element={<MyInfo />}/>
         <Route path='/myreserve' element={<MyReserve />}/>
         <Route path='/mypoint' element={<MyPoint />}/>

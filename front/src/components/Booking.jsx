@@ -5,12 +5,14 @@ import MainHeader from "../Main/MainHeader";
 import "../css/Booking.css";
 
 function Booking() {
-  const navigate = useNavigate();
+  //헤더 로그인 보존 및 유저 정보
   const { state : userInfo } = useLocation()
-  const { movieId } = useParams(); //영화명
+  const { movieId } = useParams();
+  const navigate = useNavigate();
 
   const [movieData, setMovieData] = useState([])
   
+
   useEffect(()=>{ //영화정보 조회
     fetch("http://localhost:3000/movieinfo")
     .then(response => response.json())

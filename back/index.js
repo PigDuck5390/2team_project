@@ -8,8 +8,10 @@ const pool = require('./db')
 app.use(express.json())
 app.use(cors())
 
+//정적 데이터를 읽을 파일 경로, 브라우저 URL 선언 및 연결
 app.use('/upload', express.static(path.join(__dirname, 'upload')));
 
+//신규 파일 저장경로 및 파일명 규칙 선언
 const storage = multer.diskStorage({
   destination: (req, file, cb) =>{
     cb(null, path.join(__dirname, 'upload', 'profile'))
@@ -20,88 +22,94 @@ const storage = multer.diskStorage({
   }
 });
 
+//멀터 변수화
 const upload = multer({ storage })
 
-// app.post('/admin/movie', upload.single('poster'), async (req, res) => {
-//   try {
-//     const { title, description, runtime, screen_number, start_time } = req.body;
-
-//     // multer가 저장한 파일 정보
-//     const posterPath = `/uploads/posters/${req.file.filename}`;
-
-//     // DB에 INSERT
-//     await pool.query(
-//       `INSERT INTO movie_info
-//        (title, description, runtime, screen_number, start_time, poster)
-//        VALUES (?, ?, ?, ?, ?, ?)`,
-//       [title, description, runtime, screen_number, start_time, posterPath]
-//     );
-
-//     res.json({ ok: true });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ ok: false, message: 'DB error' });
-//   }
-// });
 
 
-app.get('/userinfo', async (req, res) => { //유저정보 호출
+// -------------------------------------------- //
+
+
+
+//유저정보 호출
+app.get('/userinfo', async (req, res) => {
   const data = await pool.query('SELECT * FROM user')
   res.send(data)
 })
 
-app.get('/seatlist', async (req, res) => { //예매정보 호출
+//예매정보 호출
+app.get('/seatlist', async (req, res) => {
   const data = await pool.query('SELECT * FROM seat')
   res.send(data)
 })
 
-app.get('/movieinfo', async (req, res) => { //영화정보 호출
-  const data = await pool.query('SELECT * FROM movie_info')
-  res.send(data)
-})
-
-app.get('/movies', async (req, res) => { //영화목록 호출
+//영화정보 호출
+app.get('/movies', async (req, res) => {
   const data = await pool.query(
-    'SELECT movie_id, title, description, poster, runtime FROM movie_info ORDER BY movie_id')
+    'SELECT * FROM movie_info')
     res.send(data)
 })
 
+//영화정보 호출 (예매누적수 기반 내림차순) 
+app.get('/movieinfo', async (req, res) => {
+  const data = await pool.query(
+    'SELECT * FROM movie_info ORDER BY reserv_count DESC')
+  res.send(data)
+})
+
+//신규 예매
 app.post('/reserv', async (req, res) => {
   await pool.query(
     'INSERT INTO seat (seat_num, user_id, date, time, movie_name, userName, screen_num) VALUE (?,?,?,?,?,?,?)',
   [req.body.seat, req.body.userId, req.body.date, req.body.movieTime, req.body.movieName, req.body.userName, req.body.screen])
 })
 
-app.post('/join', async (req, res) => { //회원가입
+//회원가입
+app.post('/join', async (req, res) => {
   await pool.query('INSERT INTO user (name, id, pw) VALUES (?,?,?)',
     [req.body.userName, req.body.userId, req.body.userPw]
   )
 })
 
-app.post("/updateProfile", upload.single("profile"), async (req, res) => {
-    const userId = req.body.userId;  
+//프로필 사진 변경
+app.put("/updateProfile", upload.single("profile"), async (req, res) => {  
     const filePath = `/upload/profile/${req.file.filename}`;
     await pool.query(
       "UPDATE user SET profile = ? WHERE id = ?",
-      [filePath, userId]
+      [filePath, req.body.userId]
     );
     res.json({ success: true, profile: filePath });
 })
 
+//프로필 사진 호출
 app.get("/userprofile/:id", async (req, res) => {
-  const userId = req.params.id;
   const data = await pool.query("SELECT profile FROM user WHERE id=?",
-    [userId]
+    [req.params.id]
   );
   res.send(data);
 })
 
-app.post('/reserv', async (req, res) => {
-  await pool.query(
-    'INSERT INTO seat (seat_num, user_id, date, time, movie_name, userName, screen_num) VALUE (?,?,?,?,?,?,?)',
-  [req.body.seat, req.body.userId, req.body.date, req.body.movieTime, req.body.movieName, req.body.userName, req.body.screen])
+//비밀번호 변경
+app.put('/changePassword', async (req, res) =>{
+  await pool.query("UPDATE user SET pw = ? WHERE id =?",
+    [req.body.newPassword, req.body.userId]
+  )
 })
 
+//카드 신규 등록
+app.post('/newcard', async (req, res)=>{
+  await pool.query(
+    "INSERT INTO user_card (user_id, card_num, card_date, user_defid, card_bank) VALUE (?,?,?,?,?)",
+  [req.body.userId, req.body.card, req.body.cardDate, req.body.defid, req.body.bank])
+})
+
+//카드 정보 호출
+app.get('/cardinfo', async (req, res)=>{
+  const data = await pool.query("SELECT * FROM user_card")
+  res.send(data)
+})
+
+//서버 실행
 app.listen(3000, () => {
   console.log('서버 실행')
 })

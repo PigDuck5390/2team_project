@@ -4,14 +4,20 @@ import "../css/Movies.css";
 
 
 function Movies() {
+
   const [movies, setMovies] = useState([]);
 
+  //영화정보 조회 (순위 미반영)
   useEffect(()=>{
     fetch("http://localhost:3000/movies")
       .then(res => res.json())
       .then(data => setMovies(data))
   },[])
 
+  
+  //-----------------------------------------------------//
+
+  
   return (
     <>
       <MainHeader />

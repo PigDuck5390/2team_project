@@ -12,17 +12,20 @@ function Join() {
     const [checkPw, setCheckPw] = useState("");
     const [userData, setUserData] = useState([]);
 
-    useEffect(() => { //회원정보 조회
+    //회원정보 조회
+    useEffect(() => {
         fetch("http://localhost:3000/userinfo")
             .then(response => response.json())
             .then(data => setUserData(data));
     }, []);
 
-    function handleJoin() { //회원가입 시도
+    //회원가입 시도
+    function handleJoin() {
         if (id !== "" && pw !== "" && name !== "") {
             if (!userData.some(item => item.id === id)) {
                 if (pw === checkPw) {
-                fetch("http://localhost:3000/join", { //회원가입
+                    //회원가입 실행
+                    fetch("http://localhost:3000/join", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
@@ -31,7 +34,6 @@ function Join() {
                             userPw: pw
                         })
                     });
-
                     alert("회원가입이 완료되었습니다. 로그인 화면으로 이동합니다.");
                     navigate("/login");
                 }else{
@@ -44,6 +46,10 @@ function Join() {
             alert("입력하지 않은 정보가 있습니다.");
         }
     }
+
+
+    // ------------------------------------------------//
+
 
     return (
         <div className="join-page">
@@ -82,12 +88,13 @@ function Join() {
                     value={checkPw}
                     onChange={(e) => setCheckPw(e.target.value)}
                 />
-
+                
                 <Link to="/login"className="join-link">
                 로그인 화면으로 이동
                 </Link>
 
-                <button className="join-submit-btn" onClick={handleJoin}>
+                <button className="join-submit-btn" 
+                onClick={handleJoin}>
                     회원가입
                 </button>
             </div>
