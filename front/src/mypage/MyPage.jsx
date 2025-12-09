@@ -32,7 +32,7 @@ function MyPage() {
         fetch(`http://localhost:3000/seatlist/${location.state.id}`)
             .then(response => response.json())
             .then(data => setSeatData(data))
-    }, [seatData]);
+    }, [location.state.id]);
 
     //포인트
     useEffect(() => {

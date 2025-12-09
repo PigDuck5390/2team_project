@@ -10,6 +10,8 @@ function Seat(){
     const reservInfo = useParams()
     const [seatFilter, setSeatFilter] = useState([])
     const [reservedSeats, setReservedSeats] = useState([])
+    const [personnel, setPersonnel] = useState(0)
+    const [pickCount, setPickCount] = useState(0)
 
     const seats = 
     ["A1", "A2", "A3", "A4", "A5", "A6",
@@ -47,8 +49,15 @@ function Seat(){
       }
       if(selectedSeats.includes(seat)) {
         setSelectedSeats(selectedSeats.filter(s => s !== seat));
-      }else{
+        setPickCount(item=> item -=1)
+        console.log(pickCount)
+      }else if(pickCount < personnel){
         setSelectedSeats([...selectedSeats, seat]);
+        setPickCount(item=> item +=1)
+        console.log(pickCount)
+        console.log(personnel)
+      }else{
+        alert("선택한 인원수보다 선택한 좌석이 많습니다")
       }
     };
 
@@ -69,8 +78,28 @@ function Seat(){
         } })
       }
     }
-      
 
+    function personCount(){
+      if(personnel >= seats.length-reservedSeats.length){
+        alert("인원수가 잔여석을 초과할 수 없습니다.")
+        return;
+      }
+      setPersonnel(item=>item+=1)
+    }
+
+    function personDecount(){
+      if(personnel <= 0){
+        alert("인원수가 0보다 작을 수 없습니다.")
+        return;
+      }
+      if(pickCount < personnel){
+        setPersonnel(item=>item-=1)
+      }else{
+        alert("먼저 좌석 선택을 취소해주세요.")
+      }
+    }
+
+    
     return(
       <>
         <MainHeader />
@@ -113,7 +142,9 @@ function Seat(){
               <p><strong>날짜 :</strong> {reservInfo.date}</p>
               <p><strong>시간 :</strong> {reservInfo.time}</p>
             </div>
-
+            <button onClick={personCount}>+</button>
+            <p>인원수 : {personnel}</p>
+            <button onClick={personDecount}>-</button>
             <button className="reserve-btn" onClick={submit}>예매하기</button>
           </div>
 
