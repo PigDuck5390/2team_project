@@ -11,6 +11,7 @@ function MyInfo() {
 
     const [newPw, setNewPw] = useState("");
     const [confirmPw, setConfirmPw] = useState("");
+    const [newCardName, setNewCardName] = useState("")
     const [newCard, setNewCard] = useState("")
     const [newCardDate, setNewCardDate] = useState("")
     const [userData, setUserData] = useState([])
@@ -94,7 +95,8 @@ function MyInfo() {
                 cardDate : newCardDate,
                 userId : location.state.id,
                 defid : user.defid,
-                bank: bank
+                bank: bank,
+                name : newCardName
             })
         }
         )
@@ -105,6 +107,34 @@ function MyInfo() {
             name: location.state.name,
             id: location.state.id
         }})
+    }
+
+    //카드 별명 수정
+    function cardNameEdit(defid, name){
+        const newName = prompt("새로운 카드 별명을 입력해주세요.", name)
+        if(newName){
+            fetch("http://localhost:3000/cardnameupdate",{
+                method:"PUT",
+                headers:{"content-type":"application/json"},
+                body: JSON.stringify({
+                    cardId: defid,
+                    cardName: newName
+                })
+            })
+        }
+    }
+
+    //카드 삭제
+    function cardDelete(defid){
+        const yes = confirm("진짜 지울거니?")
+        if(yes){
+            fetch("http://localhost:3000/carddelete",{
+            method: "DELETE",
+            headers:{"content-type":'application/json'},
+            body: JSON.stringify({defid : defid})
+            }
+            )
+        }
     }
 
 
@@ -168,6 +198,15 @@ function MyInfo() {
                             <h2 className="section-title">카드 등록</h2>
 
                             <div className="input-group">
+                                <label>카드 별명</label>
+                                <input 
+                                type="text" 
+                                placeholder="카드 별명"
+                                value={newCardName} 
+                                onChange={(e)=>setNewCardName(e.target.value)}/>
+                            </div>
+
+                            <div className="input-group">
                                 <label>카드 번호</label>
                                 <input 
                                 type="text" 
@@ -184,7 +223,7 @@ function MyInfo() {
                                 value={newCardDate}
                                 onChange={(e)=>setNewCardDate(e.target.value)} />
                             </div>
-
+                            
                               <div className="input-group">
                                 <label>카드사</label>
                                 <select value={bank} onChange={(e)=>setBank(e.target.value)}>
@@ -206,28 +245,40 @@ function MyInfo() {
 
                         {/* 카드 리스트 */}
                         <section className="info-section">
-                            <h2 className="section-title">내 카드</h2>
+                        <h2 className="section-title">내 카드</h2>
 
-                            {cardData.filter((item)=>
-                            item.user_defid == userData.find(data => 
-                                data.id == location.state.id).defid)
-                                .map((item) => (
-                                <div key={item.card_defid}>
-                                    <span>카드사 : {item.card_bank}</span><br/>
-                                <span>카드 번호 : {item.card_num}</span><br/>
-                                <span>만료일 : {item.card_date}</span><br/>
+                        <div className="card-list">
+                            {cardData
+                            .filter(item => item.user_id == location.state.id)
+                            .map((item) => (
+                                <div className="card-item" key={item.card_defid}>
+                                
+                                <div className="card-top">
+                                    <span className="card-name">{item.card_name}</span>
 
-                                <button>수정</button>
-                                <button>삭제</button>
+                                    <button className="edit-btn"
+                                    onClick={() => cardNameEdit(item.card_defid, item.card_name)}>
+                                    카드 별명 수정
+                                    </button>
                                 </div>
-                                )
-                            
-                              
 
-                            )}
-                  
-                            
+                                <div className="card-info">
+                                    <span>카드사 : {item.card_bank}</span><br/>
+                                    <span>카드 번호 : {item.card_num}</span><br/>
+                                    <span>만료일 : {item.card_date}</span><br/>
+                                </div>
+
+                                <button className="delete-btn"
+                                    onClick={() => cardDelete(item.card_defid)}>
+                                    삭제
+                                </button>
+
+                                </div>
+                            ))}
+                        </div>
                         </section>
+
+
 
                     </div>
 
