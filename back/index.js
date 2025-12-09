@@ -13,7 +13,7 @@ app.use('/upload', express.static(path.join(__dirname, 'upload')));
 
 //신규 파일 저장경로 및 파일명 규칙 선언
 const storage = multer.diskStorage({
-  destination: (req, file, cb) =>{
+  destination: (req, file, cb) => {
     cb(null, path.join(__dirname, 'upload', 'profile'))
   },
   filename: (req, file, cb) => {
@@ -53,19 +53,33 @@ app.get("/seatlist/:id", async (req, res) => {
 })
 
 // 영화 포인트
-app.get("/point/:id", async (req, res) => {
-  const [rows] = await pool.query("SELECT COUNT(*) AS cnt FROM seat WHERE user_id=?",
+app.put("/point/:id", async (req, res) => {
+  const [rows] = await pool.query("UPDATE user SET point=? WHERE user_id=?",
     [req.params.id]
   );
   const data = Number(rows.cnt);
   res.send(data);
 })
 
+app.put("/point/update/:id", async (req, res) => {
+    const [rows] = await pool.query(
+      "SELECT COUNT(*) AS cnt FROM seat WHERE user_id=?",
+      [req.params.id]
+    );
+    const point = Number(rows.cnt) * 10;
+    await pool.query(
+      "UPDATE user SET point=? WHERE id=?",
+      [point, req.params.id]
+    );
+    res.send({ success: true, point });
+});
+
+
 //영화정보 호출
 app.get('/movies', async (req, res) => {
   const data = await pool.query(
     'SELECT * FROM movie_info')
-    res.send(data)
+  res.send(data)
 })
 
 //영화정보 호출 (예매누적수 기반 내림차순) 
@@ -79,7 +93,7 @@ app.get('/movieinfo', async (req, res) => {
 app.post('/reserv', async (req, res) => {
   await pool.query(
     'INSERT INTO seat (seat_num, user_id, date, time, movie_name, userName, screen_num) VALUE (?,?,?,?,?,?,?)',
-  [req.body.seat, req.body.userId, req.body.date, req.body.movieTime, req.body.movieName, req.body.userName, req.body.screen])
+    [req.body.seat, req.body.userId, req.body.date, req.body.movieTime, req.body.movieName, req.body.userName, req.body.screen])
 })
 
 //회원가입
@@ -90,13 +104,13 @@ app.post('/join', async (req, res) => {
 })
 
 //프로필 사진 변경
-app.put("/updateProfile", upload.single("profile"), async (req, res) => {  
-    const filePath = `/upload/profile/${req.file.filename}`;
-    await pool.query(
-      "UPDATE user SET profile = ? WHERE id = ?",
-      [filePath, req.body.userId]
-    );
-    res.json({ success: true, profile: filePath });
+app.put("/updateProfile", upload.single("profile"), async (req, res) => {
+  const filePath = `/upload/profile/${req.file.filename}`;
+  await pool.query(
+    "UPDATE user SET profile = ? WHERE id = ?",
+    [filePath, req.body.userId]
+  );
+  res.json({ success: true, profile: filePath });
 })
 
 //프로필 사진 호출
@@ -108,33 +122,33 @@ app.get("/userprofile/:id", async (req, res) => {
 })
 
 //비밀번호 변경
-app.put('/changePassword', async (req, res) =>{
+app.put('/changePassword', async (req, res) => {
   await pool.query("UPDATE user SET pw = ? WHERE id =?",
     [req.body.newPassword, req.body.userId]
   )
 })
 
 //카드 신규 등록
-app.post('/newcard', async (req, res)=>{
+app.post('/newcard', async (req, res) => {
   await pool.query(
     "INSERT INTO user_card (user_id, card_num, card_date, user_defid, card_bank, card_name) VALUE (?,?,?,?,?,?)",
-  [req.body.userId, req.body.card, req.body.cardDate, req.body.defid, req.body.bank, req.body.name])
+    [req.body.userId, req.body.card, req.body.cardDate, req.body.defid, req.body.bank, req.body.name])
 })
 
 //카드 정보 호출
-app.get('/cardinfo', async (req, res)=>{
+app.get('/cardinfo', async (req, res) => {
   const data = await pool.query("SELECT * FROM user_card")
   res.send(data)
 })
 
 //카드 삭제
-app.delete('/carddelete', async (req, res) =>{
+app.delete('/carddelete', async (req, res) => {
   await pool.query("DELETE FROM user_card WHERE card_defid = ?",
     [req.body.defid]
   )
 })
 
-app.put('/cardnameupdate', async (req, res)=>{
+app.put('/cardnameupdate', async (req, res) => {
   await pool.query("UPDATE user_card SET card_name = ? WHERE card_defid = ?",
     [req.body.cardName, req.body.cardId]
   )

@@ -41,6 +41,18 @@ function MyPage() {
             .then(data => setPoint(data));
     }, [location.state.id]);
 
+    useEffect(() => {
+        fetch(`http://localhost:3000/point/update/${location.state.id}`, {
+            method: "PUT"
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    setPoint(data.point);
+                }
+            });
+    }, [location.state.id]);
+
     function movieRank() {
         if (point >= 1000) {
             return "영화 그 자체";
@@ -150,7 +162,7 @@ function MyPage() {
 
                             <div className="point-box">
                                 <span className="point-label">현재 포인트</span>
-                                <span className="point-value">{point * 10} P</span>
+                                <span className="point-value">{point} P</span>
                             </div>
                         </div>
 
