@@ -66,6 +66,41 @@
     box-shadow: 0 0 4px rgba(0, 198, 230, 0.4);
     outline: none;
 }
+/* ===== 카드사 선택 드롭다운 ===== */
+.input-group select {
+  width: 100%;
+  height: 48px; /* 인풋 높이와 동일 */
+  padding: 0 16px;
+  
+  background: #fff;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+  color: #333;
+  cursor: pointer;
+
+  transition: 0.25s;
+  -webkit-appearance: none; /* 브라우저 기본 화살표 제거 */
+  -moz-appearance: none;
+  appearance: none;
+
+  /* 오른쪽 화살표 아이콘 스타일 */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%238a8a8a'%3E%3Cpath d='M4.5 6l3.5 3.5L11.5 6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+/* hover 효과 */
+.input-group select:hover {
+  border-color: #00c6e6;
+}
+
+/* focus 효과 */
+.input-group select:focus {
+  border-color: #00c6e6;
+  box-shadow: 0 0 4px rgba(0, 198, 230, 0.4);
+}
 
 .submit-btn {
     margin-top: 10px;
@@ -83,4 +118,67 @@
 
 .submit-btn:hover {
     background: #7a5a00;
+}
+
+/* 카드 아이템 */
+.card-item {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 상단 영역 (별명 + 수정 버튼) */
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 카드 별명 강조 */
+.card-name {
+  font-size: 18px;
+  font-weight: 800;
+  color: #222;
+}
+
+/* 수정 버튼 (기존 위치에서 이동) */
+.edit-btn {
+  background-color: #e0f7ff;
+  border: 1px solid #00c6e6;
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.edit-btn:hover {
+  background-color: #c5eff9;
+}
+
+/* 남은 카드 정보 */
+.card-info span {
+  font-size: 14px;
+  color: #444;
+}
+
+/* 삭제 버튼 (우측 하단에 하나만) */
+.delete-btn {
+  /* align-self: flex-end; */
+  background-color: #bb3737;
+  color: #fff;
+  font-size: 13px;
+  padding: 6px 12px;
+  border: 1px solid #740000;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.delete-btn:hover {
+  background-color: #6b0000;
 }

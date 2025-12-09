@@ -18,7 +18,8 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname)
-    cb(null, Date.now() + ext)
+    const base = path.basename(file.originalname, ext)
+    cb(null, `${Date.now()}${'-'}${base}${ext}`)
   }
 });
 
@@ -116,13 +117,37 @@ app.put('/changePassword', async (req, res) =>{
 //카드 신규 등록
 app.post('/newcard', async (req, res)=>{
   await pool.query(
-    "INSERT INTO user_card (user_id, card_num, card_date, user_defid, card_bank) VALUE (?,?,?,?,?)",
-  [req.body.userId, req.body.card, req.body.cardDate, req.body.defid, req.body.bank])
+    "INSERT INTO user_card (user_id, card_num, card_date, user_defid, card_bank, card_name) VALUE (?,?,?,?,?,?)",
+  [req.body.userId, req.body.card, req.body.cardDate, req.body.defid, req.body.bank, req.body.name])
 })
 
 //카드 정보 호출
 app.get('/cardinfo', async (req, res)=>{
   const data = await pool.query("SELECT * FROM user_card")
+  res.send(data)
+})
+
+//카드 삭제
+app.delete('/carddelete', async (req, res) =>{
+  await pool.query("DELETE FROM user_card WHERE card_defid = ?",
+    [req.body.defid]
+  )
+})
+
+app.put('/cardnameupdate', async (req, res)=>{
+  await pool.query("UPDATE user_card SET card_name = ? WHERE card_defid = ?",
+    [req.body.cardName, req.body.cardId]
+  )
+})
+//이벤트 정보 호출
+app.get('/eventinfo', async (req, res) => {
+  const data = await pool.query('SELECT * FROM event')
+  res.send(data)
+})
+
+//혜택 정보 호출
+app.get('/benefitinfo', async (req, res) => {
+  const data = await pool.query('SELECT * FROM benefit')
   res.send(data)
 })
 
