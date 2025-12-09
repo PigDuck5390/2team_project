@@ -17,7 +17,7 @@ function Main() {
       .then(data => setMovieData(data))
   }, [movieData])
 
-    // ✅ reserv_count 기준 내림차순 정렬 + 페이지별 4개씩 잘라 쓰기
+  // ✅ reserv_count 기준 내림차순 정렬 + 페이지별 4개씩 잘라 쓰기
   const sortedMovies = [...movieData].sort(
     (a, b) => b.reserv_count - a.reserv_count
   );
@@ -26,23 +26,24 @@ function Main() {
   const pageMovies = sortedMovies.slice(startIndex, startIndex + pageSize);
 
   // 안전하게 자리 뽑아오기 (없을 수도 있으니까)
-  const leftTop    = pageMovies[0]; // 1위, 5위, 9위 ...
+  const leftTop = pageMovies[0]; // 1위, 5위, 9위 ...
   const leftBottom = pageMovies[2]; // 3위, 7위 ...
-  const rightTop   = pageMovies[1]; // 2위, 6위 ...
-  const rightBottom= pageMovies[3]; // 4위, 8위 ...
+  const rightTop = pageMovies[1]; // 2위, 6위 ...
+  const rightBottom = pageMovies[3]; // 4위, 8위 ...
 
   const maxPage = Math.max(0, Math.ceil(sortedMovies.length / pageSize) - 1);
 
-  const Reserve = (movieId) => {
-    navigate(`/booking/${movieId}`, {
+  const Reserve = (movie_id) => {
+    navigate('/reservation', {
       state: {
-        name: userInfo?.state.name,
-        id: userInfo?.state.id
+        movieId: movie_id,
+        name: userInfo?.name,
+        id: userInfo?.id
       }
     });
   };
 
-      return (
+  return (
     <>
       <MainHeader />
 
@@ -70,7 +71,7 @@ function Main() {
 
                   <div className="desc">
                     <h1>{leftTop.title}</h1>
-                    <span>{leftTop.description}</span>
+                    <span>{leftTop.short_description}</span>
                   </div>
 
                   <button
@@ -98,7 +99,7 @@ function Main() {
 
                   <div className="desc">
                     <h1>{leftBottom.title}</h1>
-                    <span>{leftBottom.description}</span>
+                    <span>{leftBottom.short_description}</span>
                   </div>
 
                   <button
@@ -129,7 +130,7 @@ function Main() {
 
                   <div className="desc">
                     <h1>{rightTop.title}</h1>
-                    <span>{rightTop.description}</span>
+                    <span>{rightTop.short_description}</span>
                   </div>
 
                   <button
@@ -157,7 +158,7 @@ function Main() {
 
                   <div className="desc">
                     <h1>{rightBottom.title}</h1>
-                    <span>{rightBottom.description}</span>
+                    <span>{rightBottom.short_description}</span>
                   </div>
 
                   <button
@@ -179,9 +180,8 @@ function Main() {
           />
 
           <button
-            className={`page-arrow page-next ${
-              page === maxPage ? "disabled" : ""
-            }`}
+            className={`page-arrow page-next ${page === maxPage ? "disabled" : ""
+              }`}
             onClick={() => page < maxPage && setPage(page + 1)}
             aria-label="다음 페이지"
           />

@@ -8,16 +8,24 @@ function Movies() {
   const [movies, setMovies] = useState([]);
 
   //영화정보 조회 (순위 미반영)
-  useEffect(()=>{
+  useEffect(() => {
     fetch("http://localhost:3000/movies")
       .then(res => res.json())
       .then(data => setMovies(data))
-  },[])
+  }, [])
 
-  
+  const [movieData, setMovieData] = useState([])
+
+  useEffect(() => {
+    fetch("http://localhost:3000/movieinfo")
+      .then(response => response.json())
+      .then(data => setEventData(data))
+  }, [movieData])
+
+
   //-----------------------------------------------------//
 
-  
+
   return (
     <>
       <MainHeader />
@@ -27,7 +35,7 @@ function Movies() {
           <section key={movie.movie_id} className="movie-section">
             <div className="movie-poster-box">
               <img src={`http://localhost:3000${movie.poster}`}
-              alt={movie.title} />
+                alt={movie.title} />
             </div>
 
             <div className="movie-info-box">
@@ -36,7 +44,8 @@ function Movies() {
               <p className="movie-meta">러닝타임 : {movie.runtime}분</p>
 
               <div className="movie-extra-box">
-                <div className="chart">그래프 / 연령분포</div>
+                <img className="chart" src={`http://localhost:3000${movie.graph_path}`}
+                  alt={movie.title} />
               </div>
             </div>
           </section>
