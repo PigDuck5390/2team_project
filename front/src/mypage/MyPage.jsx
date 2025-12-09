@@ -10,6 +10,8 @@ function MyPage() {
     const location = useLocation();
     const [loggedInName, setLoggedInName] = useState(null);
     const [profileImg, setProfileImg] = useState(defaultProfile);
+    const [seatData, setSeatData] = useState([]);
+    const [point, setPoint] = useState(0);
 
     useEffect(() => {
         setLoggedInName(location.state.name);
@@ -24,6 +26,36 @@ function MyPage() {
                 }
             });
     }, [location.state?.id]);
+
+    //예매 내역
+    useEffect(() => {
+        fetch(`http://localhost:3000/seatlist/${location.state.id}`)
+            .then(response => response.json())
+            .then(data => setSeatData(data))
+    }, [seatData]);
+
+    //포인트
+    useEffect(() => {
+        fetch(`http://localhost:3000/point/${location.state.id}`)
+            .then(res => res.json())
+            .then(data => setPoint(data));
+    }, [location.state.id]);
+
+    function movieRank() {
+        if (point >= 1000) {
+            return "영화 그 자체";
+        } else if (point >= 500) {
+            return "영화에 미친자";
+        } else if (point >= 100) {
+            return "영화 중수";
+        } else if (point > 0) {
+            return "영화 입문자";
+        } else {
+            return "등급 없음";
+        }
+    }
+
+
 
     const handleProfileChange = async (e) => {
         const file = e.target.files[0];
@@ -74,7 +106,6 @@ function MyPage() {
 
             <main className="mypage-wrapper">
 
-                 {/* 🔥 Left Menu */}
                 <aside className="mypage-menu">
                     <h3 className="menu-title">나의 무비로그</h3>
 
@@ -88,11 +119,11 @@ function MyPage() {
 
                 <section className="mypage-content">
                     <div className="profile-box">
-        
+
                         <div className="level-top-box">
                             <div className="level-badge">
                                 <FaCrown className="level-icon" />
-                                <span className="level-name">영화에 미친자</span>
+                                <span className="level-name">{movieRank()}</span>
                             </div>
                         </div>
 
@@ -119,7 +150,7 @@ function MyPage() {
 
                             <div className="point-box">
                                 <span className="point-label">현재 포인트</span>
-                                <span className="point-value">98,481 P</span>
+                                <span className="point-value">{point * 10} P</span>
                             </div>
                         </div>
 
@@ -127,11 +158,43 @@ function MyPage() {
 
                     <div className="history-box">
                         <h2>나의 예매내역</h2>
-                        <p className="empty">예매 내역이 없습니다.</p>
+
+                        {seatData.length === 0 ? (
+                            <p className="empty">예매 내역이 없습니다.</p>
+                        ) : (
+                            <div className="reserve-list">
+                                {seatData.map((item) => (
+                                    <div key={item.seat_id} className="reserve-card">
+
+                                        <div className="reserve-header">
+                                            <h3 className="reserve-title">{item.movie_name}</h3>
+                                            <span className="reserve-num">예매번호 : 0{item.screen_num}-{item.seat_id * item.seat_id}</span>
+                                        </div>
+
+                                        <div className="reserve-body">
+                                            <div className="reserve-row">
+                                                <span className="label">상영관</span>
+                                                <span className="value">{item.screen_num}관</span>
+                                            </div>
+
+                                            <div className="reserve-row">
+                                                <span className="label">좌석</span>
+                                                <span className="value">{item.seat_num}</span>
+                                            </div>
+
+                                            <div className="reserve-row">
+                                                <span className="label">관람일시</span>
+                                                <span className="value">{item.date.slice(0, 10)} {item.time}</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                ))}
+                            </div>
+
+                        )}
                     </div>
-
                 </section>
-
             </main>
         </>
     );

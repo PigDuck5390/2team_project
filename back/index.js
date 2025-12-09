@@ -43,6 +43,23 @@ app.get('/seatlist', async (req, res) => {
   res.send(data)
 })
 
+//나의 예매정보 호출
+app.get("/seatlist/:id", async (req, res) => {
+  const data = await pool.query("SELECT * FROM seat WHERE user_id=?",
+    [req.params.id]
+  );
+  res.send(data);
+})
+
+// 영화 포인트
+app.get("/point/:id", async (req, res) => {
+  const [rows] = await pool.query("SELECT COUNT(*) AS cnt FROM seat WHERE user_id=?",
+    [req.params.id]
+  );
+  const data = Number(rows.cnt);
+  res.send(data);
+})
+
 //영화정보 호출
 app.get('/movies', async (req, res) => {
   const data = await pool.query(
