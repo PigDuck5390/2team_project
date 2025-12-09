@@ -13,6 +13,7 @@ import Seat from './components/Seat.jsx'
 import MyInfo from './mypage/MyInfoEdit.jsx'
 import MyPoint from './mypage/MyPoint.jsx'
 import MyReserve from './mypage/MyReserve.jsx'
+import Payment from './components/Payment.jsx'
 
 
 
@@ -41,6 +42,7 @@ function App() {
         <Route path='/myinfo' element={<MyInfo />}/>
         <Route path='/myreserve' element={<MyReserve />}/>
         <Route path='/mypoint' element={<MyPoint />}/>
+        <Route path='/payment/:title/:time/:date/:screen/:seats' element={<Payment />}/>
 
 
       </Routes>

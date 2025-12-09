@@ -17,7 +17,7 @@ function Booking() {
     fetch("http://localhost:3000/movieinfo")
     .then(response => response.json())
     .then(data=>setMovieData(data))
-  },[movieData])
+  },[])
 
 
   return (

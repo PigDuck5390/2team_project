@@ -14,7 +14,7 @@ function Event(){
         fetch("http://localhost:3000/eventinfo")
         .then(response=>response.json())
         .then(data=>setEventData(data))
-    },[eventData])
+    },[])
 
 
 

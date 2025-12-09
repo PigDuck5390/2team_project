@@ -15,7 +15,7 @@ function Benefit(){
         fetch("http://localhost:3000/benefitinfo")
         .then(response =>response.json())
         .then(data => setBenefitData(data))
-    },[benefitData])
+    },[])
     
     return(
         <>

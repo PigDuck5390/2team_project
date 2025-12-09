@@ -2,7 +2,7 @@
    좌석 선택 페이지 공통 스타일
    ========================================= */
 
-/* 전체 페이지 래핑 */
+/* 전체 페이지 래핑 (필요하면 Seat 컴포넌트에서 seat-page로 한 번 더 감싸도 됨) */
 .seat-page {
   min-height: 100vh;
   padding: 40px 0 60px;
@@ -59,7 +59,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 300px
+  margin-left: 300px;
 }
 
 /* 우측 영역: 영화 정보 + 예매 버튼 */
@@ -88,7 +88,6 @@
   gap: 6px;
 }
 
-/* 우측 정보 텍스트 */
 .movie-info p {
   font-size: 15px;
   margin: 0;
@@ -101,12 +100,10 @@
   min-width: 80px;  /* '상영관 :' 같은 라벨 정렬 */
 }
 
-
 /* =========================================
    제목 / 스크린 바
    ========================================= */
 
-/* (필요 시 사용) 영화 제목 */
 .title {
   position: relative;
   z-index: 2;
@@ -221,6 +218,29 @@
     0 3px 0 #6a3915,
     0 7px 14px rgba(0, 0, 0, 0.55),
     0 0 0 2px #f9e2bf inset;
+}
+
+/* 이미 예매된 좌석 (선택 불가) */
+.seat.reserved {
+  background: #b7aa96;
+  color: #6a5a45;
+  border-color: #8c7a61;
+  cursor: not-allowed;
+  box-shadow:
+    0 2px 0 #6f5c3f,
+    0 4px 8px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  opacity: 0.85;
+}
+
+/* 예약된 좌석은 hover 효과 없음 */
+.seat.reserved:hover {
+  background: #b7aa96;
+  transform: none;
+  box-shadow:
+    0 2px 0 #6f5c3f,
+    0 4px 8px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
 /* =========================================
