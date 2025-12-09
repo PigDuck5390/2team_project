@@ -15,7 +15,7 @@ function Login() {
         fetch('http://localhost:3000/userinfo')
             .then(response => response.json())
             .then(data => setUserData(data))
-    }, [userData]);
+    }, []);
 
     //로그인 시도
     function handleLogin() {

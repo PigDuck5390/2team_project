@@ -14,7 +14,7 @@ function Reservation() {
 
   //오늘 날짜
   const today = new Date().toISOString().split('T')[0];
-
+  
   //영화정보 조회
   useEffect(() => {
     fetch("http://localhost:3000/movies")

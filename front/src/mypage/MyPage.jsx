@@ -54,13 +54,13 @@ function MyPage() {
     }, [location.state.id]);
 
     function movieRank() {
-        if (point >= 1000) {
+        if (point*10 >= 1000) {
             return "영화 그 자체";
-        } else if (point >= 500) {
+        } else if (point*10 >= 500) {
             return "영화에 미친자";
-        } else if (point >= 100) {
+        } else if (point*10 >= 100) {
             return "영화 중수";
-        } else if (point > 0) {
+        } else if (point*10 > 0) {
             return "영화 입문자";
         } else {
             return "등급 없음";

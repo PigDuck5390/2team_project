@@ -8,8 +8,8 @@ function Seat(){
   
     const { state : userInfo } = useLocation()
     const reservInfo = useParams()
-
-    // console.log(reservInfo)
+    const [seatFilter, setSeatFilter] = useState([])
+    const [reservedSeats, setReservedSeats] = useState([])
 
     const seats = 
     ["A1", "A2", "A3", "A4", "A5", "A6",
@@ -26,11 +26,25 @@ function Seat(){
       fetch('http://localhost:3000/seatlist')
         .then(response => response.json())
         .then(data => setSeatData(data))
-    }, [seatData]);
+    }, []);
+
+    useEffect(()=>{
+      setReservedSeats(seatData.filter(item=>
+        item.movie_name == reservInfo.title &&
+        item.screen_num == reservInfo.screen &&
+        item.date.split('T')[0] == reservInfo.date.split('T')[0] &&
+        item.time == reservInfo.time)
+        .map((item)=>item.seat_num))
+    },[seatData])
 
     const [selectedSeats, setSelectedSeats] = useState([]);
 
     const toggleSeat = (seat) => { //자리선택 뻥션
+
+      if (reservedSeats.includes(seat)){
+        alert("이미 예매된 좌석입니다.");
+        return;
+      }
       if(selectedSeats.includes(seat)) {
         setSelectedSeats(selectedSeats.filter(s => s !== seat));
       }else{
@@ -43,67 +57,67 @@ function Seat(){
         alert("좌석을 선택해주세요.")
         return;
       }
-      selectedSeats.map(item =>
-        {fetch("http://localhost:3000/reserv",{
-          method: "POST",
-          headers : {"content-type" : "application/json"},
-          body : JSON.stringify({
-            date : reservInfo.date,
-            movieName : reservInfo.title,
-            movieTime : reservInfo.time,
-            userName : userInfo.name,
-            userId : userInfo.id,
-            seat : item,
-            screen : reservInfo.screen
-          })
-        }
-        )
-        }
-      
-      )
-      alert("예매 성공했습니다. 마이페이지에서 예매내역을 확인 가능합니다.")
-      navigate("/", { state : {
-          name : userInfo?.name,
-          id : userInfo?.id 
+
+      const payment = confirm("결제 페이지로 이동하시겠습니까?")
+
+      if(payment){
+        navigate(
+          `/payment/${reservInfo.title}/${reservInfo.time}/${reservInfo.date}/${reservInfo.screen}/${selectedSeats}`,
+          { state : {
+          name : userInfo.name,
+          id : userInfo.id 
         } })
+      }
     }
+      
 
     return(
       <>
         <MainHeader />
         
 
-<div className="seat-wrapper">
-  
-  {/* 좌측 영역 */}
-  <div className="left-area">
-    <h1 className='screen'>{reservInfo.screen}관 : SCREEN</h1>
-    <div className="seat-container">
-      {seats.map(seat => (
-        <div
-          key={seat}
-          className={`seat ${selectedSeats.includes(seat) ? "selected" : ""}`}
-          onClick={() => toggleSeat(seat)}
-        >
-          {seat}
+        <div className="seat-wrapper">
+          
+          {/* 좌측 영역 */}
+          <div className="left-area">
+            <h1 className='screen'>{reservInfo.screen}관 : SCREEN</h1>
+            <div className="seat-container">
+              {seats.map(seat =>{ 
+                const isSelected = selectedSeats.includes(seat);
+                const isReserved = reservedSeats.includes(seat);
+              
+              return (
+                <div
+                  key={seat}
+                  className={`seat
+                    ${isSelected ? "selected" : ""}
+                    ${isReserved ? "reserved": ""}`
+                  }
+                  onClick={() =>{ 
+                    if (!isReserved) toggleSeat(seat)
+                    }}
+                >
+                  {seat}
+                </div>
+              );
+            })}
+            </div>
+          </div>
+          
+
+          {/* 우측 영역 */}
+          <div className="right-area">
+            <div className="movie-info">
+              <p><strong>상영관 :</strong> {reservInfo.screen}관</p>
+              <p><strong>영화 제목 :</strong> {reservInfo.title}</p>
+              <p><strong>날짜 :</strong> {reservInfo.date}</p>
+              <p><strong>시간 :</strong> {reservInfo.time}</p>
+            </div>
+
+            <button className="reserve-btn" onClick={submit}>예매하기</button>
+          </div>
+
         </div>
-      ))}
-    </div>
-  </div>
-
-  {/* 우측 영역 */}
-  <div className="right-area">
-    <div className="movie-info">
-      <p><strong>상영관 :</strong> {reservInfo.screen}관</p>
-      <p><strong>영화 제목 :</strong> {reservInfo.title}</p>
-      <p><strong>날짜 :</strong> {reservInfo.date}</p>
-      <p><strong>시간 :</strong> {reservInfo.time}</p>
-    </div>
-
-    <button className="reserve-btn" onClick={submit}>예매하기</button>
-  </div>
-
-</div>
 
       </>
     )
