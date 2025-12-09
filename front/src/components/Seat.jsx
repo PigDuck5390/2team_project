@@ -34,7 +34,7 @@ function Seat(){
         item.screen_num == reservInfo.screen &&
         item.date.split('T')[0] == reservInfo.date.split('T')[0] &&
         item.time == reservInfo.time)
-        .map((item)=>item.seat_num))
+        .map(item=>item.seat_num))
     },[seatData])
 
     const [selectedSeats, setSelectedSeats] = useState([]);

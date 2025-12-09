@@ -46,7 +46,7 @@ app.get('/seatlist', async (req, res) => {
 
 //나의 예매정보 호출
 app.get("/seatlist/:id", async (req, res) => {
-  const data = await pool.query("SELECT * FROM seat WHERE user_id=? ",
+  const data = await pool.query("SELECT * FROM seat WHERE user_id=? ORDER BY seat_id DESC",
     [req.params.id]
   );
   res.send(data);
