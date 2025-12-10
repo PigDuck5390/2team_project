@@ -95,7 +95,7 @@ app.get('/movieinfo', async (req, res) => {
 //신규 예매
 app.post('/reserv', async (req, res) => {
   await pool.query(
-    'INSERT INTO seat (seat_num, user_id, date, time, movie_name, userName, screen_num, pickcount, card_num, card_bank, card_date) VALUE (?,?,?,?,?,?,?,?,?,?,?)',
+    'INSERT INTO seat (seat_num, user_id, date, time, movie_name, userName, screen_num, pickcount, card_num, card_bank, card_date) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
     [req.body.seat, req.body.userId, req.body.date, req.body.movieTime, req.body.movieName, req.body.userName, req.body.screen, req.body.pickcount,req.body.cardNumber,req.body.cardBank,req.body.cardDate]
   )
   res.json({ success: true })
@@ -136,7 +136,7 @@ app.put('/changePassword', async (req, res) => {
 //카드 신규 등록
 app.post('/newcard', async (req, res) => {
   await pool.query(
-    "INSERT INTO user_card (user_id, card_num, card_date, user_defid, card_bank, card_name) VALUE (?,?,?,?,?,?)",
+    "INSERT INTO user_card (user_id, card_num, card_date, user_defid, card_bank, card_name) VALUES (?,?,?,?,?,?)",
     [req.body.userId, req.body.card, req.body.cardDate, req.body.defid, req.body.bank, req.body.name])
 })
 
@@ -206,7 +206,7 @@ app.delete('/movies/delete', async (req, res) => {
 app.post('/movies/add', upload.single('poster'), async (req, res) => {
   const filePath = `/upload/profile/${req.file.filename}`;
   await pool.query(
-    'INSERT INTO movie_info (screen_number, title, description, short_description, poster, runtime, start_time1, start_time2, start_time3, start_time4, start_time5, start_time6, start_time7, start_time8, start_time9) VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+    'INSERT INTO movie_info (screen_number, title, description, short_description, poster, runtime, start_time1, start_time2, start_time3, start_time4, start_time5, start_time6, start_time7, start_time8, start_time9) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
     [req.body.screen_number, req.body.title, req.body.description, req.body.short_description, filePath, req.body.runtime, req.body.start_time1, req.body.start_time2, req.body.start_time3, req.body.start_time4, req.body.start_time5, req.body.start_time6, req.body.start_time7, req.body.start_time8, req.body.start_time9]
   )
 });
@@ -242,7 +242,7 @@ app.post('/benefit/add', upload.array('benefitPoster'), async (req, res) => {
   for(let i=0; i<req.files.length; i++){
     const filePath = `/upload/benefit/${req.files[i].filename}`;
     await pool.query(
-      'INSERT INTO benefit (poster_name, poster_path) VALUE (?,?)',
+      'INSERT INTO benefit (poster_name, poster_path) VALUES (?,?)',
       [req.files[i].originalname, filePath]
     )
   }
@@ -262,7 +262,7 @@ app.post('/event/add', upload.array('eventPoster'), async (req, res) => {
   for(let i=0; i<req.files.length; i++){
     const filePath = `/upload/event/${req.files[i].filename}`;
     await pool.query(
-      'INSERT INTO event (poster_name, poster_path) VALUE (?,?)',
+      'INSERT INTO event (poster_name, poster_path) VALUES (?,?)',
       [req.files[i].originalname, filePath]
     )
   }
