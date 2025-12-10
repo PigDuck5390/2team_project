@@ -100,6 +100,44 @@
   min-width: 80px;  /* '상영관 :' 같은 라벨 정렬 */
 }
 
+.right-area button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  font-family: inherit;
+  transition: 0.2s ease;
+}
+
+/* 인원 + - 버튼 */
+.right-area .count-btn {
+  width: 40px;
+  height: 40px;
+  background: #d6a565;
+  color: white;
+  font-size: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+.right-area .count-btn:hover {
+  background: #bf8b44;
+}
+
+.right-area .person-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 버튼과 텍스트 사이 간격 확보 */
+  gap: 16px; /* 요소 간 기본 간격 */
+  margin: 12px 0;
+}
+
+.right-area .person-row span {
+  display: flex;
+  align-items: center;
+}
+
+
 /* =========================================
    제목 / 스크린 바
    ========================================= */
