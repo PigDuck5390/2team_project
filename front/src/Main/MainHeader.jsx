@@ -1,120 +1,145 @@
 import { useNavigate, Link, useLocation } from 'react-router-dom'
-import {useState, useEffect} from 'react'
 import '../css/MainHeader.css'
+import { useState, useEffect } from 'react'
 
-function MainHeader(){
-    const navigate = useNavigate()
+function MainHeader() {
 
-    const { state : userInfo } = useLocation()
-    const [loggedInName, setLoggedInName] = useState(null);
+  const navigate = useNavigate()
+  const [loggedInId, setLoggedInId] = useState(null);
+  const { state: userInfo } = useLocation()
+  const [point, setPoint] = useState(0);
 
-    //닉네임 세팅
-    useEffect(()=> {
-      if (userInfo?.name) {
-        setLoggedInName(userInfo.name)
+
+  useEffect(() => {
+    if (userInfo?.name) {
+      setLoggedInId(userInfo.name)
+    }
+  }, [userInfo])
+
+  useEffect(() => {
+    if (!userInfo?.id) return;
+    fetch(`http://192.168.0.227:3000/point/${userInfo.id}`)
+      .then(res => res.json())
+      .then(data => {
+        setPoint(data);
+      });
+  }, [userInfo?.id]);
+
+
+  function handleLogout() {
+    setLoggedInId(null);
+    alert("로그아웃 되었습니다")
+    navigate('/', {
+      state: {
+        name: null,
+        id: null
       }
-    }, [userInfo])
+    })
 
-    //로그아웃
-    function handleLogout(){
-      setLoggedInName(null);
-      alert("로그아웃 되었습니다")
-      navigate('/', { state : {
-        name : null,
-        id : null
-          } 
-        }
-      )  
-    }
-    
-    //마이페이지 이동
-    function mypage(){
-      navigate('/mypage', { state : {
-        name : userInfo?.name,
-        id : userInfo?.id 
-          } 
-        }
-      )
-    }
+  }
 
-    //메인화면 이동
-    function moveMain(){
-      navigate("/", { state : {
-        name : userInfo?.name,
-        id : userInfo?.id 
-          } 
-        }
-      )
-    }
+  function mypage() {
+    navigate('/mypage', {
+      state: {
+        name: userInfo?.name,
+        id: userInfo?.id
+      }
+    })
+  }
 
-    //메뉴 : 영화 이동
-    function moveMovies(){
-      navigate("/movies", { state : {
-        name : userInfo?.name,
-        id : userInfo?.id 
-          }
+  function moveMain() {
+    navigate("/", {
+      state: {
+        name: userInfo?.name,
+        id: userInfo?.id
+      }
+    })
+  }
+  function moveMovies() {
+    navigate("/movies", {
+      state: {
+        name: userInfo?.name,
+        id: userInfo?.id
+      }
+    })
+  }
+  function moveReserv() {
+    navigate("/reservation", {
+      state: {
+        name: userInfo?.name,
+        id: userInfo?.id
+      }
+    })
+  }
+  function moveBenefit() {
+    navigate("/benefit", {
+      state: {
+        name: userInfo?.name,
+        id: userInfo?.id
+      }
+    })
+  }
+  function moveEvent() {
+    navigate("/event", {
+      state: {
+        name: userInfo?.name,
+        id: userInfo?.id
+      }
+    })
+  }
+  function moveVip() {
+    if (point >= 500) {
+      navigate("/viplounge", {
+        state: {
+          name: userInfo?.name,
+          id: userInfo?.id,
+          point: point
         }
-      )
+      });
+    } else {
+      alert("영화 더 보고 오세요!");
     }
+  }
+  function moveService() {
+    navigate("/service", {
+      state: {
+        name: userInfo?.name,
+        id: userInfo?.id
+      }
+    })
+  }
 
-    //메뉴 : 예매 이동
-    function moveReserv(){
-      navigate("/reservation", { state : {
-        name : userInfo?.name,
-        id : userInfo?.id 
-          } 
-        }
-      )
-    }
-    
-    //메뉴 : 혜택 이동
-    function moveBenefit(){
-      navigate("/benefit", { state : {
-        name : userInfo?.name,
-        id : userInfo?.id 
-          } 
-        }
-      )
-    }
 
-    //메뉴 : 이벤트 이동
-    function moveEvent(){
-      navigate("/event", { state : {
-        name : userInfo?.name,
-        id : userInfo?.id 
-          } 
-        }
-      )
-    }
-
-    //로그인 상태에 따른 프론트
-    const headerRightContent = loggedInName ? (
-      <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-        환영합니다. {loggedInName}님
-        <button onClick={handleLogout}>로그아웃</button>
-        <button onClick={mypage}>마이페이지</button>
-      </div>
-      ) : (
-        <>
-        <Link to = "/login"><button>로그인</button></Link>
-        <Link to = "/join"><button>회원가입</button></Link>
-        </>
-      )
+  const headerRightContent = loggedInId ? (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      환영합니다. {loggedInId}님
+      <button onClick={handleLogout}>로그아웃</button>
+      <button onClick={mypage}>마이페이지</button>
+    </div>
+  ) : (
+    <>
+      <Link to="/login"><button>로그인</button></Link>
+      <Link to="/join"><button>회원가입</button></Link>
+    </>
+  )
 
   return (
-      <header className="main-header">
-        {/* 로그인/회원가입 라인 */}
-        <div className="header-top">
-          <div className="header-top-inner">
-            <div className="header-top-left">
-              <span>VIP LOUNGE</span>
-              <span>고객센터</span>
-            </div>
-            <div className="header-top-right">
-              {headerRightContent}
-            </div>
+    <header className="main-header">
+      {/* 로그인/회원가입 라인 */}
+      <div className="header-top">
+        <div className="header-top-inner">
+          <div className="header-top-left">
+            <span onClick={moveVip}>VIP LOUNGE</span>
+            <span>멤버십</span>
+            <span onClick={moveService}>고객센터</span>
+          </div>
+          <div className="header-top-right">
+            {headerRightContent}
+            {/* <button>로그인</button> */}
+            {/* <button>회원가입</button> */}
           </div>
         </div>
+      </div>
 
         {/* 중앙 로고 기준 좌/우 메뉴 */}
         <div className="header-main">

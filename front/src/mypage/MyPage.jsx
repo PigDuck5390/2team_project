@@ -17,40 +17,33 @@ function MyPage() {
 
     //해당 유저 프로필 사진 조회
     useEffect(() => {
-        setLoggedInName(userInfo.name);
-        fetch(`http://localhost:3000/userprofile/${userInfo.id}`)
+        setLoggedInName(location.state.name);
+
+        fetch(`http://192.168.0.227:3000/userprofile/${location.state.id}`)
             .then(res => res.json())
             .then(data => {
                 const profilePath = Array.isArray(data) && data.length > 0
                     ? data[0].profile : null;
                 if (profilePath) {
-                        setProfileImg(`http://localhost:3000${profilePath}`);
-                }   
+                    setProfileImg(`http://192.168.0.227:3000${profilePath}`);
                 }
-            );
-    }, [userInfo?.id]);
+            });
+    }, [location.state?.id]);
 
     //예매 내역 조회
     useEffect(() => {
-        fetch(`http://localhost:3000/seatlist/${userInfo.id}`)
-            .then(response => response.json())
+        fetch(`http://192.168.0.227:3000/seatlist/${location.state.id}`)
+            .then(res => res.json())
             .then(data => setSeatData(data))
     }, [userInfo.id]);
 
-    //포인트 조회 및 수정
+    //포인트 
     useEffect(() => {
-        fetch(`http://localhost:3000/point/update/${userInfo.id}`, {
-            method: "PUT"
-                }
-            )
+        fetch(`http://192.168.0.227:3000/point/${location.state.id}`, {
+        })
             .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    setPoint(data.point);
-                }
-                }
-            );
-    }, [userInfo.id]);
+            .then(data => setPoint(data));
+    }, [location.state.id]);
 
     //포인트별 등급
     function movieRank() {
@@ -76,7 +69,7 @@ function MyPage() {
         formData.append("profile", file);
         formData.append("userId", userInfo.id);
 
-        const res = await fetch("http://localhost:3000/updateProfile", {
+        const res = await fetch("http://192.168.0.227:3000/updateProfile", {
             method: "PUT",
             body: formData
                 }
@@ -85,7 +78,7 @@ function MyPage() {
         const data = await res.json();
 
         if (data.success) {
-            setProfileImg(`http://localhost:3000${data.profile}`);
+            setProfileImg(`http://192.168.0.227:3000${data.profile}`);
         } else {
             alert("업로드 실패");
         }

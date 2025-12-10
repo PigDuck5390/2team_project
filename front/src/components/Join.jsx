@@ -14,7 +14,7 @@ function Join() {
 
     //회원정보 조회
     useEffect(() => {
-        fetch("http://localhost:3000/userinfo")
+        fetch("http://192.168.0.227:3000/userinfo")
             .then(response => response.json())
             .then(data => setUserData(data));
     }, []);
@@ -25,7 +25,7 @@ function Join() {
             if (!userData.some(item => item.id === id)) {
                 if (pw === checkPw) {
                     //회원가입 실행
-                    fetch("http://localhost:3000/join", {
+                    fetch("http://192.168.0.227:3000/join", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({

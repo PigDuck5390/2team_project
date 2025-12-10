@@ -8,10 +8,18 @@ function Movies() {
 
   //영화정보 조회 (순위 미반영)
   useEffect(() => {
-    fetch("http://localhost:3000/movies")
+    fetch("http://192.168.0.227:3000/movies")
       .then(res => res.json())
       .then(data => setMovies(data))
   }, [])
+
+  const [movieData, setMovieData] = useState([])
+
+  useEffect(() => {
+    fetch("http://192.168.0.227:3000/movieinfo")
+      .then(response => response.json())
+      .then(data => setMovieData(data))
+  }, [movieData])
 
 
   //-----------------------------------------------------//
@@ -25,7 +33,7 @@ function Movies() {
         {movies.map((movie) => (
           <section key={movie.movie_id} className="movie-section">
             <div className="movie-poster-box">
-              <img src={`http://localhost:3000${movie.poster}`}
+              <img src={`http://192.168.0.227:3000${movie.poster}`}
                 alt={movie.title} />
             </div>
 
@@ -35,7 +43,7 @@ function Movies() {
               <p className="movie-meta">러닝타임 : {movie.runtime}분</p>
 
               <div className="movie-extra-box">
-                <img className="chart" src={`http://localhost:3000${movie.graph_path}`}
+                <img className="chart" src={`http://192.168.0.227:3000${movie.graph_path}`}
                   alt={movie.title} />
               </div>
             </div>

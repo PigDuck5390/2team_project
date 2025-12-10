@@ -12,7 +12,7 @@ function Login() {
 
     //회원정보 조회
     useEffect(() => {
-        fetch('http://localhost:3000/userinfo')
+        fetch('http://192.168.0.227:3000/userinfo')
             .then(response => response.json())
             .then(data => setUserData(data))
     }, []);

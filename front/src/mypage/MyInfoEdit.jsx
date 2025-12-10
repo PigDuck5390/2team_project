@@ -18,14 +18,14 @@ function MyInfo() {
 
     //유저정보 조회
     useEffect(()=>{
-        fetch("http://localhost:3000/userinfo")
+        fetch("http://192.168.0.227:3000/userinfo")
         .then(response=>response.json())
         .then(data=>setUserData(data))
     },[userData])
 
     //카드정보 조회
     useEffect(()=>{
-        fetch("http://localhost:3000/cardinfo")
+        fetch("http://192.168.0.227:3000/cardinfo")
         .then(response => response.json())
         .then(data=>setCardData(data))
     },[cardData])
@@ -56,7 +56,7 @@ function MyInfo() {
             alert("비밀번호 확인이 일치하지 않습니다.");
             return;
         }
-        fetch("http://localhost:3000/changePassword", {
+        fetch("http://192.168.0.227:3000/changePassword", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -71,11 +71,12 @@ function MyInfo() {
         } 
     })
     };
+    
 
     //카드 등록
     function cardSubmit() {
-        const user = userData.find(item=>item.id == userInfo.id)
-        fetch("http://localhost:3000/newcard",{
+        const user = userData.find(item=>item.id == location.state.id)
+        fetch("http://192.168.0.227:3000/newcard",{
             method: "POST",
             headers:{"Content-Type" : "application/json"},
             body: JSON.stringify({
@@ -101,7 +102,7 @@ function MyInfo() {
     function cardNameEdit(defid, name){
         const newName = prompt("새로운 카드 별명을 입력해주세요.", name)
         if(newName){
-            fetch("http://localhost:3000/cardnameupdate",{
+            fetch("http://192.168.0.227:3000/cardnameupdate",{
                 method:"PUT",
                 headers:{"content-type":"application/json"},
                 body: JSON.stringify({
@@ -116,7 +117,7 @@ function MyInfo() {
     function cardDelete(defid){
         const yes = confirm("진짜 지울거니?")
         if(yes){
-            fetch("http://localhost:3000/carddelete",{
+            fetch("http://192.168.0.227:3000/carddelete",{
             method: "DELETE",
             headers:{"content-type":'application/json'},
             body: JSON.stringify({defid : defid})

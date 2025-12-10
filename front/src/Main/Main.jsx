@@ -10,9 +10,8 @@ function Main() {
   const [movieData, setMovieData] = useState([])
   const [page, setPage] = useState(0);
 
-  //영화정보 조회 (순위 반영)
-  useEffect(() => {
-    fetch("http://localhost:3000/movieinfo")
+  useEffect(() => { //영화정보 조회
+    fetch("http://192.168.0.227:3000/movieinfo")
       .then(response => response.json())
       .then(data => setMovieData(data))
   }, [movieData])
@@ -57,7 +56,7 @@ function Main() {
                 <div className="movie-row">
                   <div className="poster-wrap">
                     <img
-                      src={`http://localhost:3000${leftTop.poster}`}
+                      src={`http://192.168.0.227:3000${leftTop.poster}`}
                       alt={leftTop.title}
                       className="poster-img"
                     />
@@ -86,7 +85,7 @@ function Main() {
                 <div className="movie-row">
                   <div className="poster-wrap">
                     <img
-                      src={`http://localhost:3000${leftBottom.poster}`}
+                      src={`http://192.168.0.227:3000${leftBottom.poster}`}
                       alt={leftBottom.title}
                       className="poster-img"
                     />
@@ -117,7 +116,7 @@ function Main() {
                 <div className="movie-row">
                   <div className="poster-wrap">
                     <img
-                      src={`http://localhost:3000${rightTop.poster}`}
+                      src={`http://192.168.0.227:3000${rightTop.poster}`}
                       alt={rightTop.title}
                       className="poster-img"
                     />
@@ -145,7 +144,7 @@ function Main() {
                 <div className="movie-row">
                   <div className="poster-wrap">
                     <img
-                      src={`http://localhost:3000${rightBottom.poster}`}
+                      src={`http://192.168.0.227:3000${rightBottom.poster}`}
                       alt={rightBottom.title}
                       className="poster-img"
                     />
