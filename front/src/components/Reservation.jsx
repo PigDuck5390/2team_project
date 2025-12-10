@@ -17,7 +17,7 @@ function Reservation() {
   
   //영화정보 조회
   useEffect(() => {
-    fetch("http://localhost:3000/movies")
+    fetch("http://192.168.0.227:3000/movies")
       .then(response => response.json())
       .then(data => setMovieData(data))
   }, [])
@@ -68,7 +68,7 @@ return (
             {/* 왼쪽 포스터 */}
             <div className="reservation-poster-wrap">
               <img
-                src={`http://localhost:3000${item.poster}`}
+                src={`http://192.168.0.227:3000${item.poster}`}
                 alt={item.title}
                 className="reservation-poster"
               />

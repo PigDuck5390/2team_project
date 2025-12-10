@@ -24,7 +24,7 @@ function Seat() {
   const [seatData, setSeatData] = useState([])
 
   useEffect(() => { //예매정보 조회
-    fetch('http://localhost:3000/seatlist')
+    fetch('http://192.168.0.227:3000/seatlist')
       .then(response => response.json())
       .then(data => setSeatData(data))
   }, []);

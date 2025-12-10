@@ -8,7 +8,7 @@ function Event(){
 
     //이벤트 정보 조회
     useEffect(()=>{
-        fetch("http://localhost:3000/eventinfo")
+        fetch("http://192.168.0.227:3000/eventinfo")
         .then(response=>response.json())
         .then(data=>setEventData(data))
     },[])
@@ -22,7 +22,7 @@ function Event(){
         {/* 이벤트 포스터 */}
         {eventData.map((item)=>(
             <div key={item.defid}>
-                <img src={`http://localhost:3000${item.poster_path}`}
+                <img src={`http://192.168.0.227:3000${item.poster_path}`}
                 className="event-poster"
                 alt={item.poster_name} />
             </div>  

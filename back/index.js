@@ -97,8 +97,8 @@ app.post('/reserv', async (req, res) => {
 
 //회원가입
 app.post('/join', async (req, res) => {
-  await pool.query('INSERT INTO user (name, id, pw) VALUES (?,?,?)',
-    [req.body.userName, req.body.userId, req.body.userPw]
+  await pool.query('INSERT INTO user (name, id, pw, point) VALUES (?,?,?,?)',
+    [req.body.userName, req.body.userId, req.body.userPw, 500]
   )
 })
 
@@ -173,6 +173,6 @@ app.get('/cardinfo/:id', async (req, res) => {
 })
 
 //서버 실행
-app.listen(3000, () => {
+app.listen(3000,"0.0.0.0", () => {
   console.log('서버 실행')
 })

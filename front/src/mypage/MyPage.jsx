@@ -16,27 +16,27 @@ function MyPage() {
     useEffect(() => {
         setLoggedInName(location.state.name);
 
-        fetch(`http://localhost:3000/userprofile/${location.state.id}`)
+        fetch(`http://192.168.0.227:3000/userprofile/${location.state.id}`)
             .then(res => res.json())
             .then(data => {
                 const profilePath = Array.isArray(data) && data.length > 0
                     ? data[0].profile : null;
                 if (profilePath) {
-                    setProfileImg(`http://localhost:3000${profilePath}`);
+                    setProfileImg(`http://192.168.0.227:3000${profilePath}`);
                 }
             });
     }, [location.state?.id]);
 
     //예매 내역
     useEffect(() => {
-        fetch(`http://localhost:3000/seatlist/${location.state.id}`)
+        fetch(`http://192.168.0.227:3000/seatlist/${location.state.id}`)
             .then(res => res.json())
             .then(data => setSeatData(data))
     }, [location.state.id]);
 
     //포인트 
     useEffect(() => {
-        fetch(`http://localhost:3000/point/${location.state.id}`, {
+        fetch(`http://192.168.0.227:3000/point/${location.state.id}`, {
         })
             .then(res => res.json())
             .then(data => setPoint(data));
@@ -66,7 +66,7 @@ function MyPage() {
         formData.append("profile", file);
         formData.append("userId", location.state.id);
 
-        const res = await fetch("http://localhost:3000/updateProfile", {
+        const res = await fetch("http://192.168.0.227:3000/updateProfile", {
             method: "PUT",
             body: formData
         });
@@ -74,7 +74,7 @@ function MyPage() {
         const data = await res.json();
 
         if (data.success) {
-            setProfileImg(`http://localhost:3000${data.profile}`);
+            setProfileImg(`http://192.168.0.227:3000${data.profile}`);
         } else {
             alert("업로드 실패");
         }

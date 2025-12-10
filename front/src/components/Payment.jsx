@@ -12,7 +12,7 @@ function Payment() {
     const [selectedCard, setSelectedCard] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/cardinfo/${location.state.id}`)
+        fetch(`http://192.168.0.227:3000/cardinfo/${location.state.id}`)
             .then(res => res.json())
             .then(data => setCardData(data));
     }, []);
@@ -34,7 +34,7 @@ function Payment() {
             return;
         }
 
-        fetch("http://localhost:3000/reserv", {
+        fetch("http://192.168.0.227:3000/reserv", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify({
@@ -49,7 +49,7 @@ function Payment() {
             })
         })
             .then(() => {
-                return fetch(`http://localhost:3000/point/add/${userInfo.id}`, {
+                return fetch(`http://192.168.0.227:3000/point/add/${userInfo.id}`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ addPoint: seatCount * 10 })

@@ -8,7 +8,7 @@ function Benefit(){
 
     //혜택 정보 조회
     useEffect(()=>{
-        fetch("http://localhost:3000/benefitinfo")
+        fetch("http://192.168.0.227:3000/benefitinfo")
         .then(response =>response.json())
         .then(data => setBenefitData(data))
     },[])
@@ -20,7 +20,7 @@ function Benefit(){
             {/* 혜택 포스터 */}
             {benefitData.map((item)=>(
                 <div key={item.defid}>
-                    <img src={`http://localhost:3000${item.poster_path}`}
+                    <img src={`http://192.168.0.227:3000${item.poster_path}`}
                     className="benefit-poster"
                     alt={item.poster_name} />
                 </div>

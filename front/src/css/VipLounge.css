@@ -1,0 +1,192 @@
+.vip-wrapper {
+    display: flex;
+    padding: 60px;
+    background: linear-gradient(#3b2a1d, #6b4c2b);
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* 왼쪽 사이드 - 유저 정보 */
+.vip-side {
+    width: 260px;
+    background: #f8f3ea;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    margin-right: 40px;
+    box-sizing: border-box;
+}
+
+.vip-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #3a2413;
+    margin-bottom: 18px;
+}
+
+.vip-user-box {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.vip-profile-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 18px;
+    object-fit: cover;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+}
+
+.vip-user-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.vip-user-name {
+    font-size: 17px;
+    font-weight: 700;
+    color: #3a2413;
+}
+
+.vip-user-point {
+    font-size: 14px;
+    color: #7a5a35;
+}
+
+.vip-user-desc {
+    font-size: 13px;
+    color: #a27b4c;
+}
+
+.vip-back-btn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 999px;
+    border: none;
+    background: #d8860c;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.vip-back-btn:hover {
+    background: #a05704;
+}
+
+/* 오른쪽 채팅 영역 */
+.vip-chat-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 20px 22px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+
+/* 채팅 박스 */
+.vip-chat-box {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 12px;
+    height: 380px;
+    overflow-y: auto;
+    background: #f8f9fb;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+.chat-line {
+    margin: 4px 0;
+    font-size: 14px;
+}
+
+.chat-line.system {
+    color: #888;
+    font-style: italic;
+}
+
+/* 입력 영역 */
+.vip-input-row {
+    display: flex;
+    gap: 10px;
+}
+
+.vip-input {
+    flex: 1;
+    min-height: 60px;
+    resize: none;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.vip-input:focus {
+    outline: none;
+    border-color: #d8860c;
+    box-shadow: 0 0 0 2px rgba(216, 134, 12, 0.25);
+}
+
+.vip-send-btn {
+    width: 90px;
+    border: none;
+    border-radius: 10px;
+    background: #d8860c;
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.vip-send-btn:hover {
+    background: #a05704;
+}
+
+/* 한 메시지 행 */
+.chat-msg-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+/* 프로필 이미지 */
+.chat-profile-img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* 말풍선 전체 */
+.chat-bubble {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px 12px;
+    max-width: 70%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 이름 */
+.chat-name {
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 3px;
+}
+
+/* 메시지 내용 */
+.chat-text {
+    font-size: 15px;
+    color: #222;
+}
