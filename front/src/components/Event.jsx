@@ -1,15 +1,12 @@
 import MainHeader from '../Main/MainHeader.jsx'
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 
 import "../css/Event.css"
 
 function Event(){
-    //헤더 로그인 보존 및 유저 정보
-    const { state : userInfo } = useLocation()
-
     const [eventData, setEventData] = useState([])
 
+    //이벤트 정보 조회
     useEffect(()=>{
         fetch("http://localhost:3000/eventinfo")
         .then(response=>response.json())
@@ -21,7 +18,8 @@ function Event(){
     return(
         <>
         <MainHeader />
-        
+
+        {/* 이벤트 포스터 */}
         {eventData.map((item)=>(
             <div key={item.defid}>
                 <img src={`http://localhost:3000${item.poster_path}`}

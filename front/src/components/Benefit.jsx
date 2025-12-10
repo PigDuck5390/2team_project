@@ -1,16 +1,12 @@
 import MainHeader from '../Main/MainHeader.jsx'
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 
 import '../css/Benefit.css'
 
-
 function Benefit(){
-    //헤더 로그인 보존 및 유저 정보
-    const { state : userInfo } = useLocation()
-
     const [benefitData, setBenefitData] = useState([])
 
+    //혜택 정보 조회
     useEffect(()=>{
         fetch("http://localhost:3000/benefitinfo")
         .then(response =>response.json())
@@ -20,13 +16,17 @@ function Benefit(){
     return(
         <>
             <MainHeader />
+            
+            {/* 혜택 포스터 */}
             {benefitData.map((item)=>(
                 <div key={item.defid}>
                     <img src={`http://localhost:3000${item.poster_path}`}
                     className="benefit-poster"
                     alt={item.poster_name} />
                 </div>
-            ))}
+                    )
+                )
+            }
         </>
     )
 }
