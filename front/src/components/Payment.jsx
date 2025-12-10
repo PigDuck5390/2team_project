@@ -7,7 +7,6 @@ function Payment() {
 
     const { state: userInfo } = useLocation()
     const reservInfo = useParams()
-    const navigate = useNavigate()
     const [cardData, setCardData] = useState([])
 
     useEffect(() => {

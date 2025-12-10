@@ -1,0 +1,485 @@
+/* =========================================
+   공통 레이아웃 (중간 톤 브라운)
+   ========================================= */
+
+.admin-page {
+  min-height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    #e7d6c2 0%,
+    #d5c0a3 40%,
+    #c1a181 100%
+  );
+  color: #352015;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  font-family: "Pretendard", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.admin-main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 32px 48px;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   헤더 / 네비게이션
+   ========================================= */
+
+.admin-header {
+  width: 100%;
+  background: #644027;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.admin-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 32px;
+  box-sizing: border-box;
+}
+
+.admin-header-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #fff4e3;
+}
+
+.admin-management-header {
+  width: 100%;
+  background: #714c30;
+  box-shadow: 0 4px 12px rgba(69, 43, 25, 0.55);
+  z-index: 10;
+}
+
+.admin-management-toolbar {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 32px 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-admin-id {
+  font-size: 14px;
+  color: #fbe0b7;
+}
+
+.admin-management-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-nav-button {
+  background: #f3e4d1;
+  border: 1px solid rgba(93, 64, 40, 0.45);
+  color: #5a3a22;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform 0.08s ease-out,
+    box-shadow 0.08s ease-out,
+    background 0.1s ease-out;
+}
+
+.admin-nav-button:hover {
+  background: #fff7eb;
+  box-shadow:
+    0 0 0 1px rgba(187, 130, 75, 0.38),
+    0 4px 10px rgba(85, 55, 32, 0.35);
+  transform: translateY(-1px);
+}
+
+/* =========================================
+   타이틀 / 섹션
+   ========================================= */
+
+.admin-title {
+  font-size: 26px;
+  font-weight: 800;
+  margin: 18px 0 6px;
+  letter-spacing: 0.06em;
+  color: #472b18;
+}
+
+.admin-subtitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 12px 0 10px;
+  color: #5b3720;
+}
+
+.admin-description {
+  margin-top: 32px;
+  font-size: 15px;
+  color: #684129;
+  text-align: center;
+}
+
+.admin-section {
+  margin-top: 18px;
+}
+
+.admin-section--center {
+  display: flex;
+  justify-content: center;
+}
+
+/* 구분선 */
+.admin-divider {
+  border: none;
+  border-top: 1px solid rgba(111, 79, 53, 0.35);
+  margin: 16px 0;
+}
+
+/* =========================================
+   폼 / 인풋 / 버튼
+   ========================================= */
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-form--columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.admin-form-column {
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-form-column--times {
+  max-width: 360px;
+}
+
+.admin-form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.admin-label {
+  font-size: 13px;
+  color: #6f4b2f;
+}
+
+.admin-label-inline {
+  font-size: 13px;
+  margin-right: 6px;
+  color: #6f4b2f;
+}
+
+.admin-input,
+.admin-textarea,
+.admin-file {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid rgba(106, 77, 53, 0.65);
+  background: #fbf3e8;
+  padding: 7px 10px;
+  font-size: 13px;
+  color: #3e2719;
+  outline: none;
+}
+
+.admin-input::placeholder,
+.admin-textarea::placeholder {
+  color: rgba(102, 74, 50, 0.55);
+}
+
+.admin-input:focus,
+.admin-textarea:focus {
+  border-color: #ce9854;
+  box-shadow: 0 0 0 1px rgba(206, 152, 84, 0.45);
+}
+
+.admin-textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.admin-input--date {
+  cursor: pointer;
+}
+
+.admin-button {
+  border-radius: 8px;
+  border: 1px solid rgba(115, 83, 56, 0.6);
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  background: #f0dfcc;
+  color: #4a2e1c;
+  transition: background 0.1s ease-out,
+    transform 0.08s ease-out,
+    box-shadow 0.08s ease-out;
+}
+
+.admin-button:hover {
+  background: #f7eadb;
+  box-shadow: 0 2px 8px rgba(90, 63, 41, 0.35);
+  transform: translateY(-1px);
+}
+
+.admin-button--primary {
+  background: #e4a859;
+  border-color: #c48a3e;
+  color: #301b0f;
+  font-weight: 600;
+}
+
+.admin-button--primary:hover {
+  background: #f1b566;
+}
+
+.admin-button--danger {
+  background: #e46657;
+  border-color: #c54536;
+  color: #fff4ee;
+}
+
+.admin-button--danger:hover {
+  background: #ee7a6d;
+}
+
+.admin-button--small {
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.admin-button--tiny {
+  padding: 2px 8px;
+  font-size: 11px;
+  margin-left: 6px;
+}
+
+.admin-add-button {
+  margin-top: 12px;
+}
+
+/* 로그인 전용 카드 */
+
+.admin-login-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-login-card {
+  margin: 60px auto 40px;
+  max-width: 360px;
+  width: 100%;
+  padding: 24px 22px 20px;
+  border-radius: 18px;
+  background: radial-gradient(
+    circle at top left,
+    #f0c17e 0,
+    #dda869 30%,
+    #c79b74 55%,
+    #b89573 80%
+  );
+  box-shadow:
+    0 18px 34px rgba(84, 58, 37, 0.7),
+    0 0 0 1px rgba(255, 244, 228, 0.45);
+}
+
+.admin-login-button {
+  width: 100%;
+  margin-top: 14px;
+}
+
+/* =========================================
+   카드 / 그리드
+   ========================================= */
+
+.admin-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.admin-grid--poster {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.admin-grid--movies {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.admin-grid--reserv {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.admin-grid--users {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.admin-card {
+  background: #f9f1e6;
+  border-radius: 14px;
+  padding: 14px 12px 12px;
+  box-sizing: border-box;
+  border: 1px solid rgba(111, 79, 53, 0.55);
+  box-shadow: 0 10px 22px rgba(81, 55, 35, 0.4);
+  color: #3f2719;
+}
+
+.admin-card--poster {
+  padding: 10px;
+}
+
+.admin-card--movie {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-card--reserv,
+.admin-card--user {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.admin-card-header--user {
+  justify-content: flex-end;
+}
+
+.admin-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #4d2f1c;
+  margin-right: auto;
+}
+
+.admin-card-body {
+  font-size: 13px;
+  color: #4c2f1f;
+}
+
+.admin-card-image-wrap {
+  border-radius: 10px;
+  overflow: hidden;
+  background: #e8d4c0;
+}
+
+.admin-card-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.admin-card-actions {
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* =========================================
+   텍스트 / 기타
+   ========================================= */
+
+.admin-text {
+  font-size: 13px;
+  margin: 3px 0;
+  color: #4c2f1f;
+}
+
+.admin-reserv-code {
+  font-weight: 600;
+  color: #c87c2b;
+}
+
+/* =========================================
+   영화 카드 - 포스터 / 시간
+   ========================================= */
+
+.admin-movie-poster-wrap {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-movie-poster {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(123, 89, 59, 0.65);
+}
+
+.admin-movie-times {
+  margin-top: 6px;
+  border-top: 1px dashed rgba(116, 83, 57, 0.55);
+  padding-top: 4px;
+}
+
+/* =========================================
+   유저 카드 - 프로필
+   ========================================= */
+
+.admin-user-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.admin-user-profile-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 2px solid rgba(129, 94, 64, 0.8);
+  box-shadow: 0 6px 14px rgba(75, 48, 28, 0.6);
+}
+
+.admin-user-info {
+  margin-top: 6px;
+}
+
+/* =========================================
+   반응형
+   ========================================= */
+
+@media (max-width: 768px) {
+  .admin-main {
+    padding: 18px 16px 32px;
+  }
+
+  .admin-header-inner,
+  .admin-management-toolbar {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .admin-login-card {
+    margin-top: 40px;
+  }
+}

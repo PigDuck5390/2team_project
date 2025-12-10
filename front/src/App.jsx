@@ -5,7 +5,6 @@ import Login from './components/Login.jsx'
 import Movies from './components/Movies.jsx'
 import Benefit from './components/Benefit.jsx'
 import Event from './components/Event.jsx'
-import Admin from './Admin/Admin.jsx'
 import MyPage from './mypage/MyPage.jsx'
 import Reservation from './components/Reservation.jsx'
 import Seat from './components/Seat.jsx'
@@ -14,7 +13,13 @@ import MyReserve from './mypage/MyReserve.jsx'
 import Payment from './components/Payment.jsx'
 
 
-
+import Admin from './Admin/Admin.jsx'
+import Management from './Admin/Management.jsx'
+import ManageBenefit from './Admin/ManageMenu/ManageBenefit.jsx'
+import ManageEvent from './Admin/ManageMenu/ManageEvent.jsx'
+import ManageMovies from './Admin/ManageMenu/ManageMovies.jsx'
+import ManageReserv from './Admin/ManageMenu/ManageReserv.jsx'
+import ManageUser from './Admin/ManageMenu/ManageUser.jsx'
 
 
 import './App.css'
@@ -40,6 +45,12 @@ function App() {
         <Route path='/myreserve' element={<MyReserve />}/>
         <Route path='/payment/:title/:time/:date/:screen/:seats' element={<Payment />}/>
 
+        <Route path='/admin/management' element={<Management />}/>
+        <Route path='/admin/management/benefit' element={<ManageBenefit />}/>
+        <Route path='/admin/management/event' element={<ManageEvent />}/>
+        <Route path='/admin/management/movies' element={<ManageMovies />}/>
+        <Route path='/admin/management/reserv' element={<ManageReserv />}/>
+        <Route path='/admin/management/user' element={<ManageUser />}/>
 
       </Routes>
     </BrowserRouter>

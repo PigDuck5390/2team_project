@@ -14,7 +14,13 @@ app.use('/upload', express.static(path.join(__dirname, 'upload')));
 //신규 파일 저장경로 및 파일명 규칙 선언
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, 'upload', 'profile'))
+    if(req.path === '/benefit/add'){
+      cb(null, path.join(__dirname, 'upload', 'benefit'))
+    }else if (req.path === '/updateProfile'){
+      cb(null, path.join(__dirname, 'upload', 'profile'))
+    }else if (req.path === '/event/add'){
+      cb(null, path.join(__dirname, 'upload', 'event'))
+    }
   },
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname)
@@ -164,6 +170,132 @@ app.get('/cardinfo/:id', async (req, res) => {
   )
   res.send(data)
 })
+
+//관리자 정보 호출
+app.get('/admin', async (req, res) =>{
+  const data = await pool.query("SELECT * FROM admin")
+  res.send(data)
+})
+
+//관리자 : 영화 수정
+app.put('/movies/update', async (req, res) => {
+  await pool.query(
+    `UPDATE movie_info SET ${req.body.field} = ? WHERE movie_id = ?`,
+    [req.body.newData, req.body.movieId]
+  )
+  }
+);
+
+//관리자 : 영화 삭제
+app.delete('/movies/delete', async (req, res) => {
+  await pool.query(
+    `DELETE FROM movie_info WHERE movie_id = ?`,
+    [req.body.movieId]
+  )
+  }
+);
+
+//관리자 : 영화 추가
+app.post('/movies/add', upload.single('poster'), async (req, res) => {
+  const filePath = `/upload/profile/${req.file.filename}`;
+  await pool.query(
+    'INSERT INTO movie_info (screen_number, title, description, short_description, poster, runtime, start_time1, start_time2, start_time3, start_time4, start_time5, start_time6, start_time7, start_time8, start_time9) VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+    [req.body.screen_number, req.body.title, req.body.description, req.body.short_description, filePath, req.body.runtime, req.body.start_time1, req.body.start_time2, req.body.start_time3, req.body.start_time4, req.body.start_time5, req.body.start_time6, req.body.start_time7, req.body.start_time8, req.body.start_time9]
+  )
+});
+
+//관리자 : 예매 추가
+app.post('/seat/add', async (req, res) => {
+  await pool.query(
+    'INSERT INTO seat (seat_num, user_id, date, time, movie_name, userName, screen_num) VALUE (?,?,?,?,?,?,?)',
+    [req.body.seat_num, req.body.user_id, req.body.date, req.body.time, req.body.movie_name, req.body.userName, req.body.screen_num]
+  )
+});
+
+//관리자 : 예매 수정
+app.put('/seat/update', async (req, res) => {
+  await pool.query(
+    `UPDATE seat SET ${req.body.field} = ? WHERE seat_id = ?`,
+    [req.body.newData, req.body.seatId]
+  )
+  }
+);
+
+//관리자 : 예매 삭제
+app.delete('/seat/delete', async (req, res) => {
+  await pool.query(
+    `DELETE FROM seat WHERE seat_id = ?`,
+    [req.body.seatId]
+  )
+  }
+);
+
+//관리자 : 혜택 포스터 추가
+app.post('/benefit/add', upload.array('benefitPoster'), async (req, res) => {
+  for(let i=0; i<req.files.length; i++){
+    const filePath = `/upload/benefit/${req.files[i].filename}`;
+    await pool.query(
+      'INSERT INTO benefit (poster_name, poster_path) VALUE (?,?)',
+      [req.files[i].originalname, filePath]
+    )
+  }
+});
+
+//관리자 : 혜택 포스터 삭제
+app.delete('/benefit/delete', async (req, res) => {
+  await pool.query(
+    `DELETE FROM benefit WHERE defid = ?`,
+    [req.body.defid]
+  )
+  }
+);
+
+//관리자 : 이벤트 포스터 추가
+app.post('/event/add', upload.array('eventPoster'), async (req, res) => {
+  for(let i=0; i<req.files.length; i++){
+    const filePath = `/upload/event/${req.files[i].filename}`;
+    await pool.query(
+      'INSERT INTO event (poster_name, poster_path) VALUE (?,?)',
+      [req.files[i].originalname, filePath]
+    )
+  }
+});
+
+//관리자 : 이벤트 포스터 삭제
+app.delete('/event/delete', async (req, res) => {
+  await pool.query(
+    `DELETE FROM event WHERE defid = ?`,
+    [req.body.defid]
+  )
+  }
+);
+
+//관리자 : 유저 삭제
+app.delete('/deleteuser', async (req, res) => {
+  await pool.query(
+    `DELETE FROM user WHERE defid = ?`,
+    [req.body.defid]
+  )
+  }
+);
+
+//관리자 : 유저 프로필 기본사진으로 변경
+app.put('/setdefaultprofile', async (req, res) => {
+  await pool.query(
+    `UPDATE user SET profile = NULL WHERE defid = ?`,
+    [req.body.defid]
+  )
+  }
+);
+
+//관리자 : 유저 정보 수정
+app.put('/userupdate', async (req, res) => {
+  await pool.query(
+    `UPDATE user SET ${req.body.field} = ? WHERE defid = ?`,
+    [req.body.newData, req.body.userDefid]
+  )
+  }
+);
 
 //서버 실행
 app.listen(3000,() => {
