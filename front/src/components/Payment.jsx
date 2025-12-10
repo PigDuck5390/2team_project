@@ -3,12 +3,11 @@ import { useLocation, useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 function Payment() {
-    const { state: userInfo } = useLocation()
-    const reservInfo = useParams()
-
     const navigate = useNavigate()
 
-
+    const { state: userInfo } = useLocation()
+    const reservInfo = useParams()
+    
     function submit() { //예매 뻥션
         fetch("http://localhost:3000/reserv", {
             method: "POST",

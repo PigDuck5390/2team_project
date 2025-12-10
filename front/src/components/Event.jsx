@@ -13,20 +13,20 @@ function Event(){
         .then(data=>setEventData(data))
     },[])
 
-
-
     return(
         <>
-        <MainHeader />
+            <MainHeader />
 
-        {/* 이벤트 포스터 */}
-        {eventData.map((item)=>(
-            <div key={item.defid}>
-                <img src={`http://localhost:3000${item.poster_path}`}
-                className="event-poster"
-                alt={item.poster_name} />
-            </div>  
-        ))}
+            {/* 이벤트 포스터 */}
+            {eventData.map((item)=>(
+                <div key={item.defid}>
+                    <img src={`http://localhost:3000${item.poster_path}`}
+                    className="event-poster"
+                    alt={item.poster_name} />
+                </div>  
+                    )
+                )
+            }
         </>
     )
 }

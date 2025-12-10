@@ -1,51 +1,58 @@
+import MainHeader from "../Main/MainHeader";
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import MainHeader from "../Main/MainHeader";
-import "../css/MyPage.css";
 import defaultProfile from "../img/기본프로필.png";
 import { FaCrown } from "react-icons/fa";
 
+import "../css/MyPage.css";
+
 function MyPage() {
     const navigate = useNavigate();
-    const location = useLocation();
+
+    const { state : userInfo } = useLocation();
     const [loggedInName, setLoggedInName] = useState(null);
     const [profileImg, setProfileImg] = useState(defaultProfile);
     const [seatData, setSeatData] = useState([]);
     const [point, setPoint] = useState(0);
 
+    //해당 유저 프로필 사진 조회
     useEffect(() => {
-        setLoggedInName(location.state.name);
-
-        fetch(`http://localhost:3000/userprofile/${location.state.id}`)
+        setLoggedInName(userInfo.name);
+        fetch(`http://localhost:3000/userprofile/${userInfo.id}`)
             .then(res => res.json())
             .then(data => {
                 const profilePath = Array.isArray(data) && data.length > 0
                     ? data[0].profile : null;
                 if (profilePath) {
-                    setProfileImg(`http://localhost:3000${profilePath}`);
+                        setProfileImg(`http://localhost:3000${profilePath}`);
+                }   
                 }
-            });
-    }, [location.state?.id]);
+            );
+    }, [userInfo?.id]);
 
-    //예매 내역
+    //예매 내역 조회
     useEffect(() => {
-        fetch(`http://localhost:3000/seatlist/${location.state.id}`)
+        fetch(`http://localhost:3000/seatlist/${userInfo.id}`)
             .then(response => response.json())
             .then(data => setSeatData(data))
-    }, [location.state.id]);
+    }, [userInfo.id]);
 
+    //포인트 조회 및 수정
     useEffect(() => {
-        fetch(`http://localhost:3000/point/update/${location.state.id}`, {
+        fetch(`http://localhost:3000/point/update/${userInfo.id}`, {
             method: "PUT"
-        })
+                }
+            )
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
                     setPoint(data.point);
                 }
-            });
-    }, [location.state.id]);
+                }
+            );
+    }, [userInfo.id]);
 
+    //포인트별 등급
     function movieRank() {
         if (point >= 1000) {
             return "영화 그 자체";
@@ -60,20 +67,20 @@ function MyPage() {
         }
     }
 
-
-
-    const handleProfileChange = async (e) => {
+    //프로필 사진 변경
+    async function handleProfileChange(e){
         const file = e.target.files[0];
         if (!file) return;
 
         const formData = new FormData();
         formData.append("profile", file);
-        formData.append("userId", location.state.id);
+        formData.append("userId", userInfo.id);
 
         const res = await fetch("http://localhost:3000/updateProfile", {
             method: "PUT",
             body: formData
-        });
+                }
+            );
 
         const data = await res.json();
 
@@ -82,29 +89,23 @@ function MyPage() {
         } else {
             alert("업로드 실패");
         }
-    };
-
-    function goMyInfoEdit() {
-        navigate('/myinfo', { state: { name: location.state.name, id: location.state.id } });
     }
 
-    const goPoint = () => {
-        navigate('/mypoint', {
-            state: {
-                name: location.state.name,
-                id: location.state.id
-            }
-        });
-    };
+    //개인정보 변경 이동
+    function goMyInfoEdit() {
+        navigate('/myinfo', { state: { name: userInfo.name, id: userInfo.id } });
+    }
 
-    const goReserve = () => {
+    //예매내역 이동
+    function goReserve(){
         navigate('/myreserve', {
             state: {
-                name: location.state.name,
-                id: location.state.id
+                name: userInfo.name,
+                id: userInfo.id
             }
         });
-    };
+    }
+    
     return (
         <>
             <MainHeader />
@@ -117,7 +118,6 @@ function MyPage() {
                     <ul className="menu-list">
                         <li>내 정보</li>
                         <li onClick={goMyInfoEdit}>개인정보 변경</li>
-                        <li onClick={goPoint}>멤버십 포인트</li>
                         <li onClick={goReserve}>예매내역</li>
                     </ul>
                 </aside>

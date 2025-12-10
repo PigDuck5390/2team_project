@@ -1,29 +1,26 @@
+import MainHeader from '../Main/MainHeader.jsx'
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-
-import MainHeader from '../Main/MainHeader.jsx'
 import '../css/Main.css'
 
 function Main() {
   const navigate = useNavigate();
-  const { state: userInfo } = useLocation()
 
+  const { state: userInfo } = useLocation()
   const [movieData, setMovieData] = useState([])
   const [page, setPage] = useState(0);
 
-  useEffect(() => { //영화정보 조회
+  //영화정보 조회 (순위 반영)
+  useEffect(() => {
     fetch("http://localhost:3000/movieinfo")
       .then(response => response.json())
       .then(data => setMovieData(data))
   }, [movieData])
 
-  // ✅ reserv_count 기준 내림차순 정렬 + 페이지별 4개씩 잘라 쓰기
-  const sortedMovies = [...movieData].sort(
-    (a, b) => b.reserv_count - a.reserv_count
-  );
+  //페이지별 4개씩 잘라 쓰기
   const pageSize = 4;
   const startIndex = page * pageSize;
-  const pageMovies = sortedMovies.slice(startIndex, startIndex + pageSize);
+  const pageMovies = movieData.slice(startIndex, startIndex + pageSize);
 
   // 안전하게 자리 뽑아오기 (없을 수도 있으니까)
   const leftTop = pageMovies[0]; // 1위, 5위, 9위 ...
@@ -31,17 +28,18 @@ function Main() {
   const rightTop = pageMovies[1]; // 2위, 6위 ...
   const rightBottom = pageMovies[3]; // 4위, 8위 ...
 
-  const maxPage = Math.max(0, Math.ceil(sortedMovies.length / pageSize) - 1);
+  const maxPage = Math.max(0, Math.ceil(movieData.length / pageSize) - 1);
 
+  //바로 예매하기
   const Reserve = (movie_id) => {
-    navigate('/reservation', {
-      state: {
+    navigate('/reservation', { state: {
         movieId: movie_id,
         name: userInfo?.name,
         id: userInfo?.id
-      }
-    });
-  };
+          }
+        }
+      );
+    };
 
   return (
     <>

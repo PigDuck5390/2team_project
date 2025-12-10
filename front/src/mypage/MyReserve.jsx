@@ -5,45 +5,40 @@ import "../css/MyReserve.css";
 
 function MyReserve() {
     const navigate = useNavigate();
-    const location = useLocation();
+    const { state : userInfo } = useLocation();
     const [seatData, setSeatData] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/seatlist/${location.state.id}`)
+        fetch(`http://localhost:3000/seatlist/${userInfo.id}`)
             .then(response => response.json())
             .then(data => setSeatData(data))
     }, [seatData]);
 
+    //개인정보 변경 이동
     function goMyInfoEdit() {
-        navigate('/myinfo', { state: { name: location.state.name, id: location.state.id } });
+        navigate('/myinfo', { state: { name: userInfo.name, id: userInfo.id } });
     }
 
-    const goPoint = () => {
-        navigate('/mypoint', {
-            state: {
-                name: location.state.name,
-                id: location.state.id
-            }
-        });
-    };
-
-    const goMyPage = () => {
+    //내 정보 이동
+    function goMyPage(){
         navigate('/mypage', {
             state: {
-                name: location.state.name,
-                id: location.state.id
+                name: userInfo.name,
+                id: userInfo.id
             }
         });
     };
 
-    const goReserve = () => {
+    //예매내역 이동
+    function goReserve(){
         navigate('/myreserve', {
             state: {
-                name: location.state.name,
-                id: location.state.id
+                name: userInfo.name,
+                id: userInfo.id
             }
         });
     };
+
     return (
         <>
             <MainHeader />
@@ -55,7 +50,6 @@ function MyReserve() {
                     <ul className="menu-list">
                         <li onClick={goMyPage}>내 정보</li>
                         <li onClick={goMyInfoEdit}>개인정보 변경</li>
-                        <li onClick={goPoint}>멤버십 포인트</li>
                         <li onClick={goReserve}>예매내역</li>
                     </ul>
                 </aside>

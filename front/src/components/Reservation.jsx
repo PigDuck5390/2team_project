@@ -4,13 +4,14 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import '../css/Reservation.css'
 
 function Reservation() {
-  //헤더 로그인 보존 및 유저 정보
-  const { state: userInfo } = useLocation()
   const navigate = useNavigate()
-  const targetMovieId = userInfo?.movieId;
+
+  const { state: userInfo } = useLocation()
+  const movieRefs = useRef({});
+  
   const [movieData, setMovieData] = useState([])
   const [date, setDate] = useState({});
-  const movieRefs = useRef({});
+  const targetMovieId = userInfo?.movieId;
 
   //오늘 날짜
   const today = new Date().toISOString().split('T')[0];
@@ -22,35 +23,37 @@ function Reservation() {
       .then(data => setMovieData(data))
   }, [])
 
+  //바로 예매하기 클릭시 영화 추적
   useEffect(() => {
     if (targetMovieId && movieRefs.current[targetMovieId]) {
       setTimeout(() => {
         movieRefs.current[targetMovieId].scrollIntoView({
           behavior: "smooth",
           block: "center"
-        });
+          }
+        );
       },50);
     }
-}, [movieData])
+  }, [movieData])
 
-//좌석선택으로 이동
-function moveSeat(title, time, date, screen) {
-  if (!userInfo.id) {
-    alert("로그인 해주세요")
-    return;
-  }
-  if (!date) {
-    alert("날짜를 선택해주세요.")
-    return;
-  }
-  navigate(`/seat/${title}/${time}/${date}/${screen}`, {
-    state: {
-      name: userInfo.name,
-      id: userInfo.id
+  //좌석선택으로 이동
+  function moveSeat(title, time, date, screen) {
+    if (!userInfo.id) {
+      alert("로그인 해주세요")
+      return;
     }
+    if (!date) {
+      alert("날짜를 선택해주세요.")
+      return;
+    }
+    navigate(`/seat/${title}/${time}/${date}/${screen}`, {
+      state: {
+        name: userInfo.name,
+        id: userInfo.id
+      }
+    }
+    )
   }
-  )
-}
 
 
 //--------------------------------------------------------//
@@ -120,12 +123,14 @@ return (
                   />
                 </label>
 
+                {/* 시간별 버튼 */}
                 <div className="reservation-times">
                   {item.start_time1 && (
                     <span
                       className="time-slot"
                       onClick={() => moveSeat(
-                        item.title, item.start_time1, date[item.movie_id], item.screen_number)}
+                        item.title, item.start_time1, 
+                        date[item.movie_id], item.screen_number)}
                     >
                       {item.start_time1}
                     </span>
@@ -134,7 +139,8 @@ return (
                     <span
                       className="time-slot"
                       onClick={() => moveSeat(
-                        item.title, item.start_time2, date[item.movie_id], item.screen_number)}
+                        item.title, item.start_time2,
+                        date[item.movie_id], item.screen_number)}
                     >
                       {item.start_time2}
                     </span>
@@ -143,7 +149,8 @@ return (
                     <span
                       className="time-slot"
                       onClick={() => moveSeat(
-                        item.title, item.start_time3, date[item.movie_id], item.screen_number)}
+                        item.title, item.start_time3,
+                        date[item.movie_id], item.screen_number)}
                     >
                       {item.start_time3}
                     </span>
@@ -152,7 +159,8 @@ return (
                     <span
                       className="time-slot"
                       onClick={() => moveSeat(
-                        item.title, item.start_time4, date[item.movie_id], item.screen_number)}
+                        item.title, item.start_time4,
+                        date[item.movie_id], item.screen_number)}
                     >
                       {item.start_time4}
                     </span>
@@ -161,7 +169,8 @@ return (
                     <span
                       className="time-slot"
                       onClick={() => moveSeat(
-                        item.title, item.start_time5, date[item.movie_id], item.screen_number)}
+                        item.title, item.start_time5,
+                        date[item.movie_id], item.screen_number)}
                     >
                       {item.start_time5}
                     </span>
@@ -170,7 +179,8 @@ return (
                     <span
                       className="time-slot"
                       onClick={() => moveSeat(
-                        item.title, item.start_time6, date[item.movie_id], item.screen_number)}
+                        item.title, item.start_time6,
+                        date[item.movie_id], item.screen_number)}
                     >
                       {item.start_time6}
                     </span>
@@ -180,7 +190,8 @@ return (
                     <span
                       className="time-slot"
                       onClick={() => moveSeat(
-                        item.title, item.start_time7, date[item.movie_id], item.screen_number)}
+                        item.title, item.start_time7,
+                        date[item.movie_id], item.screen_number)}
                     >
                       {item.start_time7}
                     </span>
@@ -190,7 +201,8 @@ return (
                     <span
                       className="time-slot"
                       onClick={() => moveSeat(
-                        item.title, item.start_time8, date[item.movie_id], item.screen_number)}
+                        item.title, item.start_time8,
+                        date[item.movie_id], item.screen_number)}
                     >
                       {item.start_time8}
                     </span>
@@ -200,7 +212,8 @@ return (
                     <span
                       className="time-slot"
                       onClick={() => moveSeat(
-                        item.title, item.start_time9, date[item.movie_id], item.screen_number)}
+                        item.title, item.start_time9,
+                        date[item.movie_id], item.screen_number)}
                     >
                       {item.start_time9}
                     </span>

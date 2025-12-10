@@ -4,9 +4,7 @@ import MainHeader from "../Main/MainHeader";
 import "../css/MyInfoEdit.css";
 
 function MyInfo() {
-    //헤더 로그인 보존 및 유저 정보
-    const location = useLocation();
-
+    const { state : userInfo } = useLocation();
     const navigate = useNavigate();
 
     const [newPw, setNewPw] = useState("");
@@ -33,37 +31,27 @@ function MyInfo() {
     },[cardData])
 
     //내 정보 이동
-    const goMyInfo = () => {
+    function goMyInfo(){
         navigate('/mypage', {
             state: {
-                name: location.state.name,
-                id: location.state.id
-            }
-        });
-    };
-
-    //멤버십 포인트 이동
-    const goPoint = () => {
-        navigate('/mypoint', {
-            state: {
-                name: location.state.name,
-                id: location.state.id
+                name: userInfo.name,
+                id: userInfo.id
             }
         });
     };
 
     //예매내역 이동
-    const goReserve = () => {
+    function goReserve(){
         navigate('/myreserve', {
             state: {
-                name: location.state.name,
-                id: location.state.id
+                name: userInfo.name,
+                id: userInfo.id
             }
         });
     };
 
     //비밀번호 변경
-    const handleChangePassword = () => {
+    function handleChangePassword(){
         if (newPw !== confirmPw) {
             alert("비밀번호 확인이 일치하지 않습니다.");
             return;
@@ -72,7 +60,7 @@ function MyInfo() {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                userId: location.state.id,
+                userId: userInfo.id,
                 newPassword: newPw
             })
         })
@@ -86,14 +74,14 @@ function MyInfo() {
 
     //카드 등록
     function cardSubmit() {
-        const user = userData.find(item=>item.id == location.state.id)
+        const user = userData.find(item=>item.id == userInfo.id)
         fetch("http://localhost:3000/newcard",{
             method: "POST",
             headers:{"Content-Type" : "application/json"},
             body: JSON.stringify({
                 card : newCard,
                 cardDate : newCardDate,
-                userId : location.state.id,
+                userId : userInfo.id,
                 defid : user.defid,
                 bank: bank,
                 name : newCardName
@@ -104,8 +92,8 @@ function MyInfo() {
         setNewCard("")
         setNewCardDate("")
         navigate('/myinfo', { state : {
-            name: location.state.name,
-            id: location.state.id
+            name: userInfo.name,
+            id: userInfo.id
         }})
     }
 
@@ -152,7 +140,6 @@ function MyInfo() {
                     <ul className="menu-list">
                         <li onClick={goMyInfo}>내 정보</li>
                         <li>개인정보 변경</li>
-                        <li onClick={goPoint}>멤버십 포인트</li>
                         <li onClick={goReserve}>예매내역</li>
                     </ul>
                 </aside>
@@ -249,7 +236,7 @@ function MyInfo() {
 
                         <div className="card-list">
                             {cardData
-                            .filter(item => item.user_id == location.state.id)
+                            .filter(item => item.user_id == userInfo.id)
                             .map((item) => (
                                 <div className="card-item" key={item.card_defid}>
                                 
