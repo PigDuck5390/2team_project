@@ -11,8 +11,7 @@ function Seat(){
     const [seatFilter, setSeatFilter] = useState([])
     const [reservedSeats, setReservedSeats] = useState([])
     const [personnel, setPersonnel] = useState(0)
-    const [pickCount, setPickCount] = useState(0)
-
+    const [selectedSeats, setSelectedSeats] = useState([]);
     const seats = 
     ["A1", "A2", "A3", "A4", "A5", "A6",
         "B1", "B2", "B3", "B4", "B5", "B6",
@@ -46,7 +45,6 @@ function Seat(){
         console.log(seatNums)
     },[seatData])
 
-    const [selectedSeats, setSelectedSeats] = useState([]);
 
     const toggleSeat = (seat) => { //자리선택 뻥션
 
@@ -56,12 +54,10 @@ function Seat(){
       }
       if(selectedSeats.includes(seat)) {
         setSelectedSeats(selectedSeats.filter(s => s !== seat));
-        setPickCount(item=> item -=1)
-        console.log(pickCount)
-      }else if(pickCount < personnel){
+        console.log(selectedSeats.length)
+      }else if(selectedSeats.length < personnel){
         setSelectedSeats([...selectedSeats, seat]);
-        setPickCount(item=> item +=1)
-        console.log(pickCount)
+        console.log(selectedSeats.length)
         console.log(personnel)
       }else{
         alert("선택한 인원수보다 선택한 좌석이 많습니다")

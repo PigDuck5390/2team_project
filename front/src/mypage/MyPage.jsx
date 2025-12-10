@@ -30,20 +30,16 @@ function MyPage() {
     //예매 내역
     useEffect(() => {
         fetch(`http://localhost:3000/seatlist/${location.state.id}`)
-            .then(response => response.json())
+            .then(res => res.json())
             .then(data => setSeatData(data))
     }, [location.state.id]);
 
+    //포인트 
     useEffect(() => {
-        fetch(`http://localhost:3000/point/update/${location.state.id}`, {
-            method: "PUT"
+        fetch(`http://localhost:3000/point/${location.state.id}`, {
         })
             .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    setPoint(data.point);
-                }
-            });
+            .then(data => setPoint(data));
     }, [location.state.id]);
 
     function movieRank() {

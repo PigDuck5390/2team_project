@@ -1,0 +1,99 @@
+/* 전체 컨테이너 */
+.payment-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    font-family: "Pretendard", sans-serif;
+}
+
+.payment-container h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* 결제 정보 박스 */
+.pay-box {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 1px solid #e0e0e0;
+}
+
+.pay-box p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+/* 카드 선택 섹션 */
+.payment-section {
+    margin-top: 30px;
+}
+
+.paycard-title {
+    font-size: 22px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* 카드 리스트 레이아웃 */
+.paycard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 카드 박스 하나 */
+.paycard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    border-radius: 12px;
+    border: 2px solid #dcdcdc;
+    background: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.paycard-item:hover {
+    border-color: #e99426;
+    background: #f0f7ff;
+}
+
+/* 선택된 카드 */
+.selected-card {
+    border-color: #da8405;
+    background: #e7f1ff;
+}
+
+/* 카드 내부 텍스트 */
+.paycard-info span {
+    font-size: 15px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* 결제하기 버튼 */
+.pay-btn {
+    width: 100%;
+    margin-top: 30px;
+    padding: 15px 0;
+    background: #d8860c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.pay-btn:hover {
+    background: #a05704;
+}

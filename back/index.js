@@ -52,19 +52,25 @@ app.get("/seatlist/:id", async (req, res) => {
   res.send(data);
 })
 
-//영화 포인트 조회 및 수정
-app.put("/point/update/:id", async (req, res) => {
-    const [rows] = await pool.query(
-      "SELECT COUNT(*) AS cnt FROM seat WHERE user_id=?",
-      [req.params.id]
-    );
-    const point = Number(rows.cnt) * 10;
-    await pool.query(
-      "UPDATE user SET point=? WHERE id=?",
-      [point, req.params.id]
-    );
-    res.send({ success: true, point });
+//영화 포인트 조회
+app.get("/point/:id", async (req, res) => {
+  const [rows] = await pool.query(
+    "SELECT point FROM user WHERE id=?",
+    [req.params.id]
+  );
+  res.json(rows.point);
 });
+
+//영화 포인트 수정
+app.put("/point/add/:id", async (req, res) => {
+  const addPoint = req.body.addPoint;
+  await pool.query(
+    "UPDATE user SET point = point + ? WHERE id = ?",
+    [addPoint, req.params.id]
+  );
+  res.json({ success: true, added: addPoint });
+});
+
 
 //영화정보 호출
 app.get('/movies', async (req, res) => {
@@ -83,9 +89,10 @@ app.get('/movieinfo', async (req, res) => {
 //신규 예매
 app.post('/reserv', async (req, res) => {
   await pool.query(
-    'INSERT INTO seat (seat_num, user_id, date, time, movie_name, userName, screen_num) VALUE (?,?,?,?,?,?,?)',
-    [req.body.seat, req.body.userId, req.body.date, req.body.movieTime, req.body.movieName, req.body.userName, req.body.screen]
+    'INSERT INTO seat (seat_num, user_id, date, time, movie_name, userName, screen_num, pickcount) VALUE (?,?,?,?,?,?,?,?)',
+    [req.body.seat, req.body.userId, req.body.date, req.body.movieTime, req.body.movieName, req.body.userName, req.body.screen, req.body.pickcount]
   )
+  res.json({ success: true })
 })
 
 //회원가입
@@ -159,13 +166,13 @@ app.get('/benefitinfo', async (req, res) => {
 })
 
 app.get('/cardinfo/:id', async (req, res) => {
-  const data = await pool.query("SELECT * FROM user_card WHERE user_defid = ?",
-    [req.body.id]
+  const data = await pool.query("SELECT * FROM user_card WHERE user_id = ?",
+    [req.params.id]
   )
   res.send(data)
 })
 
 //서버 실행
-app.listen(3000,() => {
+app.listen(3000, () => {
   console.log('서버 실행')
 })
