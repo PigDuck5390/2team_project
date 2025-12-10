@@ -31,12 +31,19 @@ function Seat(){
     }, []);
 
     useEffect(()=>{
-      setReservedSeats(seatData.filter(item=>
-        item.movie_name == reservInfo.title &&
-        item.screen_num == reservInfo.screen &&
-        item.date.split('T')[0] == reservInfo.date.split('T')[0] &&
-        item.time == reservInfo.time)
-        .map(item=>item.seat_num))
+        const seatNums = seatData.filter(item =>
+          item.movie_name == reservInfo.title &&
+          item.screen_num == reservInfo.screen &&
+          item.date.split('T')[0] == reservInfo.date.split('T')[0] &&
+          item.time == reservInfo.time
+          )
+          .flatMap(item =>
+            item.seat_num.includes(',') 
+              ? item.seat_num.split(',') 
+              : [item.seat_num]
+          )
+        setReservedSeats(seatNums)
+        console.log(seatNums)
     },[seatData])
 
     const [selectedSeats, setSelectedSeats] = useState([]);
@@ -99,7 +106,7 @@ function Seat(){
       }
     }
 
-    
+
     return(
       <>
         <MainHeader />

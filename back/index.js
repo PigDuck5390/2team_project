@@ -52,15 +52,7 @@ app.get("/seatlist/:id", async (req, res) => {
   res.send(data);
 })
 
-// 영화 포인트
-app.put("/point/:id", async (req, res) => {
-  const [rows] = await pool.query("UPDATE user SET point=? WHERE user_id=?",
-    [req.params.id]
-  );
-  const data = Number(rows.cnt);
-  res.send(data);
-})
-
+//영화 포인트 조회 및 수정
 app.put("/point/update/:id", async (req, res) => {
     const [rows] = await pool.query(
       "SELECT COUNT(*) AS cnt FROM seat WHERE user_id=?",
@@ -73,7 +65,6 @@ app.put("/point/update/:id", async (req, res) => {
     );
     res.send({ success: true, point });
 });
-
 
 //영화정보 호출
 app.get('/movies', async (req, res) => {
@@ -93,7 +84,8 @@ app.get('/movieinfo', async (req, res) => {
 app.post('/reserv', async (req, res) => {
   await pool.query(
     'INSERT INTO seat (seat_num, user_id, date, time, movie_name, userName, screen_num) VALUE (?,?,?,?,?,?,?)',
-    [req.body.seat, req.body.userId, req.body.date, req.body.movieTime, req.body.movieName, req.body.userName, req.body.screen])
+    [req.body.seat, req.body.userId, req.body.date, req.body.movieTime, req.body.movieName, req.body.userName, req.body.screen]
+  )
 })
 
 //회원가입
@@ -148,6 +140,7 @@ app.delete('/carddelete', async (req, res) => {
   )
 })
 
+//카드 별명 수정
 app.put('/cardnameupdate', async (req, res) => {
   await pool.query("UPDATE user_card SET card_name = ? WHERE card_defid = ?",
     [req.body.cardName, req.body.cardId]

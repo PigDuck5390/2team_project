@@ -34,13 +34,6 @@ function MyPage() {
             .then(data => setSeatData(data))
     }, [location.state.id]);
 
-    //포인트
-    useEffect(() => {
-        fetch(`http://localhost:3000/point/${location.state.id}`)
-            .then(res => res.json())
-            .then(data => setPoint(data));
-    }, [location.state.id]);
-
     useEffect(() => {
         fetch(`http://localhost:3000/point/update/${location.state.id}`, {
             method: "PUT"
