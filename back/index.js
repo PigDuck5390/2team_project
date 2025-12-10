@@ -95,8 +95,8 @@ app.get('/movieinfo', async (req, res) => {
 //신규 예매
 app.post('/reserv', async (req, res) => {
   await pool.query(
-    'INSERT INTO seat (seat_num, user_id, date, time, movie_name, userName, screen_num, pickcount) VALUE (?,?,?,?,?,?,?,?)',
-    [req.body.seat, req.body.userId, req.body.date, req.body.movieTime, req.body.movieName, req.body.userName, req.body.screen, req.body.pickcount]
+    'INSERT INTO seat (seat_num, user_id, date, time, movie_name, userName, screen_num, pickcount, card_num, card_bank, card_date) VALUE (?,?,?,?,?,?,?,?,?,?,?)',
+    [req.body.seat, req.body.userId, req.body.date, req.body.movieTime, req.body.movieName, req.body.userName, req.body.screen, req.body.pickcount,req.body.cardNumber,req.body.cardBank,req.body.cardDate]
   )
   res.json({ success: true })
 })
