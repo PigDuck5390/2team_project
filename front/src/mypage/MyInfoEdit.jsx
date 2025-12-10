@@ -83,6 +83,7 @@ function MyInfo() {
         } 
     })
     };
+    
 
     //카드 등록
     function cardSubmit() {

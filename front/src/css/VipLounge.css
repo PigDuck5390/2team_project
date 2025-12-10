@@ -96,7 +96,7 @@
     border: 1px solid #ddd;
     border-radius: 12px;
     padding: 12px;
-    height: 380px;
+    height: 680px;
     overflow-y: auto;
     background: #f8f9fb;
     margin-bottom: 16px;
@@ -152,7 +152,7 @@
     background: #a05704;
 }
 
-/* 한 메시지 행 */
+/* 메시지 행 */
 .chat-msg-row {
     display: flex;
     align-items: flex-start;
@@ -160,15 +160,19 @@
     margin-bottom: 12px;
 }
 
-/* 프로필 이미지 */
-.chat-profile-img {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    object-fit: cover;
+/* 상대 메시지 (왼쪽) */
+.chat-msg-row.other {
+    justify-content: flex-start;
+    flex-direction: row;
 }
 
-/* 말풍선 전체 */
+/* 내 메시지 (오른쪽) */
+.chat-msg-row.mine {
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+}
+
+/* 말풍선 */
 .chat-bubble {
     background: #ffffff;
     border-radius: 10px;
@@ -177,16 +181,104 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* 이름 */
+/* 내 말풍선 색 + 텍스트 오른쪽 */
+.chat-bubble.my-bubble {
+    background: #d4ecff;
+    text-align: right;
+}
+
+/* 이름 부분 오른쪽 정렬 */
+.chat-msg-row.mine .chat-name {
+    text-align: right;
+}
+
+/* 말풍선을 오른쪽 끝에 붙이기 */
+.chat-msg-row.mine .chat-bubble {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+/* 프로필 이미지는 그대로 */
+.chat-profile-img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .chat-name {
-    font-size: 13px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 3px;
+    font-weight: bolder;
 }
 
 /* 메시지 내용 */
 .chat-text {
     font-size: 15px;
     color: #222;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    margin-bottom: 10px;
 }
+
+/* 기본 채팅 행 */
+.chat-msg-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+/* 상대방 메시지 (왼쪽) */
+.chat-msg-row.other {
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+/* 내 메시지 (오른쪽) */
+.chat-msg-row.mine {
+    justify-content: flex-end;
+    flex-direction: row; /* 기본 row 유지 → 순서를 직접 제어 */
+}
+
+/* 프로필 이미지 */
+.chat-msg-row .chat-profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* 내 메시지: 프로필이 오른쪽으로 가도록 순서 재배치 */
+.chat-msg-row.mine .chat-profile-img {
+    order: 2; /* 프로필을 맨 오른쪽으로 */
+}
+
+.chat-msg-row.mine .chat-bubble {
+    order: 1; /* 말풍선을 프로필 왼쪽으로 */
+    margin-left: auto; /* 오른쪽 끝 고정 */
+}
+
+/* 내 메시지 스타일 */
+.chat-bubble.my-bubble {
+    background: #d4ecff;
+    text-align: right;
+}
+
+/* 시간 표시 텍스트 */
+.chat-time {
+    font-size: 11px;
+    color: #888;
+    margin-top: 4px;
+    text-align: right;
+}
+
+/* 내 메시지는 오른쪽 정렬 유지 */
+.chat-msg-row.mine .chat-time {
+    text-align: right;
+}
+
+/* 상대 메시지는 왼쪽 정렬 */
+.chat-msg-row.other .chat-time {
+    text-align: left;
+}
+

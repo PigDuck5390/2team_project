@@ -100,7 +100,14 @@ function MainHeader() {
       alert("영화 더 보고 오세요!");
     }
   }
-
+  function moveService() {
+    navigate("/service", {
+      state: {
+        name: userInfo?.name,
+        id: userInfo?.id
+      }
+    })
+  }
 
 
   const headerRightContent = loggedInId ? (
@@ -124,7 +131,7 @@ function MainHeader() {
           <div className="header-top-left">
             <span onClick={moveVip}>VIP LOUNGE</span>
             <span>멤버십</span>
-            <span>고객센터</span>
+            <span onClick={moveService}>고객센터</span>
           </div>
           <div className="header-top-right">
             {headerRightContent}

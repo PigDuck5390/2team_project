@@ -13,6 +13,7 @@ import MyInfo from './mypage/MyInfoEdit.jsx'
 import MyReserve from './mypage/MyReserve.jsx'
 import Payment from './components/Payment.jsx'
 import VipLounge from './Main/VipLounge.jsx'
+import Service from './Main/Service.jsx'
 
 
 
@@ -40,6 +41,7 @@ function App() {
         <Route path='/myinfo' element={<MyInfo />}/>
         <Route path='/myreserve' element={<MyReserve />}/>
         <Route path='/viplounge' element={<VipLounge />}/>
+        <Route path='/service' element={<Service />}/>
         <Route path='/payment/:title/:time/:date/:screen/:seats' element={<Payment />}/>
 
 

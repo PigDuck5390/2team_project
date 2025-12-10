@@ -19,6 +19,10 @@ function VipLounge() {
 
     const wsRef = useRef(null);
     const chatBoxRef = useRef(null);
+    const isImageUrl = (text) =>
+        typeof text === "string" &&
+        /(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))/i.test(text);
+
 
     useEffect(() => {
         if (!userName || !userId) {
@@ -93,7 +97,7 @@ function VipLounge() {
             chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
         }
     }, [messages]);
-    
+
 
     return (
         <>
@@ -125,22 +129,45 @@ function VipLounge() {
                 {/* 채팅 영역 */}
                 <section className="vip-chat-section">
                     <div className="vip-chat-box" ref={chatBoxRef}>
-                        {messages.map((m, idx) => (
-                            <div key={idx} className="chat-msg-row">
+                        {messages.map((m, idx) => {
+                            const isMine = m.userId === userId;
 
-                                <img
-                                    src={m.profile || defaultProfile}
-                                    className="chat-profile-img"
-                                    alt="프사"
-                                />
+                            return (
+                                <div
+                                    key={idx}
+                                    className={`chat-msg-row ${isMine ? "mine" : "other"}`}
+                                >
 
-                                <div className="chat-bubble">
-                                    <div className="chat-name">{m.sender}</div>
-                                    <div className="chat-text">{m.message}</div>
+                                    {!isMine && (
+                                        <img
+                                            src={m.profile || defaultProfile}
+                                            className="chat-profile-img"
+                                            alt="프사"
+                                        />
+                                    )}
+
+                                    <div className={`chat-bubble ${isMine ? "my-bubble" : ""}`}>
+                                        <div className="chat-name">{m.sender}</div>
+
+                                        {!isImageUrl(m.message) && <div className="chat-text">{m.message}</div>}
+                                        <div className="chat-time">{m.time}</div>
+                                        {isImageUrl(m.message) && (
+                                            <img src={m.message} className="chat-img" />
+                                        )}
+                                    </div>
+
+                                    {isMine && (
+                                        <img
+                                            src={m.profile || defaultProfile}
+                                            className="chat-profile-img"
+                                            alt="프사"
+                                        />
+                                    )}
+
                                 </div>
+                            );
+                        })}
 
-                            </div>
-                        ))}
                     </div>
 
                     <div className="vip-input-row">
