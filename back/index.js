@@ -165,6 +165,13 @@ app.get('/benefitinfo', async (req, res) => {
   res.send(data)
 })
 
+app.get('/cardinfo/:id', async (req, res) => {
+  const data = await pool.query("SELECT * FROM user_card WHERE user_defid = ?",
+    [req.body.id]
+  )
+  res.send(data)
+})
+
 //서버 실행
 app.listen(3000,() => {
   console.log('서버 실행')
