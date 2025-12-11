@@ -8,7 +8,7 @@ function ManageUser() {
     const [userData, setUserData] = useState([])
 
     useEffect(() => {
-        fetch("http://192.168.0.227:3000/userinfo")
+        fetch("http://192.168.0.228:3000/userinfo")
             .then(response => response.json())
             .then(data => setUserData(data))
     }, [userData])
@@ -19,7 +19,7 @@ function ManageUser() {
         if (!confirm) {
             return;
         }
-        fetch(`http://192.168.0.227:3000/deleteuser`, {
+        fetch(`http://192.168.0.228:3000/deleteuser`, {
             method: "DELETE"
             , headers: {
                 "Content-Type": "application/json"
@@ -35,7 +35,7 @@ function ManageUser() {
         if (!confirm) {
             return;
         }
-        fetch(`http://192.168.0.227:3000/setdefaultprofile`, {
+        fetch(`http://192.168.0.228:3000/setdefaultprofile`, {
             method: "PUT"
             , headers: {
                 "Content-Type": "application/json"
@@ -51,7 +51,7 @@ function ManageUser() {
             alert("내용이 입력되지 않았습니다.")
             return
         }
-        fetch('http://192.168.0.227:3000/userupdate', {
+        fetch('http://192.168.0.228:3000/userupdate', {
             method: "PUT",
             headers: { "content-type": "application/json" },
             body: JSON.stringify({
@@ -89,7 +89,7 @@ function ManageUser() {
                                     <img
                                         className="admin-user-profile-img"
                                         src={`${item.profile ?
-                                            `http://192.168.0.227:3000${item.profile}` : baseImg}`}
+                                            `http://192.168.0.228:3000${item.profile}` : baseImg}`}
                                         alt={item.profile_name}
                                     />
                                     <button

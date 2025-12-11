@@ -12,7 +12,7 @@ function Admin() {
     const [adminData, setAdminData] = useState([])
 
     useEffect(() => {
-        fetch("http://192.168.0.227:3000/admin")
+        fetch("http://192.168.0.228:3000/admin")
             .then(response => response.json())
             .then(data => setAdminData(data))
     }, [])

@@ -7,7 +7,7 @@ function ManageEvent() {
 
     //이벤트 정보 조회
     useEffect(() => {
-        fetch("http://192.168.0.227:3000/eventinfo")
+        fetch("http://192.168.0.228:3000/eventinfo")
             .then(response => response.json())
             .then(data => setEventData(data))
     }, [eventData])
@@ -21,14 +21,14 @@ function ManageEvent() {
         for (let i = 0; i < newImg.length; i++) {
             formData.append('eventPoster', newImg[i])
         }
-        fetch('http://192.168.0.227:3000/event/add', {
+        fetch('http://192.168.0.228:3000/event/add', {
             method: "POST",
             body: formData
         })
     }
 
     function posterDel(defid) {
-        fetch('http://192.168.0.227:3000/event/delete', {
+        fetch('http://192.168.0.228:3000/event/delete', {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ function ManageEvent() {
                                 <div className="admin-card-image-wrap">
                                     <img
                                         className="admin-card-image"
-                                        src={`http://192.168.0.227:3000${item.poster_path}`}
+                                        src={`http://192.168.0.228:3000${item.poster_path}`}
                                         alt={item.poster_name}
                                     />
                                 </div>

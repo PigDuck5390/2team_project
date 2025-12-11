@@ -36,7 +36,7 @@ function MainHeader() {
 
   useEffect(() => {
     if (!userInfo?.id) return;
-    fetch(`http://192.168.0.227:3000/point/${userInfo.id}`)
+    fetch(`http://192.168.0.228:3000/point/${userInfo.id}`)
       .then(res => res.json())
       .then(data => {
         setPoint(data);
