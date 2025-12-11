@@ -19,27 +19,27 @@ function MyPage() {
     useEffect(() => {
         setLoggedInName(userInfo.name);
 
-        fetch(`http://192.168.0.227:3000/userprofile/${userInfo.id}`)
+        fetch(`http://192.168.0.228:3000/userprofile/${userInfo.id}`)
             .then(res => res.json())
             .then(data => {
                 const profilePath = Array.isArray(data) && data.length > 0
                     ? data[0].profile : null;
                 if (profilePath) {
-                    setProfileImg(`http://192.168.0.227:3000${profilePath}`);
+                    setProfileImg(`http://192.168.0.228:3000${profilePath}`);
                 }
             });
     }, [userInfo?.id]);
 
     //예매 내역 조회
     useEffect(() => {
-        fetch(`http://192.168.0.227:3000/seatlist/${userInfo.id}`)
+        fetch(`http://192.168.0.228:3000/seatlist/${userInfo.id}`)
             .then(res => res.json())
             .then(data => setSeatData(data))
     }, [userInfo.id]);
 
     //포인트 
     useEffect(() => {
-        fetch(`http://192.168.0.227:3000/point/${userInfo.id}`, {
+        fetch(`http://192.168.0.228:3000/point/${userInfo.id}`, {
         })
             .then(res => res.json())
             .then(data => setPoint(data));
@@ -68,7 +68,7 @@ function MyPage() {
         formData.append("profile", file);
         formData.append("userId", userInfo.id);
 
-        const res = await fetch("http://192.168.0.227:3000/updateProfile", {
+        const res = await fetch("http://192.168.0.228:3000/updateProfile", {
             method: "PUT",
             body: formData
                 }
@@ -77,7 +77,7 @@ function MyPage() {
         const data = await res.json();
 
         if (data.success) {
-            setProfileImg(`http://192.168.0.227:3000${data.profile}`);
+            setProfileImg(`http://192.168.0.228:3000${data.profile}`);
         } else {
             alert("업로드 실패");
         }

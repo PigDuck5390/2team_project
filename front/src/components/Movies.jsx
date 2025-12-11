@@ -12,14 +12,14 @@ function Movies() {
 
   // 영화 리스트 불러오기
   useEffect(() => {
-    fetch("http://192.168.0.227:3000/movies")
+    fetch("http://192.168.0.228:3000/movies")
       .then((res) => res.json())
       .then((data) => setMovies(data));
   }, []);
 
   // 영화 정보 불러오기
   useEffect(() => {
-    fetch("http://192.168.0.227:3000/movieinfo")
+    fetch("http://192.168.0.228:3000/movieinfo")
       .then((response) => response.json())
       .then((data) => setMovieData(data));
   }, []);
@@ -69,7 +69,7 @@ function Movies() {
           >
             <div className="movie-poster-box">
               <img
-                src={`http://192.168.0.227:3000${movie.poster}`}
+                src={`http://192.168.0.228:3000${movie.poster}`}
                 alt={movie.title}
               />
             </div>
@@ -82,7 +82,7 @@ function Movies() {
               <div className="movie-extra-box">
                 <img
                   className="chart"
-                  src={`http://192.168.0.227:3000${movie.graph_path}`}
+                  src={`http://192.168.0.228:3000${movie.graph_path}`}
                   alt={movie.title}
                 />
               </div>

@@ -79,7 +79,6 @@ app.put("/point/add/:id", async (req, res) => {
 
 //영화 예매누적
 app.put("/reservcount", async (req, res) => {
-  console.log(req.body)
   const addPoint = req.body.addCount;
   await pool.query(
     "UPDATE movie_info SET reserv_count = reserv_count + ? WHERE movie_id = ?",
