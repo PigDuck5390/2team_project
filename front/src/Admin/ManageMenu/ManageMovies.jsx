@@ -1,11 +1,15 @@
 import ManagementHead from '../ManagementHead.jsx'
 import { useState, useEffect } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
+
 
 function ManageMovies() {
 
     const [movieData, setMovieData] = useState([])
     const [newMovieData, setNewMovieData] = useState({})
 
+    const navigate = useNavigate();
+    
     useEffect(() => {
         fetch("http://192.168.0.228:3000/movies")
             .then(response => response.json())
@@ -52,6 +56,9 @@ function ManageMovies() {
             method: "POST",
             body: formData
         })
+        alert("영화가 추가되었습니다.")
+        setNewMovieData({})
+        window.location.reload();
     }
 
     return (

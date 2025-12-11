@@ -3,6 +3,10 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import '../css/Main.css'
 
+import cgv from '../img/cgv 소형 아이콘.png'
+import lotte from '../img/롯데시네마 소형아이콘.png'
+import megabox from '../img/메가박스 소형 아이콘.png'
+
 function Main() {
   const navigate = useNavigate();
 
@@ -183,6 +187,16 @@ function Main() {
             aria-label="다음 페이지"
           />
         </div>
+
+        {/* ===== 짜치는 협력사 아이콘 ===== */}
+        <div className="cinema-wrapper">
+          <span className="cinema-label">협력사 : </span>
+          <img src={cgv} className="cinema-icon"/>
+          <img src={lotte} className="cinema-icon"/>
+          <img src={megabox} className="cinema-icon"/>
+
+        </div>
+        
       </main>
     </>
   );

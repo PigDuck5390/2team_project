@@ -23,6 +23,7 @@ import ManageMovies from './Admin/ManageMenu/ManageMovies.jsx'
 import ManageReserv from './Admin/ManageMenu/ManageReserv.jsx'
 import ManageUser from './Admin/ManageMenu/ManageUser.jsx'
 
+import Ghost from './Main/ghost.jsx'
 
 import './App.css'
 
@@ -55,6 +56,8 @@ function App() {
         <Route path='/admin/management/movies' element={<ManageMovies />}/>
         <Route path='/admin/management/reserv' element={<ManageReserv />}/>
         <Route path='/admin/management/user' element={<ManageUser />}/>
+
+        <Route path='/hey' element={<Ghost />}/>
 
       </Routes>
     </BrowserRouter>

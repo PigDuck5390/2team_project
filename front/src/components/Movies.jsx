@@ -80,11 +80,8 @@ function Movies() {
               <p className="movie-meta">러닝타임 : {movie.runtime}분</p>
 
               <div className="movie-extra-box">
-                <img
-                  className="chart"
-                  src={`http://192.168.0.228:3000${movie.graph_path}`}
-                  alt={movie.title}
-                />
+                <p className="movie-meta">예매누적수 : 
+                  {movie.reserv_count}명</p>
               </div>
             </div>
           </section>

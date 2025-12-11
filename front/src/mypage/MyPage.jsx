@@ -28,14 +28,14 @@ function MyPage() {
                     setProfileImg(`http://192.168.0.228:3000${profilePath}`);
                 }
             });
-    }, [userInfo?.id]);
+    }, []);
 
     //예매 내역 조회
     useEffect(() => {
         fetch(`http://192.168.0.228:3000/seatlist/${userInfo.id}`)
             .then(res => res.json())
             .then(data => setSeatData(data))
-    }, [userInfo.id]);
+    }, []);
 
     //포인트 
     useEffect(() => {
@@ -43,7 +43,8 @@ function MyPage() {
         })
             .then(res => res.json())
             .then(data => setPoint(data));
-    }, [userInfo.id]);
+    }, []);
+
     //포인트별 등급
     function movieRank() {
         if (point >= 1000) {

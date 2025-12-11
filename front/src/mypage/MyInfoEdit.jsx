@@ -102,28 +102,46 @@ function MyInfo() {
     //카드 등록
     function cardSubmit() {
         const user = userData.find(item=>item.id == userInfo.id)
-        fetch("http://192.168.0.228:3000/newcard",{
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                card: newCard,
-                cardDate: newCardDate,
-                userId: userInfo.id,
-                defid: user.defid,
-                bank: bank,
-                name: newCardName
-            })
+
+        const cardRegex = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
+        const cardDateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
+
+        if(cardRegex.test(newCard)){
+            if(cardDateRegex.test(newCardDate)){
+                if(!bank == ""){
+                    fetch("http://192.168.0.228:3000/newcard",{
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        card: newCard,
+                        cardDate: newCardDate,
+                        userId: userInfo.id,
+                        defid: user.defid,
+                        bank: bank,
+                        name: newCardName
+                        })
+                    }
+                    )
+                    alert("카드 등록이 완료되었습니다.")
+                    setNewCardName("")
+                    setNewCard("")  
+                    setNewCardDate("")
+                    navigate('/myinfo', {
+                        state: {
+                            name: userInfo.name,
+                            id: userInfo.id
+                    }
+                    })
+                }else{
+                    alert("은행을 선택해주세요.")
+                }
+            }else {
+                    alert("유효기간에 '/' 포함하여 올바르게 입력해주세요.")
+                }
+        }else{
+            alert("카드 번호에 '-' 포함하여 올바르게 입력해주세요.")
         }
-        )
-        alert("카드 등록이 완료되었습니다.")
-        setNewCard("")
-        setNewCardDate("")
-        navigate('/myinfo', {
-            state: {
-                name: userInfo.name,
-                id: userInfo.id
-            }
-        })
+        
     }
 
     //카드 별명 수정

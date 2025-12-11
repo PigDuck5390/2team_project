@@ -14,12 +14,14 @@ app.use('/upload', express.static(path.join(__dirname, 'upload')));
 //신규 파일 저장경로 및 파일명 규칙 선언
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    if(req.path === '/benefit/add'){
+    if(req.path == '/benefit/add'){
       cb(null, path.join(__dirname, 'upload', 'benefit'))
-    }else if (req.path === '/updateProfile'){
+    }else if (req.path == '/updateProfile'){
       cb(null, path.join(__dirname, 'upload', 'profile'))
-    }else if (req.path === '/event/add'){
+    }else if (req.path == '/event/add'){
       cb(null, path.join(__dirname, 'upload', 'event'))
+    }else if (req.path == '/movies/add'){
+      cb(null, path.join(__dirname, 'upload', 'poster'))
     }
   },
   filename: (req, file, cb) => {
@@ -112,7 +114,7 @@ app.post('/reserv', async (req, res) => {
 //회원가입
 app.post('/join', async (req, res) => {
   await pool.query('INSERT INTO user (name, id, pw, point) VALUES (?,?,?,?)',
-    [req.body.userName, req.body.userId, req.body.userPw, 500]
+    [req.body.userName, req.body.userId, req.body.userPw, 490]
   )
 })
 
@@ -218,7 +220,7 @@ app.delete('/movies/delete', async (req, res) => {
 
 //관리자 : 영화 추가
 app.post('/movies/add', upload.single('poster'), async (req, res) => {
-  const filePath = `/upload/profile/${req.file.filename}`;
+  const filePath = `/upload/poster/${req.file.filename}`;
   await pool.query(
     'INSERT INTO movie_info (screen_number, title, description, short_description, poster, runtime, start_time1, start_time2, start_time3, start_time4, start_time5, start_time6, start_time7, start_time8, start_time9) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
     [req.body.screen_number, req.body.title, req.body.description, req.body.short_description, filePath, req.body.runtime, req.body.start_time1, req.body.start_time2, req.body.start_time3, req.body.start_time4, req.body.start_time5, req.body.start_time6, req.body.start_time7, req.body.start_time8, req.body.start_time9]
