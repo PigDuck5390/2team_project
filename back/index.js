@@ -142,6 +142,12 @@ app.put('/changePassword', async (req, res) => {
   )
 })
 
+app.put('/changeName', async (req, res) => {
+  await pool.query("UPDATE user SET name = ? WHERE id =?",
+    [req.body.newName, req.body.userId]
+  )
+})
+
 //카드 신규 등록
 app.post('/newcard', async (req, res) => {
   await pool.query(

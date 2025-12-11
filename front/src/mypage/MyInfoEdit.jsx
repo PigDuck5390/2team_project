@@ -1,14 +1,16 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import MainHeader from "../Main/MainHeader";
 import "../css/MyInfoEdit.css";
 
 function MyInfo() {
-    const { state : userInfo } = useLocation();
+    const { state: userInfo } = useLocation();
     const navigate = useNavigate();
 
     const [newPw, setNewPw] = useState("");
     const [confirmPw, setConfirmPw] = useState("");
+    const [newName, setNewName] = useState("");
+    const [confirmName, setConfirmName] = useState("");
     const [newCardName, setNewCardName] = useState("")
     const [newCard, setNewCard] = useState("")
     const [newCardDate, setNewCardDate] = useState("")
@@ -17,21 +19,21 @@ function MyInfo() {
     const [bank, setBank] = useState("")
 
     //유저정보 조회
-    useEffect(()=>{
+    useEffect(() => {
         fetch("http://192.168.0.227:3000/userinfo")
-        .then(response=>response.json())
-        .then(data=>setUserData(data))
-    },[userData])
+            .then(response => response.json())
+            .then(data => setUserData(data))
+    }, [userData])
 
     //카드정보 조회
-    useEffect(()=>{
+    useEffect(() => {
         fetch("http://192.168.0.227:3000/cardinfo")
-        .then(response => response.json())
-        .then(data=>setCardData(data))
-    },[cardData])
+            .then(response => response.json())
+            .then(data => setCardData(data))
+    }, [cardData])
 
     //내 정보 이동
-    function goMyInfo(){
+    function goMyInfo() {
         navigate('/mypage', {
             state: {
                 name: userInfo.name,
@@ -41,7 +43,7 @@ function MyInfo() {
     };
 
     //예매내역 이동
-    function goReserve(){
+    function goReserve() {
         navigate('/myreserve', {
             state: {
                 name: userInfo.name,
@@ -51,7 +53,7 @@ function MyInfo() {
     };
 
     //비밀번호 변경
-    function handleChangePassword(){
+    function handleChangePassword() {
         if (newPw !== confirmPw) {
             alert("비밀번호 확인이 일치하지 않습니다.");
             return;
@@ -65,46 +67,72 @@ function MyInfo() {
             })
         })
         alert("비밀번호가 변경되었습니다. 다시 로그인해주세요.")
-        navigate('/', { state : {
-            name: null,
-            id: null
-        } 
-    })
+        navigate('/', {
+            state: {
+                name: null,
+                id: null
+            }
+        })
     };
-    
+
+    //이름 변경
+    function handleChangeName() {
+        if (newName !== confirmName) {
+            alert("이름이 일치하지 않습니다.");
+            return;
+        }
+        fetch("http://192.168.0.227:3000/changeName", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                userId: userInfo.id,
+                newName: newName
+            })
+        })
+        alert("이름이 변경되었습니다. 다시 로그인해주세요.")
+        navigate('/', {
+            state: {
+                name: null,
+                id: null
+            }
+        })
+    };
+
 
     //카드 등록
     function cardSubmit() {
-        const user = userData.find(item=>item.id == userInfo.id)
-        fetch("http://192.168.0.227:3000/newcard",{
+        const user = userData.find(item => item.id == userInfo.id)
+        fetch("http://192.168.0.227:3000/newcard", {
             method: "POST",
-            headers:{"Content-Type" : "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                card : newCard,
-                cardDate : newCardDate,
-                userId : userInfo.id,
-                defid : user.defid,
+                card: newCard,
+                cardDate: newCardDate,
+                userId: userInfo.id,
+                defid: user.defid,
                 bank: bank,
-                name : newCardName
+                name: newCardName
             })
         }
         )
         alert("카드 등록이 완료되었습니다.")
         setNewCard("")
         setNewCardDate("")
-        navigate('/myinfo', { state : {
-            name: userInfo.name,
-            id: userInfo.id
-        }})
+        navigate('/myinfo', {
+            state: {
+                name: userInfo.name,
+                id: userInfo.id
+            }
+        })
     }
 
     //카드 별명 수정
-    function cardNameEdit(defid, name){
+    function cardNameEdit(defid, name) {
         const newName = prompt("새로운 카드 별명을 입력해주세요.", name)
-        if(newName){
-            fetch("http://192.168.0.227:3000/cardnameupdate",{
-                method:"PUT",
-                headers:{"content-type":"application/json"},
+        if (newName) {
+            fetch("http://192.168.0.227:3000/cardnameupdate", {
+                method: "PUT",
+                headers: { "content-type": "application/json" },
                 body: JSON.stringify({
                     cardId: defid,
                     cardName: newName
@@ -114,13 +142,13 @@ function MyInfo() {
     }
 
     //카드 삭제
-    function cardDelete(defid){
+    function cardDelete(defid) {
         const yes = confirm("진짜 지울거니?")
-        if(yes){
-            fetch("http://192.168.0.227:3000/carddelete",{
-            method: "DELETE",
-            headers:{"content-type":'application/json'},
-            body: JSON.stringify({defid : defid})
+        if (yes) {
+            fetch("http://192.168.0.227:3000/carddelete", {
+                method: "DELETE",
+                headers: { "content-type": 'application/json' },
+                body: JSON.stringify({ defid: defid })
             }
             )
         }
@@ -149,7 +177,35 @@ function MyInfo() {
                 <div className="myinfo-wrapper">
                     <h1 className="myinfo-title">개인정보 변경</h1>
                     <div className="myinfo-card">
+                        {/*사용자 이름 변경*/}
+                        <section className="info-section">
+                            <h2 className="section-title">이름 변경</h2>
+                            <div className="input-group">
 
+                                <label>새 이름</label>
+                                <input
+                                    value={newName}
+                                    onChange={(e) => setNewName(e.target.value)}
+                                    placeholder="새 이름 입력"
+                                />
+                            </div>
+
+                            <div className="input-group">
+
+                                <label>이름 확인</label>
+                                <input
+                                    value={confirmName}
+                                    onChange={(e) => setConfirmName(e.target.value)}
+                                    placeholder="이름 확인"
+                                />
+                            </div>
+
+                            <button className="submit-btn"
+                                onClick={handleChangeName}>
+                                변경하기
+                            </button>
+                        </section>
+                        
                         {/* 비밀번호 변경 */}
                         <section className="info-section">
                             <h2 className="section-title">비밀번호 변경</h2>
@@ -176,7 +232,7 @@ function MyInfo() {
                             </div>
 
                             <button className="submit-btn"
-                            onClick={handleChangePassword}>
+                                onClick={handleChangePassword}>
                                 변경하기
                             </button>
                         </section>
@@ -187,34 +243,34 @@ function MyInfo() {
 
                             <div className="input-group">
                                 <label>카드 별명</label>
-                                <input 
-                                type="text" 
-                                placeholder="카드 별명"
-                                value={newCardName} 
-                                onChange={(e)=>setNewCardName(e.target.value)}/>
+                                <input
+                                    type="text"
+                                    placeholder="카드 별명"
+                                    value={newCardName}
+                                    onChange={(e) => setNewCardName(e.target.value)} />
                             </div>
 
                             <div className="input-group">
                                 <label>카드 번호</label>
-                                <input 
-                                type="text" 
-                                placeholder="0000-0000-0000-0000"
-                                value={newCard} 
-                                onChange={(e)=>setNewCard(e.target.value)}/>
+                                <input
+                                    type="text"
+                                    placeholder="0000-0000-0000-0000"
+                                    value={newCard}
+                                    onChange={(e) => setNewCard(e.target.value)} />
                             </div>
 
                             <div className="input-group">
                                 <label>유효기간</label>
-                                <input 
-                                type="text" 
-                                placeholder="MM/YY"
-                                value={newCardDate}
-                                onChange={(e)=>setNewCardDate(e.target.value)} />
+                                <input
+                                    type="text"
+                                    placeholder="MM/YY"
+                                    value={newCardDate}
+                                    onChange={(e) => setNewCardDate(e.target.value)} />
                             </div>
-                            
-                              <div className="input-group">
+
+                            <div className="input-group">
                                 <label>카드사</label>
-                                <select value={bank} onChange={(e)=>setBank(e.target.value)}>
+                                <select value={bank} onChange={(e) => setBank(e.target.value)}>
                                     <option value="">은행 선택</option>
                                     <option value="국민은행">국민은행</option>
                                     <option value="신한은행">신한은행</option>
@@ -233,37 +289,37 @@ function MyInfo() {
 
                         {/* 카드 리스트 */}
                         <section className="info-section">
-                        <h2 className="section-title">내 카드</h2>
+                            <h2 className="section-title">내 카드</h2>
 
-                        <div className="card-list">
-                            {cardData
-                            .filter(item => item.user_id == userInfo.id)
-                            .map((item) => (
-                                <div className="card-item" key={item.card_defid}>
-                                
-                                <div className="card-top">
-                                    <span className="card-name">{item.card_name}</span>
+                            <div className="card-list">
+                                {cardData
+                                    .filter(item => item.user_id == userInfo.id)
+                                    .map((item) => (
+                                        <div className="card-item" key={item.card_defid}>
 
-                                    <button className="edit-btn"
-                                    onClick={() => cardNameEdit(item.card_defid, item.card_name)}>
-                                    카드 별명 수정
-                                    </button>
-                                </div>
+                                            <div className="card-top">
+                                                <span className="card-name">{item.card_name}</span>
 
-                                <div className="card-info">
-                                    <span>카드사 : {item.card_bank}</span><br/>
-                                    <span>카드 번호 : {item.card_num}</span><br/>
-                                    <span>만료일 : {item.card_date}</span><br/>
-                                </div>
+                                                <button className="edit-btn"
+                                                    onClick={() => cardNameEdit(item.card_defid, item.card_name)}>
+                                                    카드 별명 수정
+                                                </button>
+                                            </div>
 
-                                <button className="delete-btn"
-                                    onClick={() => cardDelete(item.card_defid)}>
-                                    삭제
-                                </button>
+                                            <div className="card-info">
+                                                <span>카드사 : {item.card_bank}</span><br />
+                                                <span>카드 번호 : {item.card_num}</span><br />
+                                                <span>만료일 : {item.card_date}</span><br />
+                                            </div>
 
-                                </div>
-                            ))}
-                        </div>
+                                            <button className="delete-btn"
+                                                onClick={() => cardDelete(item.card_defid)}>
+                                                삭제
+                                            </button>
+
+                                        </div>
+                                    ))}
+                            </div>
                         </section>
 
 
