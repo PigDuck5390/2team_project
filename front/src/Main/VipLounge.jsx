@@ -16,6 +16,7 @@ function VipLounge() {
 
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
+    const [zoomImg, setZoomImg] = useState(null);
 
     const wsRef = useRef(null);
     const chatBoxRef = useRef(null);
@@ -143,6 +144,7 @@ function VipLounge() {
                                             src={m.profile || defaultProfile}
                                             className="chat-profile-img"
                                             alt="프사"
+                                            onClick={() => setZoomImg(m.profile || defaultProfile)}
                                         />
                                     )}
 
@@ -161,6 +163,7 @@ function VipLounge() {
                                             src={m.profile || defaultProfile}
                                             className="chat-profile-img"
                                             alt="프사"
+                                            onClick={() => setZoomImg(m.profile || defaultProfile)}
                                         />
                                     )}
 
@@ -182,6 +185,12 @@ function VipLounge() {
                         </button>
                     </div>
                 </section>
+                {zoomImg && (
+                    <div className="zoom-overlay" onClick={() => setZoomImg(null)}>
+                        <img src={zoomImg} className="zoom-image" />
+                    </div>
+                )}
+
             </main>
         </>
     );

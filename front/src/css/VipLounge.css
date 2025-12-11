@@ -237,7 +237,8 @@
 /* 내 메시지 (오른쪽) */
 .chat-msg-row.mine {
     justify-content: flex-end;
-    flex-direction: row; /* 기본 row 유지 → 순서를 직접 제어 */
+    flex-direction: row;
+    /* 기본 row 유지 → 순서를 직접 제어 */
 }
 
 /* 프로필 이미지 */
@@ -250,12 +251,15 @@
 
 /* 내 메시지: 프로필이 오른쪽으로 가도록 순서 재배치 */
 .chat-msg-row.mine .chat-profile-img {
-    order: 2; /* 프로필을 맨 오른쪽으로 */
+    order: 2;
+    /* 프로필을 맨 오른쪽으로 */
 }
 
 .chat-msg-row.mine .chat-bubble {
-    order: 1; /* 말풍선을 프로필 왼쪽으로 */
-    margin-left: auto; /* 오른쪽 끝 고정 */
+    order: 1;
+    /* 말풍선을 프로필 왼쪽으로 */
+    margin-left: auto;
+    /* 오른쪽 끝 고정 */
 }
 
 /* 내 메시지 스타일 */
@@ -282,3 +286,39 @@
     text-align: left;
 }
 
+/* 전체 화면 어둡게 덮는 배경 */
+.zoom-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    cursor: zoom-out;
+}
+
+/* 확대된 이미지 */
+.zoom-image {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    animation: zoomIn 0.15s ease-out;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.6);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
