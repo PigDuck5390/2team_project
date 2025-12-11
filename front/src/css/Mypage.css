@@ -198,25 +198,19 @@
   border-radius: 10px;
 }
 
-/* 각 행 */
-.reserve-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.reserve-row:last-child {
-  margin-bottom: 0;
-}
-
 .label {
   font-size: 15px;
   font-weight: 600;
   color: #5a4635;
 }
 
-.value {
-  font-size: 15px;
-  font-weight: 500;
-  color: #3b2b20;
+.seat-row {
+  align-items: flex-start; /* 여러 줄일 때 위쪽 맞춤 */
+}
+
+.seat-value {
+  max-width: 80%;          /* 오른쪽 텍스트 영역 폭 제한 */
+  text-align: left;        /* 좌측 정렬(원하면 right로 바꿔도 OK) */
+  word-break: break-all;   /* 필요하면 글자 단위로 강제 줄바꿈 */
+  overflow-wrap: anywhere; /* 어디서든 줄바꿈 허용 */
 }

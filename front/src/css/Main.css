@@ -95,7 +95,8 @@
   padding: 8px 24px;
   display: flex;
   flex-direction: column;
-  row-gap: 40px;
+  row-gap: 30px;
+  height: 815px
 }
 
 /* 종이 질감 + 위/아래 여백 동일 */
@@ -128,11 +129,12 @@
 .movie-row {
   display: flex;
   align-items: flex-start;
-  gap: 28px;
+  gap: 26px;
 }
 
 /* 포스터 감싸는 박스 */
 .poster-wrap {
+  height: 400px;
   position: relative; /* rank-badge 기준점 */
   display: inline-block;
 }
@@ -140,7 +142,7 @@
 /* 포스터 이미지 */
 .poster-img {
   width: 260px;
-  height: auto;
+  min-height: 380px;
   border-radius: 6px;
   
 }

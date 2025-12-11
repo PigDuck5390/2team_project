@@ -259,8 +259,8 @@ function ManageReserv() {
                                     </button>
                                 </p>
 
-                                <p className="admin-text">
-                                    좌석 번호 : {item.seat_num}
+                                <p className="admin-text seat-row">
+                                    좌석 번호 : {item.seat_num.split(",").join(", ")}
                                     <button
                                         className="admin-button admin-button--tiny"
                                         onClick={(e) => reservEdit(

@@ -75,9 +75,9 @@ function MyReserve() {
                                             <span className="value">{item.screen_num}관</span>
                                         </div>
 
-                                        <div className="reserve-row">
+                                        <div className="reserve-row seat-row">
                                             <span className="label">좌석</span>
-                                            <span className="value">{item.seat_num}</span>
+                                            <span className="value seat-value">{item.seat_num.split(",").join(", ")}</span>
                                         </div>
 
                                         <div className="reserve-row">
