@@ -75,7 +75,7 @@ function MyInfo() {
 
     //카드 등록
     function cardSubmit() {
-        const user = userData.find(item=>item.id == location.state.id)
+        const user = userData.find(item=>item.id == userInfo.id)
         fetch("http://192.168.0.227:3000/newcard",{
             method: "POST",
             headers:{"Content-Type" : "application/json"},

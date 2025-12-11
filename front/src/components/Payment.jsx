@@ -7,12 +7,11 @@ function Payment() {
     const { state: userInfo } = useLocation();
     const reservInfo = useParams();
     const navigate = useNavigate();
-    const location = useLocation();
     const [cardData, setCardData] = useState([]);
     const [selectedCard, setSelectedCard] = useState(null);
 
     useEffect(() => {
-        fetch(`http://192.168.0.227:3000/cardinfo/${location.state.id}`)
+        fetch(`http://192.168.0.227:3000/cardinfo/${userInfo.id}`)
             .then(res => res.json())
             .then(data => setCardData(data));
     }, []);
@@ -94,7 +93,7 @@ function Payment() {
 
                     <div className="paycard-list">
                         {cardData
-                            .filter(item => item.user_id == location.state.id)
+                            .filter(item => item.user_id == userInfo.id)
                             .map((item) => (
                                 <div
                                     className={`paycard-item ${selectedCard === String(item.card_defid) ? "selected-card" : ""

@@ -130,7 +130,6 @@ function MainHeader() {
         <div className="header-top-inner">
           <div className="header-top-left">
             <span onClick={moveVip}>VIP LOUNGE</span>
-            <span>멤버십</span>
             <span onClick={moveService}>고객센터</span>
           </div>
           <div className="header-top-right">

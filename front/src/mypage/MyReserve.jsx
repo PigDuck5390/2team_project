@@ -9,7 +9,7 @@ function MyReserve() {
     const [seatData, setSeatData] = useState([]);
 
     useEffect(() => {
-        fetch(`http://192.168.0.227:3000/seatlist/${location.state.id}`)
+        fetch(`http://192.168.0.227:3000/seatlist/${userInfo.id}`)
             .then(response => response.json())
             .then(data => setSeatData(data))
     }, [seatData]);

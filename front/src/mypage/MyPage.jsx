@@ -17,9 +17,9 @@ function MyPage() {
 
     //해당 유저 프로필 사진 조회
     useEffect(() => {
-        setLoggedInName(location.state.name);
+        setLoggedInName(userInfo.name);
 
-        fetch(`http://192.168.0.227:3000/userprofile/${location.state.id}`)
+        fetch(`http://192.168.0.227:3000/userprofile/${userInfo.id}`)
             .then(res => res.json())
             .then(data => {
                 const profilePath = Array.isArray(data) && data.length > 0
@@ -28,23 +28,22 @@ function MyPage() {
                     setProfileImg(`http://192.168.0.227:3000${profilePath}`);
                 }
             });
-    }, [location.state?.id]);
+    }, [userInfo?.id]);
 
     //예매 내역 조회
     useEffect(() => {
-        fetch(`http://192.168.0.227:3000/seatlist/${location.state.id}`)
+        fetch(`http://192.168.0.227:3000/seatlist/${userInfo.id}`)
             .then(res => res.json())
             .then(data => setSeatData(data))
     }, [userInfo.id]);
 
     //포인트 
     useEffect(() => {
-        fetch(`http://192.168.0.227:3000/point/${location.state.id}`, {
+        fetch(`http://192.168.0.227:3000/point/${userInfo.id}`, {
         })
             .then(res => res.json())
             .then(data => setPoint(data));
-    }, [location.state.id]);
-
+    }, [userInfo.id]);
     //포인트별 등급
     function movieRank() {
         if (point >= 1000) {

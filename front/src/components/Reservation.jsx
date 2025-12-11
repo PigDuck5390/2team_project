@@ -20,7 +20,12 @@ function Reservation() {
   useEffect(() => {
     fetch("http://192.168.0.227:3000/movies")
       .then(response => response.json())
-      .then(data => setMovieData(data))
+      .then(data => {
+      const sorted = [...data].sort(
+        (a, b) => a.screen_number - b.screen_number
+      );
+      setMovieData(sorted);
+    });
   }, [])
 
   //바로 예매하기 클릭시 영화 추적
