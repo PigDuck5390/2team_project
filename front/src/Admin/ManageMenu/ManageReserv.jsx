@@ -9,7 +9,7 @@ function ManageReserv() {
     const today = new Date().toISOString().split('T')[0];
 
     useEffect(() => {
-        fetch("http://localhost:3000/seatlist")
+        fetch("http://192.168.0.227:3000/seatlist")
             .then(response => response.json())
             .then(data => setReservData(data))
     }, [reservData])
@@ -20,7 +20,7 @@ function ManageReserv() {
         if (!confirm) {
             return
         }
-        fetch('http://localhost:3000/seat/add', {
+        fetch('http://192.168.0.227:3000/seat/add', {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(newReservData),
@@ -34,7 +34,7 @@ function ManageReserv() {
             alert("내용이 입력되지 않았습니다.")
             return
         }
-        fetch('http://localhost:3000/seat/update', {
+        fetch('http://192.168.0.227:3000/seat/update', {
             method: "PUT",
             headers: { "content-type": "application/json" },
             body: JSON.stringify({
@@ -49,7 +49,7 @@ function ManageReserv() {
     function reservDel(id) {
         const confirm = window.confirm("임의로 예매를 추가하는 것은 특수한 경우가 아니라면 권장하지 않습니다. 계속하시겠습니까?")
         if (confirm) {
-            fetch(`http://localhost:3000/seat/delete`, {
+            fetch(`http://192.168.0.227:3000/seat/delete`, {
                 method: "DELETE",
                 headers: { "content-type": "application/json" },
                 body: JSON.stringify({

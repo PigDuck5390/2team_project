@@ -63,6 +63,7 @@ function Join() {
                     className="join-input"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    onKeyDown={(e)=>e.key == "Enter" && handleJoin()}
                 />
 
                 <label className="join-label">아이디 :</label>
@@ -71,6 +72,7 @@ function Join() {
                     className="join-input"
                     value={id}
                     onChange={(e) => setId(e.target.value)}
+                    onKeyDown={(e)=>e.key == "Enter" && handleJoin()}
                 />
 
                 <label className="join-label">비밀번호 :</label>
@@ -79,6 +81,7 @@ function Join() {
                     className="join-input"
                     value={pw}
                     onChange={(e) => setPw(e.target.value)}
+                    onKeyDown={(e)=>e.key == "Enter" && handleJoin()}
                 />
 
                 <label className="join-label">비밀번호 확인 :</label>
@@ -87,6 +90,7 @@ function Join() {
                     className="join-input"
                     value={checkPw}
                     onChange={(e) => setCheckPw(e.target.value)}
+                    onKeyDown={(e)=>e.key == "Enter" && handleJoin()}
                 />
                 
                 <Link to="/login"className="join-link">

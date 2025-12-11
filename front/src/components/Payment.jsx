@@ -40,7 +40,7 @@ function Payment() {
             (item) => String(item.card_defid) === selectedCard
         );
 
-        fetch("http://192.168.0.227:3000/reservcount", {
+        fetch("http://192.168.0.228:3000/reservcount", {
             method:"PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ 

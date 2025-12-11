@@ -7,7 +7,7 @@ function ManageBenefit() {
 
     //혜택 정보 조회
     useEffect(() => {
-        fetch("http://localhost:3000/benefitinfo")
+        fetch("http://192.168.0.227:3000/benefitinfo")
             .then(response => response.json())
             .then(data => setBenefitData(data))
     }, [benefitData])
@@ -21,14 +21,14 @@ function ManageBenefit() {
         for (let i = 0; i < newImg.length; i++) {
             formData.append('benefitPoster', newImg[i])
         }
-        fetch('http://localhost:3000/benefit/add', {
+        fetch('http://192.168.0.227:3000/benefit/add', {
             method: "POST",
             body: formData
         })
     }
 
     function posterDel(defid) {
-        fetch('http://localhost:3000/benefit/delete', {
+        fetch('http://192.168.0.227:3000/benefit/delete', {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ function ManageBenefit() {
                                 <div className="admin-card-image-wrap">
                                     <img
                                         className="admin-card-image"
-                                        src={`http://localhost:3000${item.poster_path}`}
+                                        src={`http://192.168.0.227:3000${item.poster_path}`}
                                         alt={item.poster_name}
                                     />
                                 </div>
