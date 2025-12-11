@@ -51,6 +51,7 @@ function Login() {
                     className="login-input"
                     value={id}
                     onChange={(e) => setId(e.target.value)}
+                    onKeyDown={(e)=>e.key == 'Enter' && handleLogin()}
                 />
 
                 <label className="login-label">비밀번호 :</label>
@@ -59,6 +60,7 @@ function Login() {
                     type="password"
                     value={pw}
                     onChange={(e) => setPw(e.target.value)}
+                    onKeyDown={(e)=>e.key == 'Enter' && handleLogin()}
                 />
 
                 <Link to="/join" className="login-join-link">

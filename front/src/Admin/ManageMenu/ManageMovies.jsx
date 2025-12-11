@@ -7,7 +7,7 @@ function ManageMovies() {
     const [newMovieData, setNewMovieData] = useState({})
 
     useEffect(() => {
-        fetch("http://localhost:3000/movies")
+        fetch("http://192.168.0.227:3000/movies")
             .then(response => response.json())
             .then(data => setMovieData(data))
     }, [movieData])
@@ -18,7 +18,7 @@ function ManageMovies() {
             alert("내용이 입력되지 않았습니다.")
             return
         }
-        fetch('http://localhost:3000/movies/update', {
+        fetch('http://192.168.0.227:3000/movies/update', {
             method: "PUT",
             headers: { "content-type": "application/json" },
             body: JSON.stringify({
@@ -33,7 +33,7 @@ function ManageMovies() {
     function del(id) {
         const confirm = window.confirm("정말로 삭제하시겠습니까?")
         if (confirm) {
-            fetch(`http://localhost:3000/movies/delete`, {
+            fetch(`http://192.168.0.227:3000/movies/delete`, {
                 method: "DELETE"
                 , headers: { "content-type": "application/json" },
                 body: JSON.stringify({
@@ -48,7 +48,7 @@ function ManageMovies() {
         for (const key in newMovieData) {
             formData.append(key, newMovieData[key])
         }
-        fetch('http://localhost:3000/movies/add', {
+        fetch('http://192.168.0.227:3000/movies/add', {
             method: "POST",
             body: formData
         })
@@ -367,7 +367,7 @@ function ManageMovies() {
                                         <span className="admin-label-inline">포스터</span>
                                         <img
                                             className="admin-movie-poster"
-                                            src={`http://localhost:3000${item.poster}`}
+                                            src={`http://192.168.0.227:3000${item.poster}`}
                                             alt={`${item.title} 포스터`}
                                         />
                                         <button
