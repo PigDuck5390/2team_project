@@ -42,12 +42,12 @@ function App() {
         <Route path='/admin' element={<Admin />} />
         <Route path='/mypage' element={<MyPage />} />
         <Route path='/reservation' element={<Reservation />} />
-        <Route path='/seat/:title/:time/:date/:screen' element={<Seat />} />
+        <Route path='/seat/:title/:time/:date/:screen/:movieId' element={<Seat />} />
         <Route path='/myinfo' element={<MyInfo />}/>
         <Route path='/myreserve' element={<MyReserve />}/>
         <Route path='/viplounge' element={<VipLounge />}/>
         <Route path='/service' element={<Service />}/>
-        <Route path='/payment/:title/:time/:date/:screen/:seats' element={<Payment />}/>
+        <Route path='/payment/:title/:time/:date/:screen/:seats/:movieId' element={<Payment />}/>
 
         <Route path='/admin/management' element={<Management />}/>
         <Route path='/admin/management/benefit' element={<ManageBenefit />}/>

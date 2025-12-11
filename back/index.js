@@ -77,6 +77,15 @@ app.put("/point/add/:id", async (req, res) => {
   res.json({ success: true, added: addPoint });
 });
 
+//영화 예매누적
+app.put("/reservcount", async (req, res) => {
+  console.log(req.body)
+  const addPoint = req.body.addCount;
+  await pool.query(
+    "UPDATE movie_info SET reserv_count = reserv_count + ? WHERE movie_id = ?",
+    [addPoint, req.body.movieId]
+  );
+});
 
 //영화정보 호출
 app.get('/movies', async (req, res) => {

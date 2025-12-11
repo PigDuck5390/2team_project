@@ -10,6 +10,8 @@ function Payment() {
     const [cardData, setCardData] = useState([]);
     const [selectedCard, setSelectedCard] = useState(null);
 
+    console.log(reservInfo)
+    
     useEffect(() => {
         fetch(`http://192.168.0.227:3000/cardinfo/${userInfo.id}`)
             .then(res => res.json())
@@ -20,55 +22,67 @@ function Payment() {
     const seatCount = seatList.length;
 
     function submit() {
-    if (cardData.length === 0) {
-        alert("카드를 등록해주세요.");
-        navigate("/myinfo", {
-            state: { name: userInfo.name, id: userInfo.id }
-        });
-        return;
-    }
-
-    if (!selectedCard) {
-        alert("결제 카드를 선택해주세요!");
-        return;
-    }
-
-    
-    const selectedCardInfo = cardData.find(
-        (item) => String(item.card_defid) === selectedCard
-    );
-
-    fetch("http://192.168.0.227:3000/reserv", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-            date: reservInfo.date,
-            movieName: reservInfo.title,
-            movieTime: reservInfo.time,
-            userName: userInfo.name,
-            userId: userInfo.id,
-            seat: reservInfo.seats,
-            screen: reservInfo.screen,
-            pickcount: seatCount,
-            cardNumber: selectedCardInfo.card_num,
-            cardBank: selectedCardInfo.card_bank,
-            cardDate: selectedCardInfo.card_date
-        })
-    })
-        .then(() => {
-            return fetch(`http://192.168.0.227:3000/point/add/${userInfo.id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ addPoint: seatCount * 10 })
-            });
-        })
-        .then(res => res.json())
-        .then(() => {
-            alert("결제에 성공했습니다. 마이페이지에서 내역확인이 가능합니다.");
-            navigate("/", {
+        if (cardData.length === 0) {
+            alert("카드를 등록해주세요.");
+            navigate("/myinfo", {
                 state: { name: userInfo.name, id: userInfo.id }
             });
-        });
+            return;
+        }
+
+        if (!selectedCard) {
+            alert("결제 카드를 선택해주세요!");
+            return;
+        }
+
+        
+        const selectedCardInfo = cardData.find(
+            (item) => String(item.card_defid) === selectedCard
+        );
+
+        fetch("http://192.168.0.227:3000/reservcount", {
+            method:"PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                movieId: reservInfo.movieId,
+                addCount: seatCount 
+            })
+        }
+        )
+
+        fetch("http://192.168.0.227:3000/reserv", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+                date: reservInfo.date,
+                movieName: reservInfo.title,
+                movieTime: reservInfo.time,
+                userName: userInfo.name,
+                userId: userInfo.id,
+                seat: reservInfo.seats,
+                screen: reservInfo.screen,
+                pickcount: seatCount,
+                cardNumber: selectedCardInfo.card_num,
+                cardBank: selectedCardInfo.card_bank,
+                cardDate: selectedCardInfo.card_date
+            })
+        })
+            .then(() => {
+                return fetch(`http://192.168.0.227:3000/point/add/${userInfo.id}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ addPoint: seatCount * 10 })
+                });
+            })
+            .then(res => res.json())
+            .then(() => {
+                alert("결제에 성공했습니다. 마이페이지에서 내역확인이 가능합니다.");
+                navigate("/", {
+                    state: { name: userInfo.name, id: userInfo.id }
+                });
+            });
+
+        
 }
 
     return (

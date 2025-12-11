@@ -74,7 +74,7 @@ function Seat() {
 
     if (payment) {
       navigate(
-        `/payment/${reservInfo.title}/${reservInfo.time}/${reservInfo.date}/${reservInfo.screen}/${selectedSeats}`,
+        `/payment/${reservInfo.title}/${reservInfo.time}/${reservInfo.date}/${reservInfo.screen}/${selectedSeats}/${reservInfo.movieId}`,
         {
           state: {
             name: userInfo.name,
