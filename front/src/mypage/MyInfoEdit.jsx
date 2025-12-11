@@ -81,7 +81,7 @@ function MyInfo() {
             alert("이름이 일치하지 않습니다.");
             return;
         }
-        fetch("http://192.168.0.227:3000/changeName", {
+        fetch("http://192.168.0.228:3000/changeName", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
