@@ -8,6 +8,24 @@ function MainHeader() {
   const [loggedInId, setLoggedInId] = useState(null);
   const { state: userInfo } = useLocation()
   const [point, setPoint] = useState(0);
+  const [ hide, setHide ] = useState(false);
+
+  useEffect(()=>{
+    let lastY = window.scrollY;
+    
+    const onScroll = ()=> {
+    const nowY = window.scrollY;
+
+    if(nowY>lastY){
+      setHide(true);
+    }else{
+      setHide(false);
+    }
+    lastY = nowY;
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+    },[]);
 
 
   useEffect(() => {
@@ -24,7 +42,6 @@ function MainHeader() {
         setPoint(data);
       });
   }, [userInfo?.id]);
-
 
   function handleLogout() {
     setLoggedInId(null);
@@ -124,7 +141,7 @@ function MainHeader() {
   )
 
   return (
-    <header className="main-header">
+    <header className={`header-wrapper ${hide ? "hide-header" : ""}`}>
       {/* 로그인/회원가입 라인 */}
       <div className="header-top">
         <div className="header-top-inner">
