@@ -7,6 +7,8 @@ import cgv from '../img/cgv 소형 아이콘.png'
 import lotte from '../img/롯데시네마 소형아이콘.png'
 import megabox from '../img/메가박스 소형 아이콘.png'
 
+import ad from '../../../back/upload/video/아바타 예고편.mp4'
+
 function Main() {
   const navigate = useNavigate();
 
@@ -14,12 +16,19 @@ function Main() {
   const [movieData, setMovieData] = useState([])
   const [page, setPage] = useState(0);
 
+  const [showAd, setShowAd] = useState(false)
+
   useEffect(() => { //영화정보 조회
     fetch("http://192.168.0.228:3000/movieinfo")
       .then(response => response.json())
       .then(data => setMovieData(data))
   }, [movieData])
 
+  useEffect(()=>{
+    setShowAd(true)
+  },[])
+
+  
   //페이지별 4개씩 잘라 쓰기
   const pageSize = 4;
   const startIndex = page * pageSize;
@@ -44,11 +53,37 @@ function Main() {
       );
     };
 
+    function closeAd(){
+      setShowAd(false)
+    }
+
+
   return (
     <>
       <MainHeader />
 
       <main className="main-area">
+       {/* 전체 화면 광고 모달 */}
+       {showAd && (
+        <div className="ad-modal">
+          <div className="ad-content">
+
+            <video
+              src={ad}
+              autoPlay
+              muted
+              loop
+              className="ad-video"
+            />
+
+            <button className="ad-close-btn" onClick={closeAd}>
+              close ad
+            </button>
+          </div>
+        </div>
+       )}
+        
+        
         <div className="book-wrapper">
           <div className="open-book">
             <div className="book-spine" />
