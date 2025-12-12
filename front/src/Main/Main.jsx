@@ -24,11 +24,23 @@ function Main() {
       .then(data => setMovieData(data))
   }, [movieData])
 
-  useEffect(()=>{
-    setShowAd(true)
-  },[])
+ useEffect(() => {
+    const lastClosed = localStorage.getItem("adClosedAt");
 
-  
+    if (!lastClosed) {
+      setShowAd(true);  // 광고 본 적 없음 → 보여줌
+      return;
+    }
+
+    const diff = Date.now() - Number(lastClosed);
+
+    if (diff > 24 * 60 * 60 * 1000) {
+      // 24시간 지남 → 다시 광고 보여줌
+      setShowAd(true);
+    }
+  }, []);
+
+
   //페이지별 4개씩 잘라 쓰기
   const pageSize = 4;
   const startIndex = page * pageSize;
@@ -54,6 +66,7 @@ function Main() {
     };
 
     function closeAd(){
+      localStorage.setItem("adClosedAt", Date.now());
       setShowAd(false)
     }
 
