@@ -230,7 +230,7 @@ app.post('/movies/add', upload.single('poster'), async (req, res) => {
 //관리자 : 예매 추가
 app.post('/seat/add', async (req, res) => {
   await pool.query(
-    'INSERT INTO seat (seat_num, user_id, date, time, movie_name, userName, screen_num) VALUE (?,?,?,?,?,?,?)',
+    'INSERT INTO seat (seat_num, user_id, date, time, movie_name, userName, screen_num) VALUES (?,?,?,?,?,?,?)',
     [req.body.seat_num, req.body.user_id, req.body.date, req.body.time, req.body.movie_name, req.body.userName, req.body.screen_num]
   )
 });
